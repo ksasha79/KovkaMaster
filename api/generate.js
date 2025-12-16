@@ -1,25 +1,18 @@
 import { GoogleGenAI } from "@google/genai";
 
-export const config = {
-  runtime: 'edge', // Optional: Makes it faster on Vercel
-};
-
-export default async function handler(request) {
-  if (request.method !== 'POST') {
-    return new Response(JSON.stringify({ error: 'Method not allowed' }), {
-      status: 405,
-      headers: { 'Content-Type': 'application/json' }
-    });
+export default async function handler(req, res) {
+  // Check for POST method
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
   }
 
   try {
-    const { promptDetails } = await request.json();
+    // Vercel automatically parses JSON body for Node.js functions
+    const { promptDetails } = req.body;
 
     if (!process.env.API_KEY) {
-      return new Response(JSON.stringify({ error: 'Server API Key missing' }), {
-        status: 500,
-        headers: { 'Content-Type': 'application/json' }
-      });
+      console.error("API_KEY is missing in environment variables");
+      return res.status(500).json({ error: 'Server API Key missing' });
     }
 
     const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
@@ -46,22 +39,13 @@ export default async function handler(request) {
     }
 
     if (!imageUrl) {
-      return new Response(JSON.stringify({ error: 'Failed to generate image' }), {
-        status: 500,
-        headers: { 'Content-Type': 'application/json' }
-      });
+      return res.status(500).json({ error: 'Failed to generate image' });
     }
 
-    return new Response(JSON.stringify({ image: imageUrl }), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' }
-    });
+    return res.status(200).json({ image: imageUrl });
 
   } catch (error) {
     console.error("Server API Error:", error);
-    return new Response(JSON.stringify({ error: 'Internal Server Error' }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' }
-    });
+    return res.status(500).json({ error: 'Internal Server Error' });
   }
 }
