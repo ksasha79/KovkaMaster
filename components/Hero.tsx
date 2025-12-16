@@ -1,50 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 const Hero: React.FC = () => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  // Список фоновых изображений (файлы должны лежать в public/images/)
-  const backgroundImages = [
-    '/images/master1.jpg',
-    '/images/master2.jpg'
-  ];
-
-  useEffect(() => {
-    // Меняем картинку каждые 6 секунд
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % backgroundImages.length);
-    }, 6000);
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
-    // Изменено: items-center -> items-end и добавлен pb-24/pb-32, чтобы опустить текст вниз
-    <section id="hero" className="relative h-screen flex items-end justify-center pb-24 md:pb-32 overflow-hidden bg-metal-900">
+    <section id="hero" className="relative h-screen flex items-center justify-center overflow-hidden bg-metal-900">
       
-      {/* Background Slideshow */}
+      {/* Background Image */}
       <div className="absolute inset-0 z-0">
-        {backgroundImages.map((image, index) => (
-          <div
-            key={image}
-            className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
-              index === currentImageIndex ? 'opacity-100' : 'opacity-0'
-            }`}
-          >
-            <img 
-              src={image} 
-              alt="Forged gates background" 
-              // Изменено: добавлено object-top, чтобы фиксировать верх картинки (лицо)
-              className="w-full h-full object-cover object-top"
-              // Добавляем запасную картинку, если master1/2 еще не загружены
-              onError={(e) => {
-                e.currentTarget.src = "https://images.unsplash.com/photo-1622372658604-0373df45f22e?q=80&w=1920&auto=format&fit=crop";
-              }}
-            />
-          </div>
-        ))}
-        {/* Dark Overlay - градиент усилен снизу, чтобы текст читался на любом фоне */}
-        <div className="absolute inset-0 bg-gradient-to-t from-metal-900 via-metal-900/40 to-transparent"></div>
+        <img 
+          src="/images/logo.jpg" 
+          alt="Forged gates background" 
+          className="w-full h-full object-cover"
+          // Запасная картинка, если logo.jpg еще не загружен
+          onError={(e) => {
+            e.currentTarget.src = "https://images.unsplash.com/photo-1622372658604-0373df45f22e?q=80&w=1920&auto=format&fit=crop";
+          }}
+        />
+        {/* Dark Overlay for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-metal-900 via-metal-900/60 to-metal-900/30"></div>
       </div>
 
       {/* Content */}
