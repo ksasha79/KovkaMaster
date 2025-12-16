@@ -19,7 +19,8 @@ const Hero: React.FC = () => {
   }, []);
 
   return (
-    <section id="hero" className="relative h-screen flex items-center justify-center overflow-hidden bg-metal-900">
+    // Изменено: items-center -> items-end и добавлен pb-24/pb-32, чтобы опустить текст вниз
+    <section id="hero" className="relative h-screen flex items-end justify-center pb-24 md:pb-32 overflow-hidden bg-metal-900">
       
       {/* Background Slideshow */}
       <div className="absolute inset-0 z-0">
@@ -33,7 +34,8 @@ const Hero: React.FC = () => {
             <img 
               src={image} 
               alt="Forged gates background" 
-              className="w-full h-full object-cover"
+              // Изменено: добавлено object-top, чтобы фиксировать верх картинки (лицо)
+              className="w-full h-full object-cover object-top"
               // Добавляем запасную картинку, если master1/2 еще не загружены
               onError={(e) => {
                 e.currentTarget.src = "https://images.unsplash.com/photo-1622372658604-0373df45f22e?q=80&w=1920&auto=format&fit=crop";
@@ -41,8 +43,8 @@ const Hero: React.FC = () => {
             />
           </div>
         ))}
-        {/* Dark Overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-metal-900 via-metal-900/60 to-metal-900/30"></div>
+        {/* Dark Overlay - градиент усилен снизу, чтобы текст читался на любом фоне */}
+        <div className="absolute inset-0 bg-gradient-to-t from-metal-900 via-metal-900/40 to-transparent"></div>
       </div>
 
       {/* Content */}
