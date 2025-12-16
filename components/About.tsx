@@ -8,7 +8,7 @@ const About: React.FC = () => {
           
           <div className="space-y-6">
             <h2 className="text-3xl font-bold text-metal-900">
-              Работаем в <span className="text-gold-600">Ростове, ДНР и ЛНР</span>
+              Работаем в <span className="text-gold-600">Ростовской области, ДНР и ЛНР</span>
             </h2>
             <div className="h-1 w-20 bg-gold-500"></div>
             
