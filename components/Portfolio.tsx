@@ -5,6 +5,7 @@ const Portfolio: React.FC = () => {
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedImage, setGeneratedImage] = useState<string | null>(null);
   const [customPrompt, setCustomPrompt] = useState('');
+  const [error, setError] = useState<string | null>(null);
 
   // Updated with reliable Unsplash source URLs and fixed styling
   const portfolioItems = [
@@ -38,15 +39,19 @@ const Portfolio: React.FC = () => {
     if (!customPrompt) return;
     
     setIsGenerating(true);
+    setError(null);
+    setGeneratedImage(null);
+
     try {
         const image = await generateGateConcept(customPrompt);
         if (image) {
             setGeneratedImage(image);
         } else {
-            alert('Не удалось сгенерировать. Проверьте API ключ (в коде) или попробуйте позже.');
+            setError('Сервис временно перегружен или недоступен. Пожалуйста, попробуйте позже.');
         }
     } catch (e) {
         console.error(e);
+        setError('Ошибка соединения. Проверьте интернет.');
     } finally {
         setIsGenerating(false);
     }
@@ -113,22 +118,35 @@ const Portfolio: React.FC = () => {
                 >
                   {isGenerating ? 'Создаем дизайн...' : 'Сгенерировать Образец'}
                 </button>
-                <p className="text-xs text-gray-500 italic">
-                  *Требуется настройка API ключа в коде для работы генерации.
-                </p>
               </div>
             </div>
 
-            <div className="flex items-center justify-center min-h-[300px] bg-metal-800 rounded-lg border-2 border-dashed border-gray-700 h-80 overflow-hidden">
+            <div className="flex items-center justify-center min-h-[300px] bg-metal-800 rounded-lg border-2 border-dashed border-gray-700 h-80 overflow-hidden relative">
+              {isGenerating && (
+                <div className="absolute inset-0 z-10 bg-metal-900/80 flex flex-col items-center justify-center">
+                    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gold-500 mb-3"></div>
+                    <p className="text-gold-500 animate-pulse">Рисуем эскиз...</p>
+                </div>
+              )}
+              
               {generatedImage ? (
-                <div className="relative w-full h-full">
+                <div className="relative w-full h-full animate-fade-in">
                     <img src={generatedImage} alt="AI Generated Gate" className="w-full h-full object-cover rounded shadow-lg" />
                     <span className="absolute top-2 right-2 bg-gold-600 text-xs text-white px-2 py-1 rounded">AI Concept</span>
                 </div>
               ) : (
                 <div className="text-center p-6">
-                    <span className="text-4xl block mb-2">✨</span>
-                    <p className="text-gray-500">Здесь появится ваш эскиз</p>
+                    {error ? (
+                        <div className="text-red-400">
+                            <span className="text-4xl block mb-2">⚠️</span>
+                            <p>{error}</p>
+                        </div>
+                    ) : (
+                        <>
+                            <span className="text-4xl block mb-2">✨</span>
+                            <p className="text-gray-500">Здесь появится ваш эскиз</p>
+                        </>
+                    )}
                 </div>
               )}
             </div>
