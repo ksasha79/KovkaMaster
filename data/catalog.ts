@@ -1,10 +1,27 @@
+export interface GalleryImage {
+  url: string;
+  label: string; // Например: "Эскиз", "В цеху", "Монтаж"
+}
+
 export interface CatalogItem {
   id: number;
   title: string;
   category: 'gates' | 'fences' | 'decor' | 'welding';
-  image: string; // Ссылка на картинку
-  description?: string;
+  description: string;
+  priceStart?: string; // Цена "от..."
+  gallery: GalleryImage[]; // Серия фото
 }
+
+// Вспомогательная функция, чтобы не дублировать длинные ссылки-заглушки
+// Когда будете менять на свои фото, просто стирайте заглушки и пишите: "/images/foto1.jpg"
+const placeholder = (type: 'sketch' | 'process' | 'shop' | 'installed') => {
+  switch (type) {
+    case 'sketch': return "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800&q=80"; // Бумага/чертеж
+    case 'process': return "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=800&q=80"; // Сварка
+    case 'shop': return "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&w=800&q=80"; // Деталь в цеху
+    case 'installed': return "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80"; // Готовые ворота
+  }
+};
 
 export const catalogData: CatalogItem[] = [
   // --- КАТЕГОРИЯ: ВОРОТА ---
@@ -12,23 +29,35 @@ export const catalogData: CatalogItem[] = [
     id: 1,
     title: "Кованые ворота премиум-класса",
     category: 'gates',
-    // В будущем замените на: "/images/premium_vorota.jpg"
-    image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80",
-    description: "Эксклюзивный дизайн, сложная ковка, патинирование."
+    description: "Эксклюзивный дизайн, сложная ковка, патинирование под золото.",
+    gallery: [
+      { label: "Готовый результат", url: placeholder('installed') },
+      { label: "Эскиз проекта", url: placeholder('sketch') },
+      { label: "Сварка деталей", url: placeholder('process') },
+      { label: "Грунтовка в цеху", url: placeholder('shop') },
+    ]
   },
   {
     id: 2,
     title: "Ворота с калиткой под ключ",
     category: 'gates',
-    image: "https://images.unsplash.com/photo-1599423300746-b62507ac9705?auto=format&fit=crop&w=800&q=80",
-    description: "Комплексное решение: въездная группа и входная калитка в едином стиле."
+    description: "Комплексное решение: въездная группа и входная калитка в едином стиле.",
+    gallery: [
+      { label: "Вид на объекте", url: "https://images.unsplash.com/photo-1599423300746-b62507ac9705?auto=format&fit=crop&w=800&q=80" },
+      { label: "3D Модель", url: placeholder('sketch') },
+      { label: "Сборка каркаса", url: placeholder('process') },
+    ]
   },
   {
     id: 7,
     title: "Современные металлические ворота",
     category: 'gates',
-    image: "https://images.unsplash.com/photo-1622372658604-0373df45f22e?auto=format&fit=crop&w=800&q=80",
-    description: "Стиль хай-тек, лофт, жалюзи. Лаконичность и надежность."
+    description: "Стиль хай-тек, лофт, жалюзи. Лаконичность и надежность.",
+    gallery: [
+      { label: "Стиль Лофт", url: "https://images.unsplash.com/photo-1622372658604-0373df45f22e?auto=format&fit=crop&w=800&q=80" },
+      { label: "Чертеж", url: placeholder('sketch') },
+      { label: "Покраска", url: placeholder('shop') },
+    ]
   },
 
   // --- КАТЕГОРИЯ: ЗАБОРЫ ---
@@ -36,8 +65,12 @@ export const catalogData: CatalogItem[] = [
     id: 3,
     title: "Заборы любой сложности",
     category: 'fences',
-    image: "https://images.unsplash.com/photo-1621253457193-41e913a5d852?auto=format&fit=crop&w=800&q=80",
-    description: "От профнастила до кованых секций и кирпичной кладки."
+    description: "От профнастила до кованых секций и кирпичной кладки.",
+    gallery: [
+      { label: "Кирпич + Ковка", url: "https://images.unsplash.com/photo-1621253457193-41e913a5d852?auto=format&fit=crop&w=800&q=80" },
+      { label: "Фундамент", url: placeholder('process') },
+      { label: "Кладка столбов", url: placeholder('shop') },
+    ]
   },
 
   // --- КАТЕГОРИЯ: ХУДОЖЕСТВЕННАЯ КОВКА (Декор) ---
@@ -45,15 +78,23 @@ export const catalogData: CatalogItem[] = [
     id: 4,
     title: "Художественная ковка",
     category: 'decor',
-    image: "https://plus.unsplash.com/premium_photo-1678900994119-03c0032943b0?auto=format&fit=crop&w=800&q=80",
-    description: "Перила, козырьки, решетки и элементы декора ручной работы."
+    description: "Перила, козырьки, решетки и элементы декора ручной работы.",
+    gallery: [
+      { label: "Кованые перила", url: "https://plus.unsplash.com/premium_photo-1678900994119-03c0032943b0?auto=format&fit=crop&w=800&q=80" },
+      { label: "Ковка элементов", url: placeholder('process') },
+      { label: "Сборка узора", url: placeholder('shop') },
+    ]
   },
   {
     id: 8,
     title: "Индивидуальные проекты под заказ",
     category: 'decor',
-    image: "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&w=800&q=80",
-    description: "Воплощаем в металле любые ваши идеи и нестандартные эскизы."
+    description: "Воплощаем в металле любые ваши идеи и нестандартные эскизы.",
+    gallery: [
+      { label: "Эксклюзив", url: "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&w=800&q=80" },
+      { label: "Эскиз заказчика", url: placeholder('sketch') },
+      { label: "Процесс работы", url: placeholder('process') },
+    ]
   },
 
   // --- КАТЕГОРИЯ: СВАРКА И МОНТАЖ ---
@@ -61,14 +102,20 @@ export const catalogData: CatalogItem[] = [
     id: 5,
     title: "Профессиональные сварочные работы",
     category: 'welding',
-    image: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=800&q=80",
-    description: "Качественные швы, сборка металлоконструкций, каркасов и ферм."
+    description: "Качественные швы, сборка металлоконструкций, каркасов и ферм.",
+    gallery: [
+      { label: "Сварка ферм", url: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=800&q=80" },
+      { label: "Крупный план шва", url: placeholder('shop') },
+    ]
   },
   {
     id: 6,
     title: "Монтаж и установка конструкций",
     category: 'welding',
-    image: "https://images.unsplash.com/photo-1581094794329-cd19cedcb2ad?auto=format&fit=crop&w=800&q=80",
-    description: "Установка ворот, навесов и ограждений на объекте заказчика."
+    description: "Установка ворот, навесов и ограждений на объекте заказчика.",
+    gallery: [
+      { label: "Монтаж навеса", url: "https://images.unsplash.com/photo-1581094794329-cd19cedcb2ad?auto=format&fit=crop&w=800&q=80" },
+      { label: "Бетонирование", url: placeholder('process') },
+    ]
   }
 ];
