@@ -7,78 +7,68 @@ export interface CatalogItem {
 }
 
 export const catalogData: CatalogItem[] = [
-  // ==========================================
-  // КАК ДОБАВИТЬ СВОЮ РАБОТУ:
-  // ==========================================
-  
-  // ВАРИАНТ 1 (Простой): Внешняя ссылка
-  // Загрузите фото на postimages.org, скопируйте "Прямую ссылку" и вставьте сюда:
-  /*
-  {
-    id: 101,
-    title: "Мои ворота",
-    category: 'gates',
-    image: "https://i.postimg.cc/пример/фото.jpg", 
-    description: "Ковка ручной работы"
-  },
-  */
-
-  // ВАРИАНТ 2 (Надежный): Фото внутри проекта
-  // 1. На GitHub нажмите Add file -> Upload files
-  // 2. Перетащите ваше фото (например, vorota1.jpg) в папку public/images/
-  // 3. Напишите путь так:
-  /*
-  {
-    id: 102,
-    title: "Ворота с калиткой",
-    category: 'gates',
-    image: "/images/vorota1.jpg", 
-    description: "Установили в Батайске"
-  },
-  */
-
-  // --- СПИСОК РАБОТ ---
-
-  // --- ВОРОТА ---
+  // --- КАТЕГОРИЯ: ВОРОТА ---
   {
     id: 1,
-    title: "Кованые ворота 'Барокко'",
+    title: "Кованые ворота премиум-класса",
     category: 'gates',
+    // В будущем замените на: "/images/premium_vorota.jpg"
     image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80",
-    description: "Сложная художественная ковка с элементами золочения."
+    description: "Эксклюзивный дизайн, сложная ковка, патинирование."
   },
   {
     id: 2,
-    title: "Откатные ворота 'Модерн'",
+    title: "Ворота с калиткой под ключ",
+    category: 'gates',
+    image: "https://images.unsplash.com/photo-1599423300746-b62507ac9705?auto=format&fit=crop&w=800&q=80",
+    description: "Комплексное решение: въездная группа и входная калитка в едином стиле."
+  },
+  {
+    id: 7,
+    title: "Современные металлические ворота",
     category: 'gates',
     image: "https://images.unsplash.com/photo-1622372658604-0373df45f22e?auto=format&fit=crop&w=800&q=80",
-    description: "Современный стиль, автоматика, глухая зашивка."
+    description: "Стиль хай-тек, лофт, жалюзи. Лаконичность и надежность."
   },
-  
-  // --- ЗАБОРЫ ---
+
+  // --- КАТЕГОРИЯ: ЗАБОРЫ ---
   {
     id: 3,
-    title: "Забор с кирпичными столбами",
+    title: "Заборы любой сложности",
     category: 'fences',
-    image: "https://images.unsplash.com/photo-1599423300746-b62507ac9705?auto=format&fit=crop&w=800&q=80",
-    description: "Комбинированный забор: кирпич + кованые секции."
+    image: "https://images.unsplash.com/photo-1621253457193-41e913a5d852?auto=format&fit=crop&w=800&q=80",
+    description: "От профнастила до кованых секций и кирпичной кладки."
   },
-  
-  // --- ДЕКОР ---
+
+  // --- КАТЕГОРИЯ: ХУДОЖЕСТВЕННАЯ КОВКА (Декор) ---
   {
     id: 4,
-    title: "Кованые перила",
+    title: "Художественная ковка",
     category: 'decor',
     image: "https://plus.unsplash.com/premium_photo-1678900994119-03c0032943b0?auto=format&fit=crop&w=800&q=80",
-    description: "Перила для входной группы."
+    description: "Перила, козырьки, решетки и элементы декора ручной работы."
   },
-  
-  // --- ПРИМЕРЫ СВАРКИ ---
+  {
+    id: 8,
+    title: "Индивидуальные проекты под заказ",
+    category: 'decor',
+    image: "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&w=800&q=80",
+    description: "Воплощаем в металле любые ваши идеи и нестандартные эскизы."
+  },
+
+  // --- КАТЕГОРИЯ: СВАРКА И МОНТАЖ ---
   {
     id: 5,
-    title: "Навес для авто",
+    title: "Профессиональные сварочные работы",
     category: 'welding',
     image: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=800&q=80",
-    description: "Металлокаркас с поликарбонатом."
+    description: "Качественные швы, сборка металлоконструкций, каркасов и ферм."
+  },
+  {
+    id: 6,
+    title: "Монтаж и установка конструкций",
+    category: 'welding',
+    image: "https://images.unsplash.com/photo-1581094794329-cd19cedcb2ad?auto=format&fit=crop&w=800&q=80",
+    description: "Установка ворот, навесов и ограждений на объекте заказчика."
   }
 ];
