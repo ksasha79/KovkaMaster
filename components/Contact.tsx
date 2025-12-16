@@ -126,6 +126,7 @@ const Contact: React.FC = () => {
                  <div className="flex space-x-4">
                    <a href="#" className="flex-1 py-2 bg-[#0088cc] hover:bg-[#0077b5] text-white rounded text-center font-medium transition">Telegram</a>
                    <a href="#" className="flex-1 py-2 bg-[#25D366] hover:bg-[#1fae53] text-white rounded text-center font-medium transition">WhatsApp</a>
+                   <a href="#" className="flex-1 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded text-center font-medium transition">Max</a>
                  </div>
                </div>
             </div>
