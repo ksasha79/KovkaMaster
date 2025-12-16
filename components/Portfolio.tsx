@@ -6,12 +6,32 @@ const Portfolio: React.FC = () => {
   const [generatedImage, setGeneratedImage] = useState<string | null>(null);
   const [customPrompt, setCustomPrompt] = useState('');
 
-  // Static placeholders for "Real" work examples (using Picsum for demo)
+  // Updated with reliable Unsplash source URLs and fixed styling
   const portfolioItems = [
-    { id: 1, src: "https://picsum.photos/400/300?random=1", title: "Ворота 'Классика'", type: "Ворота" },
-    { id: 2, src: "https://picsum.photos/400/300?random=2", title: "Забор с пиками", type: "Забор" },
-    { id: 3, src: "https://picsum.photos/400/300?random=3", title: "Козырек кованый", type: "Навес" },
-    { id: 4, src: "https://picsum.photos/400/300?random=4", title: "Откатные ворота", type: "Ворота" },
+    { 
+      id: 1, 
+      src: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80", 
+      title: "Ворота 'Барокко'", 
+      type: "Ворота" 
+    },
+    { 
+      id: 2, 
+      src: "https://images.unsplash.com/photo-1599423300746-b62507ac9705?auto=format&fit=crop&w=800&q=80", 
+      title: "Забор 'Премиум'", 
+      type: "Забор" 
+    },
+    { 
+      id: 3, 
+      src: "https://plus.unsplash.com/premium_photo-1678900994119-03c0032943b0?auto=format&fit=crop&w=800&q=80", 
+      title: "Художественная ковка", 
+      type: "Декор" 
+    },
+    { 
+      id: 4, 
+      src: "https://images.unsplash.com/photo-1622372658604-0373df45f22e?auto=format&fit=crop&w=800&q=80", 
+      title: "Откатные ворота", 
+      type: "Ворота" 
+    },
   ];
 
   const handleGenerate = async () => {
@@ -19,8 +39,6 @@ const Portfolio: React.FC = () => {
     
     setIsGenerating(true);
     try {
-        // In a real app, you wouldn't expose this button if API key isn't there, 
-        // but for this demo code we assume env var is set or handled.
         const image = await generateGateConcept(customPrompt);
         if (image) {
             setGeneratedImage(image);
@@ -46,16 +64,16 @@ const Portfolio: React.FC = () => {
           </p>
         </div>
 
-        {/* Gallery Grid */}
+        {/* Gallery Grid - Fixed height to ensure visibility */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           {portfolioItems.map((item) => (
-            <div key={item.id} className="group relative overflow-hidden rounded-lg shadow-lg aspect-w-4 aspect-h-3">
+            <div key={item.id} className="group relative overflow-hidden rounded-lg shadow-lg h-72">
               <img 
                 src={item.src} 
                 alt={item.title} 
                 className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                 <div>
                   <h4 className="text-lg font-bold text-white">{item.title}</h4>
                   <p className="text-sm text-gold-500">{item.type}</p>
@@ -101,7 +119,7 @@ const Portfolio: React.FC = () => {
               </div>
             </div>
 
-            <div className="flex items-center justify-center min-h-[300px] bg-metal-800 rounded-lg border-2 border-dashed border-gray-700">
+            <div className="flex items-center justify-center min-h-[300px] bg-metal-800 rounded-lg border-2 border-dashed border-gray-700 h-80 overflow-hidden">
               {generatedImage ? (
                 <div className="relative w-full h-full">
                     <img src={generatedImage} alt="AI Generated Gate" className="w-full h-full object-cover rounded shadow-lg" />
