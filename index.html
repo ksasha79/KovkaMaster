@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Кованые ворота и заборы | Ростов, ДНР, ЛНР | Профессиональная сварка</title>
+    <meta name="description" content="Изготовление кованых ворот любой сложности, установка заборов, профессиональная сварка. Работаем по Ростовской области, ДНР и ЛНР. Индивидуальный дизайн." />
+    <meta name="keywords" content="кованые ворота, забор, сварка, Ростов, ДНР, ЛНР, Донецк, Луганск, установка ворот, художественная ковка" />
+    
+    <!-- Open Graph for Social Media -->
+    <meta property="og:title" content="Мастерская ковки: Ворота и Заборы под ключ" />
+    <meta property="og:description" content="Качественные ворота и заборы. Выезд мастера в Ростовской области, ДНР и ЛНР." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://picsum.photos/1200/630" />
+
+    <!-- Tailwind CSS (CDN is fine for simple deployment, though npm install is better for heavy production) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'metal-900': '#1a1a1a',
+              'metal-800': '#2d2d2d',
+              'gold-500': '#c5a059',
+              'gold-600': '#b08d4b',
+            },
+            fontFamily: {
+              sans: ['Helvetica', 'Arial', 'sans-serif'],
+            }
+          }
+        }
+      }
+    </script>
+    
+    <!-- Structured Data (Schema.org) for Local Business -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HomeAndConstructionBusiness",
+      "name": "ИП Мастер Ковки",
+      "image": "https://picsum.photos/500/500",
+      "description": "Изготовление кованых ворот и установка заборов.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressRegion": "Rostov Region, DPR, LPR",
+        "addressCountry": "RU"
+      },
+      "priceRange": "$$"
+    }
+    </script>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.33.0",
+    "vite": "https://esm.sh/vite@^7.3.0",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-gray-50 text-gray-900 antialiased">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
