@@ -39,15 +39,15 @@ const About: React.FC = () => {
             </div>
           </div>
 
-          <div className="relative h-96 rounded-xl overflow-hidden shadow-xl">
-             {/* Map placeholder or worker image */}
+          <div className="relative h-96 rounded-xl overflow-hidden shadow-xl group">
+             {/* Real welder image */}
              <img 
-               src="https://picsum.photos/800/800?grayscale" 
+               src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=800&q=80" 
                alt="Welder at work" 
-               className="w-full h-full object-cover"
+               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
              />
-             <div className="absolute bottom-0 left-0 right-0 bg-metal-900/80 p-6 text-white">
-                <h3 className="text-xl font-bold mb-2">География работ</h3>
+             <div className="absolute bottom-0 left-0 right-0 bg-metal-900/90 p-6 text-white backdrop-blur-sm">
+                <h3 className="text-xl font-bold mb-2 text-gold-500">География работ</h3>
                 <p className="text-sm text-gray-300">Ростов-на-Дону • Таганрог • Донецк • Луганск • Мариуполь • Макеевка</p>
              </div>
           </div>
