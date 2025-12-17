@@ -4,11 +4,13 @@ import Stats from './components/Stats';
 import Services from './components/Services';
 import Steps from './components/Steps';
 import Portfolio from './components/Portfolio';
+import Pricing from './components/Pricing';
 import About from './components/About';
 import Reviews from './components/Reviews';
 import FAQ from './components/FAQ';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import FloatingBot from './components/FloatingBot';
 
 function App() {
   return (
@@ -20,12 +22,14 @@ function App() {
         <Services />
         <Steps />
         <Portfolio />
+        <Pricing />
         <About />
         <Reviews />
         <FAQ />
         <Contact />
       </main>
       <Footer />
+      <FloatingBot />
       
       {/* Sticky Mobile Call Button */}
       <div className="fixed bottom-6 right-6 z-40 md:hidden">
