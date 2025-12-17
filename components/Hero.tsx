@@ -7,42 +7,42 @@ const Hero: React.FC = () => {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="/images/logo.jpg" 
-          alt="ЕвроЗаборы фон" 
+          src="/images/hero.jpg" 
+          alt="Готовые ЕвроЗаборы и Ворота" 
           className="w-full h-full object-cover"
           onError={(e) => {
             e.currentTarget.src = "https://images.unsplash.com/photo-1622372658604-0373df45f22e?q=80&w=1920&auto=format&fit=crop";
           }}
         />
-        {/* Dark Overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-metal-900 via-metal-900/60 to-metal-900/30"></div>
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-metal-900/70 via-metal-900/40 to-metal-900/90"></div>
       </div>
 
       {/* Content */}
       <div className="relative z-10 text-center px-4 max-w-5xl mx-auto animate-fade-in-up">
-        <h1 className="text-4xl md:text-6xl font-extrabold text-white tracking-tight mb-6 drop-shadow-2xl">
-          Профессиональные <br/>
-          <span className="text-gold-500 uppercase">ЕвроЗаборы</span>
+        <div className="inline-block px-4 py-1.5 mb-6 border border-gold-500/50 rounded-full bg-gold-600/10 backdrop-blur-md">
+          <span className="text-gold-500 text-[10px] font-black uppercase tracking-[0.3em]">Инженерный подход к ограждениям</span>
+        </div>
+        <h1 className="text-4xl md:text-7xl font-black text-white tracking-tighter mb-6 uppercase leading-none">
+          Проектируем <span className="text-gold-500">Заборы</span><br/>и Устанавливаем
         </h1>
         <p className="mt-4 text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto mb-10 font-light drop-shadow-md">
-          Изготовление, сварка и монтаж ограждений под ключ. 
-          Работаем по <span className="text-white font-semibold border-b border-gold-500">Ростовской области</span>, 
-          <span className="text-white font-semibold border-b border-gold-500 ml-1">ДНР</span> и 
-          <span className="text-white font-semibold border-b border-gold-500 ml-1">ЛНР</span>.
+          Профессиональный монтаж готовых ЕвроЗаборов «под ключ». 
+          Учитываем рельеф участка и грунт. <span className="text-white font-bold underline decoration-gold-500 underline-offset-8">Гарантия на монтаж — 2 года</span>.
         </p>
         
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a 
-            href="#contact" 
-            className="px-8 py-4 bg-gold-600 hover:bg-gold-500 text-white text-lg font-bold rounded shadow-lg shadow-gold-600/20 transform hover:scale-105 transition-all duration-300"
-          >
-            Рассчитать стоимость
-          </a>
+        <div className="flex flex-col sm:flex-row gap-6 justify-center">
           <a 
             href="#portfolio" 
-            className="px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white hover:bg-white hover:text-metal-900 text-white text-lg font-bold rounded shadow-lg transition-all duration-300"
+            className="px-10 py-5 bg-gold-600 hover:bg-gold-500 text-white text-sm font-black uppercase tracking-widest rounded-xl shadow-2xl shadow-gold-600/30 transition-all active:scale-95"
           >
-            Смотреть работы
+            Смотреть каталог
+          </a>
+          <a 
+            href="#contact" 
+            className="px-10 py-5 bg-white/5 backdrop-blur-md border border-white/20 hover:bg-white/10 text-white text-sm font-black uppercase tracking-widest rounded-xl transition-all active:scale-95"
+          >
+            Вызвать инженера
           </a>
         </div>
       </div>
@@ -51,3 +51,4 @@ const Hero: React.FC = () => {
 };
 
 export default Hero;
+
