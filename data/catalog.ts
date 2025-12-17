@@ -6,70 +6,69 @@ export interface GalleryImage {
 export interface CatalogItem {
   id: number;
   title: string;
-  category: 'gates' | 'fences' | 'decor' | 'welding';
+  category: 'concrete' | '3d-mesh' | 'gates' | 'installations';
   description: string;
   priceStart: string;
   location: string;
   gallery: GalleryImage[];
 }
 
-const placeholder = (type: 'sketch' | 'process' | 'shop' | 'installed') => {
+const placeholder = (type: 'concrete' | 'mesh' | 'gate' | 'work') => {
   switch (type) {
-    case 'sketch': return "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800&q=80";
-    case 'process': return "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=800&q=80";
-    case 'shop': return "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&w=800&q=80";
-    case 'installed': return "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80";
+    case 'concrete': return "https://images.unsplash.com/photo-1621253457193-41e913a5d852?auto=format&fit=crop&w=800&q=80";
+    case 'mesh': return "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80";
+    case 'gate': return "https://images.unsplash.com/photo-1599423300746-b62507ac9705?auto=format&fit=crop&w=800&q=80";
+    case 'work': return "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80";
   }
 };
 
 export const catalogData: CatalogItem[] = [
   {
     id: 1,
-    title: "Ворота 'Византия' с патиной",
-    category: 'gates',
+    title: "ЕвроЗабор 'Колотый Сланец'",
+    category: 'concrete',
     location: "г. Донецк",
-    priceStart: "125 000 ₽",
-    description: "Сложная художественная ковка, ручная работа. Покрытие - немецкая кузнечная краска.",
+    priceStart: "2 100 ₽/п.м.",
+    description: "Классическая бетонная секция с имитацией натурального камня. Самый популярный выбор для частного сектора.",
     gallery: [
-      { label: "Готовый результат", url: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80" },
-      { label: "Эскиз проекта", url: placeholder('sketch') },
-      { label: "Процесс ковки", url: placeholder('process') },
+      { label: "Готовый забор", url: "https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?auto=format&fit=crop&w=800&q=80" },
+      { label: "Текстура вблизи", url: placeholder('concrete') },
     ]
   },
   {
     id: 2,
-    title: "Въездная группа 'Классик'",
-    category: 'gates',
+    title: "3D Ограждение 'Стандарт'",
+    category: '3d-mesh',
     location: "г. Ростов-на-Дону",
-    priceStart: "85 000 ₽",
-    description: "Распашные ворота с элементами холодной ковки. Оптимальное соотношение цена/качество.",
+    priceStart: "1 850 ₽/п.м.",
+    description: "Панельное сетчатое ограждение с полимерным покрытием. Не перекрывает свет, служит более 20 лет.",
     gallery: [
-      { label: "Объект в Батайске", url: "https://images.unsplash.com/photo-1599423300746-b62507ac9705?auto=format&fit=crop&w=800&q=80" },
-      { label: "Сборка каркаса", url: placeholder('process') },
+      { label: "Объект в Батайске", url: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80" },
+      { label: "Крепления столбов", url: placeholder('mesh') },
     ]
   },
   {
     id: 3,
-    title: "Забор 'Модерн' секционный",
-    category: 'fences',
-    location: "г. Мариуполь",
-    priceStart: "4 500 ₽/п.м.",
-    description: "Секционный забор из профильной трубы с декоративными вставками.",
+    title: "Ворота под ЕвроЗабор",
+    category: 'gates',
+    location: "г. Макеевка",
+    priceStart: "45 000 ₽/комплект",
+    description: "Распашные ворота с заполнением в стиль основного забора. Каркас из усиленной трубы.",
     gallery: [
-      { label: "Установленные секции", url: "https://images.unsplash.com/photo-1621253457193-41e913a5d852?auto=format&fit=crop&w=800&q=80" },
-      { label: "Монтаж столбов", url: placeholder('process') },
+      { label: "Установленные ворота", url: "https://images.unsplash.com/photo-1599423300746-b62507ac9705?auto=format&fit=crop&w=800&q=80" },
+      { label: "Узел автоматики", url: placeholder('gate') },
     ]
   },
   {
     id: 4,
-    title: "Навес для авто 'Лофт'",
-    category: 'welding',
-    location: "г. Макеевка",
-    priceStart: "65 000 ₽",
-    description: "Металлоконструкция с покрытием из поликарбоната. Скрытые сварные швы.",
+    title: "ЕвроЗабор 'Бутовый камень'",
+    category: 'concrete',
+    location: "г. Луганск",
+    priceStart: "2 450 ₽/п.м.",
+    description: "Двусторонняя секция с глубоким рельефом. Визуально не отличим от кладки из натурального камня.",
     gallery: [
-      { label: "Готовый навес", url: "https://images.unsplash.com/photo-1581094794329-cd19cedcb2ad?auto=format&fit=crop&w=800&q=80" },
-      { label: "В цеху", url: placeholder('shop') },
+      { label: "Готовый объект", url: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80" },
+      { label: "Монтажные работы", url: placeholder('work') },
     ]
   }
 ];
