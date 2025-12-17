@@ -1,0 +1,28 @@
+import React from 'react';
+
+const stats = [
+  { label: 'Лет на рынке', value: '15+', icon: '🏗️' },
+  { label: 'Объектов сдано', value: '540', icon: '🏠' },
+  { label: 'Тонн металла', value: '1200', icon: '⚙️' },
+  { label: 'Гарантия', value: '5 лет', icon: '🛡️' },
+];
+
+const Stats: React.FC = () => {
+  return (
+    <section className="py-12 bg-metal-900 border-y border-gold-600/20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+          {stats.map((stat, idx) => (
+            <div key={idx} className="text-center group">
+              <div className="text-4xl mb-2 group-hover:scale-110 transition-transform duration-300">{stat.icon}</div>
+              <div className="text-3xl md:text-4xl font-extrabold text-gold-500 mb-1">{stat.value}</div>
+              <div className="text-sm uppercase tracking-widest text-gray-400 font-medium">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Stats;
