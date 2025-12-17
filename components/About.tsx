@@ -8,21 +8,21 @@ const About: React.FC = () => {
           
           <div className="space-y-6">
             <h2 className="text-3xl font-bold text-metal-900">
-              Работаем в <span className="text-gold-600">Ростовской области, ДНР и ЛНР</span>
+              <span className="text-gold-600 uppercase">ЕвроЗаборы</span> в Ростовской области, ДНР и ЛНР
             </h2>
             <div className="h-1 w-20 bg-gold-500"></div>
             
             <p className="text-lg text-gray-700">
               Я — профессиональный строитель и сварщик со стажем более 15 лет. 
-              Специализируюсь на сложных конструкциях, требующих точности и творческого подхода.
+              Специализируюсь на установке современных ЕвроЗаборов и ворот любой сложности.
             </p>
 
             <ul className="space-y-4">
               {[
                 'Бесплатный выезд на замер в пределах региона',
                 'Гарантия 2 года на все виды работ',
-                'Работаем с вашим металлом или закупаем сами',
-                'Доступные цены для жителей ДНР и ЛНР'
+                'Работаем с вашим материалом или закупаем сами',
+                'Доступные цены на ЕвроЗаборы для жителей ДНР и ЛНР'
               ].map((item, idx) => (
                 <li key={idx} className="flex items-start">
                   <span className="flex-shrink-0 h-6 w-6 text-gold-600 mr-2">✓</span>
@@ -33,7 +33,7 @@ const About: React.FC = () => {
 
             <div className="p-4 bg-white border-l-4 border-gold-500 shadow-sm rounded-r">
               <p className="italic text-gray-600">
-                "Каждые ворота — это лицо дома. Я делаю так, чтобы это лицо было безупречным."
+                "Качественный забор — это не просто ограда, а безопасность и стиль вашего дома. Мы делаем ЕвроЗаборы, которые служат десятилетиями."
               </p>
               <p className="mt-2 font-bold text-metal-900">— Мастер производства</p>
             </div>
