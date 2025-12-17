@@ -103,7 +103,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ onOrderClick }) => {
           ))}
         </div>
 
-        {/* AI Concept Section */}
+        {/* AI Concept Section - Временно отключена
         <div className="relative bg-metal-900 rounded-3xl p-10 md:p-16 border border-gold-600/20 overflow-hidden shadow-2xl">
            <div className="relative z-10 grid lg:grid-cols-2 gap-16 items-center">
               <div>
@@ -126,6 +126,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ onOrderClick }) => {
               </div>
            </div>
         </div>
+        */}
       </div>
 
       {/* MODAL */}
