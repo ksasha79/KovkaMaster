@@ -14,9 +14,10 @@ export const generateGateConcept = async (promptDetails: string): Promise<string
 
     const ai = new GoogleGenAI({ apiKey });
     
-    const fullPrompt = `Photorealistic professional architectural visualization of wrought iron gates. 
-    Design details: ${promptDetails}. 
-    Environment: High-end residence entrance, sunny day, black steel, intricate ornaments, 8k resolution.`;
+    const fullPrompt = `Photorealistic architectural visualization of a modern EuroZabor (sectional concrete or mesh fence) with matching gates. 
+    Design request: ${promptDetails}. 
+    Environment: Suburban house facade, clean landscape, daylight. 
+    Materials: Decorative concrete texture (stone/brick), premium metal pillars, high quality finish. 8k resolution, cinematic lighting.`;
 
     const response = await ai.models.generateContent({
       model: 'gemini-2.5-flash-image',
@@ -28,7 +29,6 @@ export const generateGateConcept = async (promptDetails: string): Promise<string
       }
     });
 
-    // Безопасно ищем часть с изображением (inlineData) используя методы массива
     const imagePart = response.candidates?.[0]?.content?.parts?.find(part => part.inlineData?.data);
 
     if (imagePart?.inlineData?.data) {
@@ -37,7 +37,7 @@ export const generateGateConcept = async (promptDetails: string): Promise<string
 
     return null;
   } catch (error) {
-    console.error("Error generating gate concept with Gemini:", error);
+    console.error("Error generating fence concept with Gemini:", error);
     return null;
   }
 };
