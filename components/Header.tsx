@@ -19,8 +19,8 @@ const Header: React.FC = () => {
         <div className="flex justify-between items-center h-20">
           <div className="flex-shrink-0 flex items-center">
             <span className="font-black text-2xl tracking-tighter text-gold-500 flex items-center">
-              <span className="bg-gold-500 text-metal-900 px-2 mr-1 rounded-sm">M</span>
-              МАСТЕР<span className="text-white font-light">КОВКИ</span>
+              <span className="bg-gold-500 text-metal-900 px-2 mr-1 rounded-sm text-xl">E</span>
+              ЕВРО<span className="text-white font-light">ЗАБОРЫ</span>
             </span>
           </div>
           
