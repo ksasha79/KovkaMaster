@@ -20,7 +20,7 @@ const About: React.FC = () => {
             <ul className="space-y-4">
               {[
                 'Бесплатный выезд на замер в пределах региона',
-                'Соблюдение сроков и гарантия на сварные швы',
+                'Гарантия 2 года на все виды работ',
                 'Работаем с вашим металлом или закупаем сами',
                 'Доступные цены для жителей ДНР и ЛНР'
               ].map((item, idx) => (
@@ -40,7 +40,6 @@ const About: React.FC = () => {
           </div>
 
           <div className="relative h-96 rounded-xl overflow-hidden shadow-xl group">
-             {/* Real welder image */}
              <img 
                src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=800&q=80" 
                alt="Welder at work" 
