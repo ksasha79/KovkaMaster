@@ -16,7 +16,7 @@ const reviews: Review[] = [
     name: "Михаил Данилов",
     location: "г. Таганрог",
     text: "Заказывал откатные ворота с автоматикой. Понравилось, что мастер сам приехал на замер, посоветовал, как лучше усилить проем. Сделали за 2 недели. Работают четко, швы идеальные, автоматика летает. Рекомендую!",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80",
+    avatar: "/images/review1.jpg",
     rating: 5,
     date: "12 окт 2023"
   },
@@ -25,7 +25,7 @@ const reviews: Review[] = [
     name: "Елена Викторовна",
     location: "г. Аксай",
     text: "Давно мечтала о красивой кованой калитке с виноградной лозой. Ребята воплотили мою мечту в реальность! Дизайн нарисовали бесплатно. Установили аккуратно, даже цветы на клумбе не повредили. Спасибо огромное!",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80",
+    avatar: "/images/review2.jpg",
     rating: 5,
     date: "05 сен 2023"
   },
@@ -34,7 +34,7 @@ const reviews: Review[] = [
     name: "Сергей Петров",
     location: "г. Макеевка (ДНР)",
     text: "Нужен был надежный забор для частного дома. Цены адекватные, даже с учетом доставки. Качество металла хорошее, покраска в три слоя, как и обещали. Выглядят очень солидно.",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80",
+    avatar: "/images/review3.jpg",
     rating: 5,
     date: "20 авг 2023"
   }
@@ -69,6 +69,10 @@ const Reviews: React.FC = () => {
                   src={review.avatar} 
                   alt={review.name} 
                   className="w-14 h-14 rounded-full object-cover border-2 border-gold-600 mr-4"
+                  onError={(e) => {
+                    // Если фото в папке нет, создаем стильную заглушку с инициалами
+                    e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(review.name)}&background=c5a059&color=fff&size=150`;
+                  }}
                 />
                 <div>
                   <h4 className="text-white font-bold text-lg">{review.name}</h4>
