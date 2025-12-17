@@ -6,7 +6,13 @@ import { GoogleGenAI } from "@google/genai";
  */
 export const generateGateConcept = async (promptDetails: string): Promise<string | null> => {
   try {
-    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+    const apiKey = process.env.API_KEY;
+    if (!apiKey) {
+      console.error("API_KEY is not defined");
+      return null;
+    }
+
+    const ai = new GoogleGenAI({ apiKey });
     
     const fullPrompt = `Photorealistic professional architectural visualization of wrought iron gates. 
     Design details: ${promptDetails}. 
@@ -22,11 +28,11 @@ export const generateGateConcept = async (promptDetails: string): Promise<string
       }
     });
 
-    // Ищем часть с изображением (inlineData)
-    for (const part of response.candidates[0].content.parts) {
-      if (part.inlineData) {
-        return `data:image/png;base64,${part.inlineData.data}`;
-      }
+    // Безопасно ищем часть с изображением (inlineData) используя методы массива
+    const imagePart = response.candidates?.[0]?.content?.parts?.find(part => part.inlineData?.data);
+
+    if (imagePart?.inlineData?.data) {
+      return `data:image/png;base64,${imagePart.inlineData.data}`;
     }
 
     return null;
