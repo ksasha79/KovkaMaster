@@ -34,40 +34,43 @@ const Pricing: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
           {plans.map((plan, idx) => (
             <div 
               key={idx}
-              className={`relative p-8 rounded-2xl border ${
+              className={`relative p-8 rounded-2xl border transition-all duration-500 hover:translate-y-[-8px] ${
                 plan.popular 
-                ? 'border-gold-500 shadow-2xl scale-105 z-10 bg-metal-900 text-white' 
+                ? 'border-gold-500 shadow-[0_20px_50px_rgba(197,160,89,0.2)] scale-105 z-10 bg-metal-900 text-white' 
                 : 'border-gray-200 bg-gray-50 text-metal-900'
-              } transition-all duration-300`}
+              }`}
             >
               {plan.popular && (
-                <span className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gold-600 text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">
+                <span className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gold-600 text-white px-6 py-1.5 rounded-full text-xs font-black uppercase tracking-widest shadow-lg">
                   Популярный выбор
                 </span>
               )}
               <h3 className={`text-2xl font-bold mb-2 ${plan.popular ? 'text-gold-500' : ''}`}>{plan.name}</h3>
-              <div className="text-3xl font-black mb-6">{plan.price}</div>
+              <div className="text-3xl font-black mb-6 flex items-baseline">
+                {plan.price}
+                <span className="text-sm font-normal text-gray-500 ml-2">/изделие</span>
+              </div>
               <ul className="space-y-4 mb-8">
                 {plan.features.map((feature, fIdx) => (
-                  <li key={fIdx} className="flex items-center text-sm">
-                    <span className="text-gold-500 mr-2">✔</span>
+                  <li key={fIdx} className="flex items-start text-sm">
+                    <span className="text-gold-500 mr-3 mt-1 text-lg">✓</span>
                     <span className={plan.popular ? 'text-gray-300' : 'text-gray-600'}>{feature}</span>
                   </li>
                 ))}
               </ul>
               <a 
                 href="#contact"
-                className={`block text-center py-3 rounded-lg font-bold transition-colors ${
+                className={`block text-center py-4 rounded-lg font-black transition-all transform active:scale-95 ${
                   plan.popular 
-                  ? 'bg-gold-600 hover:bg-gold-500 text-white' 
+                  ? 'bg-gold-600 hover:bg-gold-500 text-white shadow-lg shadow-gold-600/20' 
                   : 'bg-metal-900 hover:bg-metal-800 text-white'
                 }`}
               >
-                Узнать точную цену
+                ЗАКАЗАТЬ РАСЧЕТ
               </a>
             </div>
           ))}
