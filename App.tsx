@@ -1,9 +1,11 @@
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Services from './components/Services';
+import Steps from './components/Steps';
 import Portfolio from './components/Portfolio';
 import About from './components/About';
 import Reviews from './components/Reviews';
+import FAQ from './components/FAQ';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
@@ -14,9 +16,11 @@ function App() {
       <main className="flex-grow">
         <Hero />
         <Services />
+        <Steps />
         <Portfolio />
         <About />
         <Reviews />
+        <FAQ />
         <Contact />
       </main>
       <Footer />
