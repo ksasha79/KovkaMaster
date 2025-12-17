@@ -8,9 +8,8 @@ const Hero: React.FC = () => {
       <div className="absolute inset-0 z-0">
         <img 
           src="/images/logo.jpg" 
-          alt="Forged gates background" 
+          alt="ЕвроЗаборы фон" 
           className="w-full h-full object-cover"
-          // Запасная картинка, если logo.jpg еще не загружен
           onError={(e) => {
             e.currentTarget.src = "https://images.unsplash.com/photo-1622372658604-0373df45f22e?q=80&w=1920&auto=format&fit=crop";
           }}
@@ -22,11 +21,11 @@ const Hero: React.FC = () => {
       {/* Content */}
       <div className="relative z-10 text-center px-4 max-w-5xl mx-auto animate-fade-in-up">
         <h1 className="text-4xl md:text-6xl font-extrabold text-white tracking-tight mb-6 drop-shadow-2xl">
-          Кованые Ворота и Заборы <br/>
-          <span className="text-gold-500">Любой Сложности</span>
+          Профессиональные <br/>
+          <span className="text-gold-500 uppercase">ЕвроЗаборы</span>
         </h1>
         <p className="mt-4 text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto mb-10 font-light drop-shadow-md">
-          Профессиональное изготовление, сварка и монтаж. 
+          Изготовление, сварка и монтаж ограждений под ключ. 
           Работаем по <span className="text-white font-semibold border-b border-gold-500">Ростовской области</span>, 
           <span className="text-white font-semibold border-b border-gold-500 ml-1">ДНР</span> и 
           <span className="text-white font-semibold border-b border-gold-500 ml-1">ЛНР</span>.
