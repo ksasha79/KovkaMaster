@@ -44,7 +44,7 @@ const Footer: React.FC = () => {
             <ul className="space-y-4 text-sm">
               <li className="flex items-center gap-3">
                 <span className="text-gold-500">📞</span>
-                <a href="tel:+79000000000" className="hover:text-white transition-colors text-lg font-bold">+7 (900) 000-00-00</a>
+                <a href="tel:+79591878949" className="hover:text-white transition-colors text-lg font-bold">+7 (959) 187-89-49</a>
               </li>
               <li className="flex items-center gap-3">
                 <span className="text-gold-500">📍</span>
@@ -89,4 +89,3 @@ const Footer: React.FC = () => {
 };
 
 export default Footer;
-
