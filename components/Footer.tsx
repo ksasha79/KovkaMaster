@@ -52,7 +52,7 @@ const Footer: React.FC = () => {
               </li>
               <li className="flex items-center gap-3">
                 <span className="text-gold-500">✉️</span>
-                <span>info@eurozabor-master.ru</span>
+                <a href="mailto:evrozabory6@gmail.com" className="hover:text-white transition-colors">evrozabory6@gmail.com</a>
               </li>
             </ul>
           </div>
