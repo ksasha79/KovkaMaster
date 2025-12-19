@@ -59,15 +59,19 @@ const Footer: React.FC = () => {
 
           <div>
             <h3 className="text-white text-xs font-black uppercase tracking-[0.2em] mb-8">Юридическая информация</h3>
-            <div className="bg-white/5 p-6 rounded-2xl border border-white/5 space-y-2">
-              <p className="text-[11px] leading-tight italic">
+            <div className="bg-white/5 p-6 rounded-2xl border border-white/5 space-y-3">
+              <p className="text-[11px] leading-tight italic text-gray-500">
                 Все работы выполняются в соответствии с договором строительного подряда. 
-                Гарантия на монтажные работы — 24 месяца.
+                Лицензия на проведение строительно-монтажных работ.
               </p>
-              <div className="pt-4 mt-4 border-t border-white/5 text-[10px] text-gray-500 uppercase tracking-widest font-bold">
-                ИП Мастер-Заборов А.В.<br/>
-                ОГРНИП: 000000000000000<br/>
-                ИНН: 000000000000
+              <div className="pt-4 mt-4 border-t border-white/5">
+                <div className="text-gold-500 text-[10px] uppercase tracking-widest font-black mb-1">Организация:</div>
+                <div className="text-white text-[12px] font-bold uppercase mb-2">ООО «МАСТЕР»</div>
+                <div className="grid grid-cols-1 gap-1 text-[10px] text-gray-500 uppercase tracking-widest font-bold">
+                  <span>ОГРН: 1236100000000</span>
+                  <span>ИНН: 6164000000</span>
+                  <span>КПП: 616401001</span>
+                </div>
               </div>
             </div>
           </div>
@@ -76,7 +80,7 @@ const Footer: React.FC = () => {
 
         <div className="border-t border-white/5 pt-10 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-[11px] uppercase tracking-widest font-bold">
-            © {new Date().getFullYear()} ЕвроЗаборы — Лидеры рынка Ростовской области и Донбасса
+            © {new Date().getFullYear()} ЕвроЗаборы — ООО «Мастер». Лидеры рынка Ростовской области и Донбасса
           </p>
           <div className="flex gap-8 text-[10px] font-black uppercase tracking-widest">
             <a href="#" className="hover:text-gold-500 transition-colors">Политика конфиденциальности</a>
