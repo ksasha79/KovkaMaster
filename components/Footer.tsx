@@ -5,7 +5,7 @@ const Footer: React.FC = () => {
     <footer className="bg-metal-900 text-gray-400 py-20 border-t border-white/5 relative overflow-hidden">
       {/* Subtle Background Mark */}
       <div className="absolute bottom-0 right-0 text-[150px] font-black text-white/[0.02] select-none leading-none pointer-events-none">
-        MASTER
+        EUROZABOR
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -61,7 +61,7 @@ const Footer: React.FC = () => {
             <h3 className="text-white text-xs font-black uppercase tracking-[0.2em] mb-8">Юридическая информация</h3>
             <div className="space-y-4 text-sm">
               <div>
-                <div className="text-white font-bold uppercase mb-1">ООО «МАСТЕР»</div>
+                <div className="text-white font-bold uppercase mb-1">ООО "ЕвроЗаборы"</div>
                 <div className="text-xs text-gray-500 leading-relaxed italic mb-4">
                   Работаем по договору строительного подряда с гарантией 24 месяца.
                 </div>
@@ -78,7 +78,7 @@ const Footer: React.FC = () => {
 
         <div className="border-t border-white/5 pt-10 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-[11px] uppercase tracking-widest font-bold">
-            © {new Date().getFullYear()} ЕвроЗаборы — ООО «Мастер». Лидеры рынка Ростовской области и Донбасса
+            © {new Date().getFullYear()} ЕвроЗаборы — ООО "ЕвроЗаборы". Лидеры рынка Ростовской области и Донбасса
           </p>
           <div className="flex gap-8 text-[10px] font-black uppercase tracking-widest">
             <a href="#" className="hover:text-gold-500 transition-colors">Политика конфиденциальности</a>
