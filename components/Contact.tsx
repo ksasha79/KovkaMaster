@@ -113,6 +113,15 @@ const Contact: React.FC<ContactProps> = ({ prefillMessage }) => {
                   </div>
 
                   <div className="flex items-start gap-4">
+                     <div className="w-10 h-10 bg-metal-900 rounded-lg flex items-center justify-center text-xl border border-gray-700">✉️</div>
+                     <div>
+                        <div className="text-xs text-gray-500 uppercase font-black">Электронная почта</div>
+                        <a href="mailto:evrozabory6@gmail.com" className="text-xl font-bold text-white hover:text-gold-500 transition-colors">evrozabory6@gmail.com</a>
+                        <div className="text-sm text-gray-400 mt-1">Для коммерческих предложений</div>
+                     </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
                      <div className="w-10 h-10 bg-metal-900 rounded-lg flex items-center justify-center text-xl border border-gray-700">🛡️</div>
                      <div>
                         <div className="text-xs text-gray-500 uppercase font-black">Юридическая защита</div>
