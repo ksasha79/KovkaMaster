@@ -37,10 +37,10 @@ const Header: React.FC = () => {
                 </a>
               ))}
               <a 
-                href="tel:+79000000000" 
+                href="tel:+79591878949" 
                 className="ml-4 bg-gold-600 hover:bg-gold-500 text-white px-5 py-2.5 rounded-sm text-sm font-black shadow-lg transition-all transform hover:scale-105 active:scale-95"
               >
-                +7 (900) 000-00-00
+                +7 (959) 187-89-49
               </a>
             </div>
           </div>
@@ -78,7 +78,7 @@ const Header: React.FC = () => {
               </a>
             ))}
             <div className="px-4 py-4">
-               <a href="tel:+79000000000" className="block text-center bg-gold-600 text-white py-4 rounded font-bold">
+               <a href="tel:+79591878949" className="block text-center bg-gold-600 text-white py-4 rounded font-bold">
                  Позвонить мастеру
                </a>
             </div>
