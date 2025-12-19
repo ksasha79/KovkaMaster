@@ -107,7 +107,7 @@ const Contact: React.FC<ContactProps> = ({ prefillMessage }) => {
                      <div className="w-10 h-10 bg-metal-900 rounded-lg flex items-center justify-center text-xl border border-gray-700">📞</div>
                      <div>
                         <div className="text-xs text-gray-500 uppercase font-black">Телефон мастера</div>
-                        <a href="tel:+79000000000" className="text-2xl font-black text-white hover:text-gold-500 transition-colors">+7 (900) 000-00-00</a>
+                        <a href="tel:+79591878949" className="text-2xl font-black text-white hover:text-gold-500 transition-colors">+7 (959) 187-89-49</a>
                         <div className="text-sm text-green-500 font-bold mt-1">● Сейчас в сети (ответит за 1 мин)</div>
                      </div>
                   </div>
@@ -143,4 +143,3 @@ const Contact: React.FC<ContactProps> = ({ prefillMessage }) => {
 };
 
 export default Contact;
-
