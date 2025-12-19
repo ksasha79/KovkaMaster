@@ -59,20 +59,18 @@ const Footer: React.FC = () => {
 
           <div>
             <h3 className="text-white text-xs font-black uppercase tracking-[0.2em] mb-8">Юридическая информация</h3>
-            <div className="bg-white/5 p-6 rounded-2xl border border-white/5 space-y-3">
-              <p className="text-[11px] leading-tight italic text-gray-500">
-                Все работы выполняются в соответствии с договором строительного подряда. 
-                Лицензия на проведение строительно-монтажных работ.
-              </p>
-              <div className="pt-4 mt-4 border-t border-white/5">
-                <div className="text-gold-500 text-[10px] uppercase tracking-widest font-black mb-1">Организация:</div>
-                <div className="text-white text-[12px] font-bold uppercase mb-2">ООО «МАСТЕР»</div>
-                <div className="grid grid-cols-1 gap-1 text-[10px] text-gray-500 uppercase tracking-widest font-bold">
-                  <span>ОГРН: 1236100000000</span>
-                  <span>ИНН: 6164000000</span>
-                  <span>КПП: 616401001</span>
+            <div className="space-y-4 text-sm">
+              <div>
+                <div className="text-white font-bold uppercase mb-1">ООО «МАСТЕР»</div>
+                <div className="text-xs text-gray-500 leading-relaxed italic mb-4">
+                  Работаем по договору строительного подряда с гарантией 24 месяца.
                 </div>
               </div>
+              <ul className="space-y-2 text-[11px] uppercase tracking-widest font-bold text-gray-500">
+                <li>ОГРН: 1236100000000</li>
+                <li>ИНН: 6164000000</li>
+                <li>КПП: 616401001</li>
+              </ul>
             </div>
           </div>
 
