@@ -43,7 +43,7 @@ function App() {
       {/* Sticky Mobile Call Button */}
       <div className="fixed bottom-6 right-6 z-40 md:hidden">
         <a 
-          href="tel:+79000000000"
+          href="tel:+79591878949"
           className="flex items-center justify-center w-14 h-14 bg-green-500 text-white rounded-full shadow-lg hover:bg-green-600 transition-all active:scale-95 animate-pulse"
         >
           <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
