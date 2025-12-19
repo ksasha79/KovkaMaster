@@ -29,7 +29,7 @@ const About: React.FC = () => {
             <div className="absolute -bottom-6 -right-6 md:-bottom-10 md:-right-10 bg-gold-600 text-white p-8 md:p-12 rounded-[2.5rem] shadow-2xl z-20">
                <div className="text-4xl md:text-6xl font-black mb-1 leading-none">15</div>
                <div className="text-[10px] md:text-[11px] uppercase font-bold tracking-[0.2em] opacity-90 leading-tight">
-                 Лет личного <br/>опыта в стройке
+                 Лет безупречной <br/>репутации на рынке
                </div>
             </div>
 
@@ -41,22 +41,22 @@ const About: React.FC = () => {
           <div className="space-y-10 order-1 lg:order-2">
             <div>
               <div className="inline-block px-3 py-1 bg-gold-100 rounded-md mb-4">
-                <span className="text-xs font-black text-gold-700 uppercase tracking-widest">Гарантия результата</span>
+                <span className="text-xs font-black text-gold-700 uppercase tracking-widest">Профессиональный статус</span>
               </div>
               <h3 className="text-4xl md:text-6xl font-black text-metal-900 uppercase leading-[0.95] mb-8">
-                Почему работают <br/>
-                <span className="text-gold-500">напрямую со мной?</span>
+                Почему выбирают <br/>
+                <span className="text-gold-500">ООО «Мастер»?</span>
               </h3>
               <p className="text-xl text-gray-600 leading-relaxed font-light border-l-4 border-gold-500 pl-6">
-                Я работаю как индивидуальный предприниматель. Это значит, что я лично отвечаю за каждый установленный столб и каждую секцию вашего забора.
+                Мы работаем как специализированная компания. Это гарантирует вам юридическую защиту, фиксированные сроки и многоуровневый контроль качества каждой конструкции.
               </p>
             </div>
 
             <div className="grid gap-10">
               {[
                 { 
-                  title: 'Честная цена', 
-                  desc: 'Никаких скрытых платежей за «сложный грунт». Смета фиксируется в договоре.',
+                  title: 'Работа по договору', 
+                  desc: 'Мы — юридическое лицо ООО «Мастер». Все обязательства, сроки и финальная стоимость прописаны в официальном документе.',
                   icon: (
                     <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -65,7 +65,7 @@ const About: React.FC = () => {
                 },
                 { 
                   title: 'Собственный цех', 
-                  desc: 'Прямые поставки армированных плит без торговых наценок посредников.',
+                  desc: 'Прямые поставки армированных плит без торговых наценок посредников. Контроль каждой партии бетона.',
                   icon: (
                     <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
@@ -73,8 +73,8 @@ const About: React.FC = () => {
                   )
                 },
                 { 
-                  title: 'Личный контроль', 
-                  desc: 'Я лично принимаю объект и проверяю уровень каждой секции перед сдачей.',
+                  title: 'Инженерный надзор', 
+                  desc: 'Наши бригадиры лично принимают каждый этап: от глубины бурения лунок до финишной покраски швов.',
                   icon: (
                     <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
@@ -99,7 +99,7 @@ const About: React.FC = () => {
                  href="#contact" 
                  className="inline-flex items-center justify-center px-10 py-5 bg-metal-900 text-white font-black uppercase tracking-widest text-xs rounded-2xl hover:bg-gold-600 transition-all shadow-xl group"
                >
-                  Обсудить ваш проект лично
+                  Получить коммерческое предложение
                   <span className="ml-3 group-hover:translate-x-2 transition-transform">→</span>
                </a>
             </div>
