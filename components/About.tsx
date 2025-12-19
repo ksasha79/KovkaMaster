@@ -45,7 +45,7 @@ const About: React.FC = () => {
               </div>
               <h3 className="text-4xl md:text-6xl font-black text-metal-900 uppercase leading-[0.95] mb-8">
                 Почему выбирают <br/>
-                <span className="text-gold-500">ООО «Мастер»?</span>
+                <span className="text-gold-500">ООО "ЕвроЗаборы"?</span>
               </h3>
               <p className="text-xl text-gray-600 leading-relaxed font-light border-l-4 border-gold-500 pl-6">
                 Мы работаем как специализированная компания. Это гарантирует вам юридическую защиту, фиксированные сроки и многоуровневый контроль качества каждой конструкции.
@@ -56,7 +56,7 @@ const About: React.FC = () => {
               {[
                 { 
                   title: 'Работа по договору', 
-                  desc: 'Мы — юридическое лицо ООО «Мастер». Все обязательства, сроки и финальная стоимость прописаны в официальном документе.',
+                  desc: 'Мы — юридическое лицо ООО "ЕвроЗаборы". Все обязательства, сроки и финальная стоимость прописаны в официальном документе.',
                   icon: (
                     <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
