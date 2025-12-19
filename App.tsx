@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
-import Stats from './components/Stats';
 import Services from './components/Services';
 import Steps from './components/Steps';
 import Portfolio from './components/Portfolio';
@@ -29,7 +28,6 @@ function App() {
       <Header />
       <main className="flex-grow">
         <Hero />
-        <Stats />
         <Services />
         <Steps />
         <Portfolio onOrderClick={handleOrderSpecific} />
