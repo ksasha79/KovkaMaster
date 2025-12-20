@@ -87,7 +87,7 @@ export const catalogData: CatalogItem[] = [
     priceStart: "от 15 000 ₽",
     description: "Усиленные стеллажи для хранения инструментов и колес. Порошковая покраска, нагрузка до 300кг на полку.",
     gallery: [
-      { label: "Организация гаража", url: "/images/shelving_garage.jpg" },
+      { label: "Организация гаража", url: "/images/77.jpg" },
     ]
   },
   {
