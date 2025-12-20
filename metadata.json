@@ -1,5 +1,7 @@
 {
-  "name": "EuroZabor - Gates & Fences",
-  "description": "Professional manufacturing and installation of EuroZabor fences and gates in Rostov Region, DPR, and LPR.",
-  "requestFramePermissions": []
+  "name": "ООО ЕвроЗаборы - Завод Ограждений и Ворот",
+  "description": "Профессиональное производство и монтаж еврозаборов, ворот и металлоконструкций. Официальный договор ООО, работаем по Ростовской области, ДНР и ЛНР.",
+  "requestFramePermissions": [
+    "camera"
+  ]
 }
