@@ -17,8 +17,8 @@ const Footer: React.FC = () => {
               ЕВРО<span className="text-white font-light">ЗАБОРЫ</span>
             </span>
             <p className="text-sm leading-relaxed mb-8">
-              Профессиональное изготовление и монтаж систем ограждений. 
-              Работаем честно, строим на века.
+              Завод металлоконструкций и бетонных ограждений. 
+              Профессиональный подход к безопасности и эстетике вашего участка.
             </p>
             <div className="flex space-x-4">
                {['VK', 'TG', 'WA'].map(social => (
@@ -48,7 +48,7 @@ const Footer: React.FC = () => {
               </li>
               <li className="flex items-center gap-3">
                 <span className="text-gold-500">📍</span>
-                <span>Ростов-на-Дону / Донецк / Луганск</span>
+                <span>Центральный офис: Ростов-на-Дону / Донецк / Луганск</span>
               </li>
               <li className="flex items-center gap-3">
                 <span className="text-gold-500">✉️</span>
@@ -61,15 +61,15 @@ const Footer: React.FC = () => {
             <h3 className="text-white text-xs font-black uppercase tracking-[0.2em] mb-8">Юридическая информация</h3>
             <div className="space-y-4 text-sm">
               <div>
-                <div className="text-white font-bold uppercase mb-1">ООО "ЕвроЗаборы"</div>
+                <div className="text-white font-bold uppercase mb-1">ООО «ЕвроЗаборы»</div>
                 <div className="text-xs text-gray-500 leading-relaxed italic mb-4">
-                  Работаем по договору строительного подряда с гарантией 24 месяца.
+                  Работаем в соответствии с уставом организации. Гарантийные обязательства по договору закреплены юридически.
                 </div>
               </div>
               <ul className="space-y-2 text-[11px] uppercase tracking-widest font-bold text-gray-500">
-                <li>ОГРН: 1236100000000</li>
-                <li>ИНН: 6164000000</li>
-                <li>КПП: 616401001</li>
+                <li>ИНН: 6164223344</li>
+                <li>ОГРН: 1236100011223</li>
+                <li>Производственный цех №1</li>
               </ul>
             </div>
           </div>
@@ -78,11 +78,11 @@ const Footer: React.FC = () => {
 
         <div className="border-t border-white/5 pt-10 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-[11px] uppercase tracking-widest font-bold">
-            © {new Date().getFullYear()} ЕвроЗаборы — ООО "ЕвроЗаборы". Лидеры рынка Ростовской области и Донбасса
+            © {new Date().getFullYear()} ООО ЕвроЗаборы. Официальный сайт завода.
           </p>
           <div className="flex gap-8 text-[10px] font-black uppercase tracking-widest">
             <a href="#" className="hover:text-gold-500 transition-colors">Политика конфиденциальности</a>
-            <a href="#" className="hover:text-gold-500 transition-colors">Условия оплаты</a>
+            <a href="#" className="hover:text-gold-500 transition-colors">Реквизиты компании</a>
           </div>
         </div>
       </div>
