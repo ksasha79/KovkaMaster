@@ -1,5 +1,5 @@
+
 import React, { useState, useEffect } from 'react';
-import { ContactForm } from '../types';
 
 interface ContactProps {
   prefillMessage?: string;
@@ -10,9 +10,11 @@ const Contact: React.FC<ContactProps> = ({ prefillMessage }) => {
     name: '', 
     phone: '', 
     message: '',
-    length: '' // Новое поле для длины забора
+    length: '' 
   });
-  const [status, setStatus] = useState<'idle' | 'sending' | 'success'>('idle');
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [isDemo, setIsDemo] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     if (prefillMessage) {
@@ -20,14 +22,32 @@ const Contact: React.FC<ContactProps> = ({ prefillMessage }) => {
     }
   }, [prefillMessage]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('sending');
-    // Имитация отправки
-    setTimeout(() => {
-      setStatus('success');
-      setFormData({ name: '', phone: '', message: '', length: '' });
-    }, 1500);
+    setErrorMessage('');
+    setIsDemo(false);
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        if (result.isDemo) setIsDemo(true);
+        setStatus('success');
+        setFormData({ name: '', phone: '', message: '', length: '' });
+      } else {
+        throw new Error(result.error || 'Ошибка при отправке');
+      }
+    } catch (err: any) {
+      setStatus('error');
+      setErrorMessage(err.message || 'Произошла ошибка. Пожалуйста, позвоните нам напрямую.');
+    }
   };
 
   return (
@@ -40,108 +60,127 @@ const Contact: React.FC<ContactProps> = ({ prefillMessage }) => {
           
           <div className="bg-metal-800 rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-700/50">
             <h2 className="text-3xl font-black mb-2 uppercase tracking-tight">Вызвать замерщика</h2>
-            <p className="text-gray-400 mb-10 text-sm">Оставьте данные, и мы подготовим предварительную смету за 15 минут.</p>
+            <p className="text-gray-400 mb-10 text-sm">Бесплатный выезд мастера и точный расчет сметы в день обращения.</p>
 
             {status === 'success' ? (
-              <div className="text-center py-16 px-8 bg-green-900/20 rounded-2xl border border-green-500/50 text-green-400 animate-fade-in">
-                <div className="w-20 h-20 bg-green-500 text-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg shadow-green-500/20">
+              <div className="text-center py-12 px-6 bg-gold-600/5 rounded-3xl border border-gold-600/30 animate-fade-in">
+                <div className="w-20 h-20 bg-gold-600 text-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl shadow-gold-600/20">
                    <svg className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
                 </div>
-                <h3 className="text-2xl font-black mb-2 uppercase">Заявка принята!</h3>
-                <p className="mb-8">Мастер уже получил уведомление и свяжется с вами.</p>
-                <button onClick={() => setStatus('idle')} className="text-gold-500 font-bold hover:underline">Отправить ещё одну заявку</button>
+                <h3 className="text-2xl font-black mb-2 uppercase text-gold-500">Заявка отправлена!</h3>
+                <p className="text-gray-300 mb-6">Спасибо за доверие. Мы свяжемся с вами в течение 15 минут для подтверждения времени замера.</p>
+                
+                {isDemo && (
+                  <div className="mb-8 p-4 bg-blue-900/30 border border-blue-500/50 rounded-xl text-blue-300 text-xs italic">
+                    ⚠️ Режим теста: Данные успешно обработаны сервером и выведены в консоль. Для получения реальных уведомлений в Telegram настройте токены.
+                  </div>
+                )}
+                
+                <button onClick={() => setStatus('idle')} className="text-gold-500 font-bold hover:text-white transition-colors uppercase text-xs tracking-widest border-b border-gold-600/50 pb-1">Отправить ещё одну</button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div className="grid md:grid-cols-2 gap-5">
+              <form onSubmit={handleSubmit} className="space-y-6">
+                {status === 'error' && (
+                  <div className="p-4 bg-red-900/30 border border-red-500/50 rounded-xl text-red-400 text-sm mb-4 flex items-center gap-3">
+                    <span className="text-xl">⚠️</span> {errorMessage}
+                  </div>
+                )}
+                
+                <div className="grid md:grid-cols-2 gap-6">
                    <div className="space-y-2">
-                     <label className="text-[10px] uppercase font-black text-gray-500 ml-1">Как вас зовут?</label>
-                     <input type="text" required className="w-full px-5 py-4 bg-metal-900 border border-gray-700 rounded-xl text-white focus:border-gold-500 focus:ring-1 focus:ring-gold-500 outline-none transition-all" placeholder="Иван" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} />
+                     <label className="text-[10px] uppercase font-black text-gray-500 ml-1 tracking-widest">Ваше Имя</label>
+                     <input type="text" required className="w-full px-5 py-4 bg-metal-900 border border-gray-700 rounded-xl text-white focus:border-gold-500 focus:ring-1 focus:ring-gold-500 outline-none transition-all placeholder-gray-600" placeholder="Александр" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} />
                    </div>
                    <div className="space-y-2">
-                     <label className="text-[10px] uppercase font-black text-gray-500 ml-1">Телефон</label>
-                     <input type="tel" required className="w-full px-5 py-4 bg-metal-900 border border-gray-700 rounded-xl text-white focus:border-gold-500 focus:ring-1 focus:ring-gold-500 outline-none transition-all" placeholder="+7 (___) ___-__-__" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} />
+                     <label className="text-[10px] uppercase font-black text-gray-500 ml-1 tracking-widest">Контактный номер</label>
+                     <input type="tel" required className="w-full px-5 py-4 bg-metal-900 border border-gray-700 rounded-xl text-white focus:border-gold-500 focus:ring-1 focus:ring-gold-500 outline-none transition-all placeholder-gray-600" placeholder="+7 (___) ___-__-__" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} />
                    </div>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-[10px] uppercase font-black text-gray-500 ml-1">Примерная длина (метров)</label>
+                  <label className="text-[10px] uppercase font-black text-gray-500 ml-1 tracking-widest">Длина участка (примерно)</label>
                   <div className="relative">
                     <input 
                       type="number" 
-                      className="w-full px-5 py-4 bg-metal-900 border border-gray-700 rounded-xl text-white focus:border-gold-500 focus:ring-1 focus:ring-gold-500 outline-none transition-all" 
-                      placeholder="Например: 50" 
+                      className="w-full px-5 py-4 bg-metal-900 border border-gray-700 rounded-xl text-white focus:border-gold-500 focus:ring-1 focus:ring-gold-500 outline-none transition-all placeholder-gray-600" 
+                      placeholder="Например: 45" 
                       value={formData.length} 
                       onChange={e => setFormData({...formData, length: e.target.value})} 
                     />
-                    <span className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-600 font-bold">п.м.</span>
+                    <span className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-500 font-black text-xs uppercase">Метров</span>
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-[10px] uppercase font-black text-gray-500 ml-1">Комментарий</label>
-                  <textarea className="w-full px-5 py-4 bg-metal-900 border border-gray-700 rounded-xl text-white focus:border-gold-500 focus:ring-1 focus:ring-gold-500 outline-none transition-all h-32 resize-none" placeholder="Укажите пожелания или название проекта..." value={formData.message} onChange={e => setFormData({...formData, message: e.target.value})} />
+                  <label className="text-[10px] uppercase font-black text-gray-500 ml-1 tracking-widest">Дополнительная информация</label>
+                  <textarea className="w-full px-5 py-4 bg-metal-900 border border-gray-700 rounded-xl text-white focus:border-gold-500 focus:ring-1 focus:ring-gold-500 outline-none transition-all h-28 resize-none placeholder-gray-600" placeholder="Напишите выбранную модель или особые условия участка..." value={formData.message} onChange={e => setFormData({...formData, message: e.target.value})} />
                 </div>
 
-                <button type="submit" disabled={status === 'sending'} className="w-full py-5 bg-gold-600 hover:bg-gold-500 text-white font-black uppercase tracking-widest rounded-xl transition-all shadow-xl shadow-gold-600/20 active:scale-95 disabled:bg-gray-700">
-                  {status === 'sending' ? 'Обработка...' : 'Получить расчет стоимости'}
+                <button 
+                  type="submit" 
+                  disabled={status === 'sending'} 
+                  className="w-full py-5 bg-gold-600 hover:bg-gold-500 text-white font-black uppercase tracking-[0.2em] rounded-xl transition-all shadow-xl shadow-gold-600/20 active:scale-95 disabled:bg-gray-700 disabled:opacity-50 flex justify-center items-center gap-4 text-sm"
+                >
+                  {status === 'sending' ? (
+                    <>
+                      <svg className="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Обработка...
+                    </>
+                  ) : 'Записаться на замер'}
                 </button>
+                <p className="text-[9px] text-gray-500 text-center uppercase tracking-widest leading-relaxed">Нажимая кнопку, вы соглашаетесь на обработку персональных данных</p>
               </form>
             )}
           </div>
 
-          <div className="flex flex-col h-full">
-             <div className="bg-metal-800/50 p-10 rounded-3xl border border-gray-700/50 flex-grow">
-               <h3 className="text-2xl font-black mb-8 uppercase text-gold-500">Прямая связь</h3>
+          {/* Contact Info Sidebar */}
+          <div className="lg:sticky lg:top-32 space-y-10">
+             <div className="bg-metal-800/30 p-10 rounded-3xl border border-gray-700/30">
+               <h3 className="text-xl font-black mb-8 uppercase text-gold-500 tracking-tighter">Связаться напрямую</h3>
                <div className="space-y-8">
-                  <div className="flex items-start gap-4">
-                     <div className="w-10 h-10 bg-metal-900 rounded-lg flex items-center justify-center text-xl border border-gray-700">📍</div>
+                  <div className="flex items-start gap-5">
+                     <div className="w-12 h-12 bg-metal-900 rounded-2xl flex items-center justify-center text-2xl border border-gray-800 shadow-inner">📞</div>
                      <div>
-                        <div className="text-xs text-gray-500 uppercase font-black">Наш офис и цех</div>
-                        <div className="text-white font-bold">г. Ростов-на-Дону, ул. Сварщиков, 12</div>
-                        <div className="text-sm text-gray-400 mt-1">Доставка: вся область + ДНР/ЛНР</div>
+                        <div className="text-[10px] text-gray-500 uppercase font-black tracking-widest mb-1">Бесплатная консультация</div>
+                        <a href="tel:+79591878949" className="text-2xl font-black text-white hover:text-gold-500 transition-colors tracking-tighter">+7 (959) 187-89-49</a>
+                        <div className="flex items-center gap-2 mt-2">
+                           <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                           <span className="text-[10px] text-green-500 font-black uppercase">Инженер на линии</span>
+                        </div>
                      </div>
                   </div>
 
-                  <div className="flex items-start gap-4">
-                     <div className="w-10 h-10 bg-metal-900 rounded-lg flex items-center justify-center text-xl border border-gray-700">📞</div>
+                  <div className="flex items-start gap-5">
+                     <div className="w-12 h-12 bg-metal-900 rounded-2xl flex items-center justify-center text-2xl border border-gray-800 shadow-inner">✉️</div>
                      <div>
-                        <div className="text-xs text-gray-500 uppercase font-black">Телефон мастера</div>
-                        <a href="tel:+79591878949" className="text-2xl font-black text-white hover:text-gold-500 transition-colors">+7 (959) 187-89-49</a>
-                        <div className="text-sm text-green-500 font-bold mt-1">● Сейчас в сети (ответит за 1 мин)</div>
-                     </div>
-                  </div>
-
-                  <div className="flex items-start gap-4">
-                     <div className="w-10 h-10 bg-metal-900 rounded-lg flex items-center justify-center text-xl border border-gray-700">✉️</div>
-                     <div>
-                        <div className="text-xs text-gray-500 uppercase font-black">Электронная почта</div>
-                        <a href="mailto:evrozabory6@gmail.com" className="text-xl font-bold text-white hover:text-gold-500 transition-colors">evrozabory6@gmail.com</a>
-                        <div className="text-sm text-gray-400 mt-1">Для коммерческих предложений</div>
-                     </div>
-                  </div>
-
-                  <div className="flex items-start gap-4">
-                     <div className="w-10 h-10 bg-metal-900 rounded-lg flex items-center justify-center text-xl border border-gray-700">🛡️</div>
-                     <div>
-                        <div className="text-xs text-gray-500 uppercase font-black">Юридическая защита</div>
-                        <div className="text-white font-bold">Работаем по договору</div>
-                        <div className="text-sm text-gray-400 mt-1">Официальная гарантия 2 года на монтаж</div>
+                        <div className="text-[10px] text-gray-500 uppercase font-black tracking-widest mb-1">Для документов и чертежей</div>
+                        <a href="mailto:evrozabory6@gmail.com" className="text-lg font-bold text-white hover:text-gold-500 transition-colors">evrozabory6@gmail.com</a>
                      </div>
                   </div>
                </div>
 
-               <div className="mt-12">
-                  <div className="text-[10px] text-gray-500 uppercase font-black mb-4 tracking-widest text-center">Напишите в мессенджеры</div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <a href="#" className="flex items-center justify-center gap-2 py-4 bg-[#0088cc] hover:bg-[#0077b5] text-white rounded-xl font-bold transition-all shadow-lg">
+               <div className="mt-12 pt-10 border-t border-gray-800">
+                  <div className="text-[10px] text-gray-500 uppercase font-black mb-6 tracking-widest">Пишите нам в мессенджеры</div>
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    <a href="#" className="flex-1 flex items-center justify-center gap-3 py-4 bg-[#0088cc] hover:bg-[#0077b5] text-white rounded-xl font-black uppercase text-[10px] tracking-widest transition-all shadow-xl shadow-blue-900/20 active:scale-95">
                       <span>Telegram</span>
                     </a>
-                    <a href="#" className="flex items-center justify-center gap-2 py-4 bg-[#25D366] hover:bg-[#20b356] text-white rounded-xl font-bold transition-all shadow-lg">
+                    <a href="#" className="flex-1 flex items-center justify-center gap-3 py-4 bg-[#25D366] hover:bg-[#20b356] text-white rounded-xl font-black uppercase text-[10px] tracking-widest transition-all shadow-xl shadow-green-900/20 active:scale-95">
                       <span>WhatsApp</span>
                     </a>
                   </div>
                </div>
+             </div>
+             
+             <div className="px-6 py-8 bg-gold-600/10 rounded-3xl border border-gold-600/20 flex items-center gap-6">
+                <div className="text-4xl">🚚</div>
+                <div>
+                   <h4 className="font-black uppercase text-gold-500 text-xs mb-1">Своя логистика</h4>
+                   <p className="text-gray-400 text-xs">Доставляем заказы манипуляторами по всей области и новым регионам.</p>
+                </div>
              </div>
           </div>
 
