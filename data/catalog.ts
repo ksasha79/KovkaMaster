@@ -54,7 +54,7 @@ export const catalogData: CatalogItem[] = [
     priceStart: "от 4 200 ₽/м²",
     description: "Арочный навес из поликарбоната 10мм. Фермы из профильной трубы 60х60. Полная защита вашего автомобиля от осадков.",
     gallery: [
-      { label: "Навес на 2 машины", url: "/images/55.jpg" },
+      { label: "Навес на 2 машины", url: "/images/66.jpg" },
     ]
   },
   {
