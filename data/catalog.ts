@@ -37,13 +37,13 @@ export const catalogData: CatalogItem[] = [
   },
   {
     id: 2,
-    title: "Ворота 'Евро-Классик'",
-    category: 'gates',
+    title: "ЕвроЗабор 'Евро-Классик'",
+    category: 'concrete',
     location: "Донецк",
-    priceStart: "от 45 000 ₽",
-    description: "Распашные ворота с заполнением из секций еврозабора. Покраска в цвет по RAL, усиленные петли на подшипниках.",
+    priceStart: "от 2 800 ₽/п.м.",
+    description: "Классическое решение для ограждения. Секции с имитацией кирпича или камня. Покраска в цвет по RAL, долговечность и эстетика.",
     gallery: [
-      { label: "Общий вид", url: "/images/gate_classic_1.jpg" },
+      { label: "Общий вид", url: "/images/22.jpg" },
     ]
   },
   {
@@ -89,6 +89,17 @@ export const catalogData: CatalogItem[] = [
     description: "Усиленные стеллажи для хранения инструментов и колес. Порошковая покраска, нагрузка до 300кг на полку.",
     gallery: [
       { label: "Организация гаража", url: "/images/shelving_garage.jpg" },
+    ]
+  },
+  {
+    id: 7,
+    title: "Ворота 'Евро-Классик'",
+    category: 'gates',
+    location: "Донецк",
+    priceStart: "от 48 000 ₽",
+    description: "Распашные или откатные ворота в едином стиле с забором 'Евро-Классик'. Надежная рама и качественное заполнение.",
+    gallery: [
+      { label: "Фасад", url: "/images/33.jpg" },
     ]
   }
 ];
