@@ -98,7 +98,7 @@ export const catalogData: CatalogItem[] = [
     priceStart: "от 48 000 ₽",
     description: "Распашные или откатные ворота в едином стиле with забором 'Евро-Классик'. Надежная рама и качественное заполнение.",
     gallery: [
-      { label: "Фасад", url: "/images/33.jpg" },
+      { label: "Фасад", url: "/images/88.jpg" },
     ]
   }
 ];
