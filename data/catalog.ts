@@ -29,7 +29,7 @@ export const catalogData: CatalogItem[] = [
     category: 'concrete',
     location: "Ростов-на-Дону",
     priceStart: "от 2 500 ₽/п.м.",
-    description: "Надежный забор с текстурой натурального сланца. Глубокое армирование, морозостойкий бетон марки М350. Идеально подходит для частных домов.",
+    description: "Надежный забор with текстурой натурального сланца. Глубокое армирование, морозостойкий бетон марки М350. Идеально подходит для частных домов.",
     gallery: [
       { label: "Фасадный вид", url: "/images/1-1.png" },
       { label: "Детали текстуры", url: "/images/1-2.png" },
@@ -41,7 +41,7 @@ export const catalogData: CatalogItem[] = [
     category: 'concrete',
     location: "Донецк",
     priceStart: "от 2 800 ₽/п.м.",
-    description: "Классическое решение для ограждения. Секции с имитацией кирпича или камня. Покраска в цвет по RAL, долговечность и эстетика.",
+    description: "Классическое решение для ограждения. Секции with имитацией кирпича или камня. Покраска в цвет по RAL, долговечность и эстетика.",
     gallery: [
       { label: "Общий вид", url: "/images/22.jpg" },
     ]
@@ -63,7 +63,7 @@ export const catalogData: CatalogItem[] = [
     category: '3d-mesh',
     location: "Аксай",
     priceStart: "от 1 850 ₽/п.м.",
-    description: "Ограждение из сварной сетки с полимерным покрытием. Долговечно, не требует покраски, пропускает свет.",
+    description: "Ограждение из сварной сетки with полимерным покрытием. Долговечно, не требует покраски, пропускает свет.",
     gallery: [
       { label: "Установленное ограждение", url: "/images/44.jpg" },
     ]
@@ -76,8 +76,7 @@ export const catalogData: CatalogItem[] = [
     priceStart: "от 95 000 ₽",
     description: "Современная зона отдыха. Металлокаркас + отделка лиственницей. В комплекте идет фундамент на сваях.",
     gallery: [
-      { label: "Вид спереди", url: "/images/gazebo_loft_1.jpg" },
-      { label: "Внутренняя отделка", url: "/images/gazebo_loft_int.jpg" },
+      { label: "Готовый проект", url: "/images/55.jpg" },
     ]
   },
   {
@@ -97,7 +96,7 @@ export const catalogData: CatalogItem[] = [
     category: 'gates',
     location: "Донецк",
     priceStart: "от 48 000 ₽",
-    description: "Распашные или откатные ворота в едином стиле с забором 'Евро-Классик'. Надежная рама и качественное заполнение.",
+    description: "Распашные или откатные ворота в едином стиле with забором 'Евро-Классик'. Надежная рама и качественное заполнение.",
     gallery: [
       { label: "Фасад", url: "/images/33.jpg" },
     ]
