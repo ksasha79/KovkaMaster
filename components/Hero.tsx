@@ -11,11 +11,11 @@ const Hero: React.FC = () => {
           alt="Еврозаборы и Ворота" 
           className="w-full h-full object-cover transition-transform duration-[20s] scale-110 hover:scale-100"
           onError={(e) => {
-            // Пока файла нет, используем стильный индустриальный фон
+            // Если вашего файла hero.jpg еще нет, показываем это временное фото
             e.currentTarget.src = "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=1920&auto=format&fit=crop";
           }}
         />
-        {/* Многослойный градиент для читаемости текста */}
+        {/* Градиенты для читаемости */}
         <div className="absolute inset-0 bg-gradient-to-r from-metal-900/90 via-metal-900/40 to-transparent"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-metal-900 via-transparent to-metal-900/30"></div>
       </div>
@@ -53,7 +53,7 @@ const Hero: React.FC = () => {
               href="#contact" 
               className="px-12 py-6 bg-white/5 backdrop-blur-md border border-white/20 hover:bg-white/10 text-white text-sm font-black uppercase tracking-widest rounded-2xl transition-all active:scale-95"
             >
-              Бесплатный расчет
+              Вызвать замерщика
             </a>
           </div>
         </div>
