@@ -65,7 +65,7 @@ export const catalogData: CatalogItem[] = [
     priceStart: "от 1 850 ₽/п.м.",
     description: "Ограждение из сварной сетки с полимерным покрытием. Долговечно, не требует покраски, пропускает свет.",
     gallery: [
-      { label: "Периметр участка", url: "/images/gitter_3d_green.jpg" },
+      { label: "Установленное ограждение", url: "/images/44.jpg" },
     ]
   },
   {
@@ -97,7 +97,7 @@ export const catalogData: CatalogItem[] = [
     category: 'gates',
     location: "Донецк",
     priceStart: "от 48 000 ₽",
-    description: "Распашные или откатные ворота в едином стиле с забором 'Евро-Классик'. Надежная рама и качественное заполнение.",
+    description: "Распашные или откатные ворота в едином стиле with забором 'Евро-Классик'. Надежная рама и качественное заполнение.",
     gallery: [
       { label: "Фасад", url: "/images/33.jpg" },
     ]
