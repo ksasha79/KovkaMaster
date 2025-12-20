@@ -54,7 +54,7 @@ export const catalogData: CatalogItem[] = [
     priceStart: "от 4 200 ₽/м²",
     description: "Арочный навес из поликарбоната 10мм. Фермы из профильной трубы 60х60. Полная защита вашего автомобиля от осадков.",
     gallery: [
-      { label: "Навес на 2 машины", url: "/images/naves_premium_1.jpg" },
+      { label: "Навес на 2 машины", url: "/images/55.jpg" },
     ]
   },
   {
@@ -97,7 +97,7 @@ export const catalogData: CatalogItem[] = [
     category: 'gates',
     location: "Донецк",
     priceStart: "от 48 000 ₽",
-    description: "Распашные или откатные ворота в едином стиле with забором 'Евро-Классик'. Надежная рама и качественное заполнение.",
+    description: "Распашные или откатные ворота в едином стиле с забором 'Евро-Классик'. Надежная рама и качественное заполнение.",
     gallery: [
       { label: "Фасад", url: "/images/33.jpg" },
     ]
