@@ -8,7 +8,6 @@ const Header: React.FC = () => {
     { name: 'Услуги', href: '#services' },
     { name: 'Портфолио', href: '#portfolio' },
     { name: 'Цены', href: '#pricing' },
-    { name: 'Регионы', href: '#about' },
     { name: 'Вопросы', href: '#faq' },
     { name: 'Контакты', href: '#contact' },
   ];
