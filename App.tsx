@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
+import Stats from './components/Stats';
 import Services from './components/Services';
 import Steps from './components/Steps';
 import Portfolio from './components/Portfolio';
@@ -28,11 +29,12 @@ function App() {
       <Header />
       <main className="flex-grow">
         <Hero />
+        <Stats />
         <Services />
+        <About />
         <Steps />
         <Portfolio onOrderClick={handleOrderSpecific} />
         <Pricing />
-        <About />
         <Reviews />
         <FAQ />
         <Contact prefillMessage={prefillMessage} />
@@ -41,7 +43,7 @@ function App() {
       <FloatingBot />
       
       {/* Sticky Mobile Call Button */}
-      <div className="fixed bottom-6 right-6 z-40 md:hidden">
+      <div className="fixed bottom-6 left-6 z-40 md:hidden">
         <a 
           href="tel:+79591878949"
           className="flex items-center justify-center w-14 h-14 bg-green-500 text-white rounded-full shadow-lg hover:bg-green-600 transition-all active:scale-95 animate-pulse"
