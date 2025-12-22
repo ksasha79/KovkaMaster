@@ -1,6 +1,6 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { chatWithSupport } from '../services/geminiService';
+import { chatWithSupport, ChatMessage } from '../services/geminiService';
 
 interface Message {
   role: 'user' | 'bot';
@@ -26,15 +26,28 @@ const FloatingBot: React.FC = () => {
     if (!inputValue.trim() || isLoading) return;
 
     const userMessage = inputValue;
-    setMessages(prev => [...prev, { role: 'user', text: userMessage }]);
+    const newMessage: Message = { role: 'user', text: userMessage };
+    
+    // Сначала обновляем UI сообщением пользователя
+    setMessages(prev => [...prev, newMessage]);
     setInputValue('');
     setIsLoading(true);
 
     try {
-      const botResponse = await chatWithSupport(userMessage, messages);
+      // Преобразуем историю в формат, который ожидает API (role/parts)
+      const chatHistory: ChatMessage[] = messages.map(msg => ({
+        role: msg.role === 'bot' ? 'model' : 'user',
+        parts: [{ text: msg.text }]
+      }));
+
+      const botResponse = await chatWithSupport(userMessage, chatHistory);
+      
       setMessages(prev => [...prev, { role: 'bot', text: botResponse }]);
     } catch (e) {
-      setMessages(prev => [...prev, { role: 'bot', text: 'Сбой связи. Пожалуйста, обратитесь напрямую в отдел продаж: +7 (959) 187-89-49.' }]);
+      setMessages(prev => [...prev, { 
+        role: 'bot', 
+        text: 'Сбой связи. Пожалуйста, обратитесь напрямую в отдел продаж: +7 (959) 187-89-49.' 
+      }]);
     } finally {
       setIsLoading(false);
     }
