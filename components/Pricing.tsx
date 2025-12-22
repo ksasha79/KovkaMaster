@@ -1,114 +1,93 @@
+
 import React from 'react';
 
 const plans = [
   {
-    name: 'Эконом',
+    name: 'Базовый',
     price: 'от 2 500 ₽',
-    features: [
-      'Высота секции до 1.5м',
-      'Стандартная 3D сетка или бетон',
-      'Установка на металлические столбы',
-      'Базовое бетонирование (60см)',
-      'Гарантия 12 месяцев'
-    ],
+    desc: 'Оптимально для дачи и временных ограждений',
+    features: ['Секция Gitter 3D (4мм)', 'Столбы 60х40мм', 'Полимерное покрытие', 'Монтаж в грунт'],
     popular: false
   },
   {
-    name: 'Стандарт',
+    name: 'Инженерный',
     price: 'от 4 200 ₽',
-    features: [
-      'Высота секции до 2.0м',
-      'Усиленное армирование плит',
-      'Текстурный рисунок (камень/дерево)',
-      'Полимерная покраска столбов',
-      'Гарантия 2 года',
-      'Бесплатный выезд на замер'
-    ],
+    desc: 'Заводской стандарт для частного домовладения',
+    features: ['Еврозабор (Армированный)', 'Бетон М350 / ГОСТ', 'Текстура на выбор', 'Глубокое бетонирование', 'Гарантия 24 месяца'],
     popular: true
   },
   {
-    name: 'Премиум',
-    price: 'от 6 900 ₽',
-    features: [
-      'Индивидуальный дизайн-проект',
-      'Двустороннее окрашивание секций',
-      'Комбинированные материалы (металл+бетон)',
-      'Усиленный фундамент (ростверк)',
-      'Гарантия 3 года по договору',
-      'Приоритетные сроки монтажа'
-    ],
+    name: 'Премиум Системы',
+    price: 'от 7 500 ₽',
+    desc: 'Индивидуальные решения и автоматизация',
+    features: ['Комбинированный дизайн', 'Откатные ворота NICE', 'Дистанционное управление', 'Усиленный фундамент', 'VIP-монтаж'],
     popular: false
   }
 ];
 
 const Pricing: React.FC = () => {
   return (
-    <section id="pricing" className="py-24 bg-white relative">
+    <section id="pricing" className="py-32 bg-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-metal-900 uppercase tracking-wide">
-            Стоимость <span className="text-gold-600">ЕвроЗаборов</span>
-          </h2>
-          <div className="h-1 w-24 bg-gold-600 mx-auto mt-4 rounded-full"></div>
-          <p className="mt-6 text-gray-600 max-w-2xl mx-auto">
-            Финальная стоимость рассчитывается за погонный метр и включает в себя производство, доставку и установку «под ключ» напрямую от завода ООО «ЕвроЗаборы».
-          </p>
+        <div className="text-center mb-24">
+          <h2 className="text-[10px] font-black text-gold-600 uppercase tracking-[0.6em] mb-4">Price List 2024</h2>
+          <h3 className="text-5xl md:text-7xl font-black text-metal-900 uppercase tracking-tighter leading-none">
+            ЗАВОДСКИЕ ЦЕНЫ <br/> <span className="text-gold-500">БЕЗ ПОСРЕДНИКОВ</span>
+          </h3>
+          <div className="h-1.5 w-32 bg-gold-500 mx-auto mt-8 rounded-full"></div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
           {plans.map((plan, idx) => (
             <div 
               key={idx}
-              className={`relative p-8 rounded-2xl border transition-all duration-500 flex flex-col ${
+              className={`relative flex flex-col p-1 bg-white rounded-[2rem] transition-all duration-500 ${
                 plan.popular 
-                ? 'border-gold-500 shadow-[0_20px_50px_rgba(197,160,89,0.2)] lg:scale-105 z-10 bg-metal-900 text-white' 
-                : 'border-gray-200 bg-gray-50 text-metal-900'
+                ? 'shadow-[0_40px_100px_rgba(197,160,89,0.15)] ring-1 ring-gold-500/50 scale-105 z-10' 
+                : 'shadow-2xl shadow-gray-200 border border-gray-100'
               }`}
             >
-              {plan.popular && (
-                <span className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gold-600 text-white px-6 py-1.5 rounded-full text-xs font-black uppercase tracking-widest shadow-lg">
-                  Оптимальный выбор
-                </span>
-              )}
-              
-              <div className="mb-8">
-                <h3 className={`text-2xl font-bold mb-4 ${plan.popular ? 'text-gold-500' : 'text-metal-900'}`}>{plan.name}</h3>
-                <div className="flex items-baseline">
-                  <span className="text-3xl font-black">{plan.price}</span>
-                  <span className={`text-sm ml-2 ${plan.popular ? 'text-gray-400' : 'text-gray-500'}`}>/ за п.м.</span>
+              <div className={`flex-grow p-10 rounded-[1.8rem] ${plan.popular ? 'bg-metal-900 text-white' : 'bg-white text-metal-900'}`}>
+                {plan.popular && (
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gold-500 text-metal-900 px-6 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest shadow-xl">
+                    Выбор клиентов
+                  </div>
+                )}
+                
+                <h3 className={`text-xs font-black uppercase tracking-[0.3em] mb-2 ${plan.popular ? 'text-gold-500' : 'text-gray-400'}`}>
+                  Тариф: {plan.name}
+                </h3>
+                <p className="text-[10px] uppercase font-bold tracking-tight opacity-60 mb-8">{plan.desc}</p>
+                
+                <div className="flex items-baseline mb-10 border-b border-current/10 pb-8">
+                  <span className="text-5xl font-black tracking-tighter">{plan.price}</span>
+                  <span className="text-[10px] font-black ml-2 uppercase opacity-40">/ м.п.</span>
                 </div>
-                <div className={`text-[10px] mt-2 uppercase font-bold tracking-widest ${plan.popular ? 'text-gold-600' : 'text-gray-400'}`}>
-                  Материалы + Работа + Монтаж
-                </div>
+
+                <ul className="space-y-5 mb-12">
+                  {plan.features.map((feature, fIdx) => (
+                    <li key={fIdx} className="flex items-start text-[11px] uppercase font-bold tracking-tight">
+                      <svg className={`w-4 h-4 mr-3 mt-0.5 ${plan.popular ? 'text-gold-500' : 'text-gold-600'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                      </svg>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+
+                <a 
+                  href="#contact"
+                  className={`block text-center py-5 rounded-xl font-black uppercase tracking-[0.3em] text-[10px] transition-all ${
+                    plan.popular 
+                    ? 'bg-gold-500 text-metal-900 hover:bg-white hover:text-metal-900 shadow-lg shadow-gold-500/20' 
+                    : 'bg-metal-900 text-white hover:bg-gold-600'
+                  }`}
+                >
+                  Заказать расчет
+                </a>
               </div>
-
-              <ul className="space-y-4 mb-10 flex-grow">
-                {plan.features.map((feature, fIdx) => (
-                  <li key={fIdx} className="flex items-start text-sm">
-                    <span className="text-gold-500 mr-3 mt-0.5 text-lg leading-none">✓</span>
-                    <span className={plan.popular ? 'text-gray-300' : 'text-gray-600'}>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <a 
-                href="#contact"
-                className={`block text-center py-4 rounded-xl font-black uppercase tracking-widest transition-all transform active:scale-95 ${
-                  plan.popular 
-                  ? 'bg-gold-600 hover:bg-gold-500 text-white shadow-lg shadow-gold-600/20' 
-                  : 'bg-metal-900 hover:bg-metal-800 text-white'
-                }`}
-              >
-                РАССЧИТАТЬ СМЕТУ
-              </a>
             </div>
           ))}
-        </div>
-
-        <div className="mt-16 p-6 bg-metal-800/5 rounded-2xl border border-dashed border-gray-300 text-center">
-          <p className="text-sm text-gray-500">
-            * Указанные цены являются актуальными на текущий сезон. Точная стоимость фиксируется в официальном договоре с ООО после замера и анализа грунта.
-          </p>
         </div>
       </div>
     </section>
