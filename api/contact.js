@@ -1,9 +1,7 @@
 
 /**
  * Серверный обработчик для отправки заявок в Telegram.
- * Для работы нужно установить переменные окружения:
- * TELEGRAM_BOT_TOKEN - токен от @BotFather
- * TELEGRAM_CHAT_ID - ваш ID от @userinfobot
+ * Использует HTML разметку, так как она более устойчива к спецсимволам.
  */
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -12,7 +10,6 @@ export default async function handler(req, res) {
 
   const { name, phone, length, message } = req.body;
 
-  // Базовая проверка
   if (!name || !phone) {
     return res.status(400).json({ error: 'Имя и телефон обязательны' });
   }
@@ -20,30 +17,30 @@ export default async function handler(req, res) {
   const token = process.env.TELEGRAM_BOT_TOKEN;
   const chatId = process.env.TELEGRAM_CHAT_ID;
 
-  // Формируем красивое сообщение для Telegram
-  // Используем Markdown для оформления
-  const text = `
-🆕 *НОВЫЙ ЗАКАЗ: ЗАМЕР*
-──────────────────
-👤 *Имя:* ${name}
-📞 *Телефон:* ${phone}
-📏 *Длина участка:* ${length ? length + ' м.п.' : 'Не указана'}
-💬 *Сообщение:* ${message || 'Клиент не оставил комментарий'}
-──────────────────
-🏭 _ООО "ЕвроЗаборы" - Система уведомлений_
-  `.trim();
-
-  // Если ключи не настроены (локальная разработка)
+  // Если ключи отсутствуют, выводим ошибку в консоль сервера
   if (!token || !chatId) {
-    console.warn("⚠️ ВНИМАНИЕ: Telegram API ключи не найдены в process.env");
-    console.log("Данные заказа:", { name, phone, length, message });
-    
+    console.error("❌ ОШИБКА КОНФИГУРАЦИИ: Переменные TELEGRAM_BOT_TOKEN или TELEGRAM_CHAT_ID не установлены.");
     return res.status(200).json({ 
       success: true, 
-      isDemo: true,
-      message: 'Режим разработки: заказ напечатан в консоль сервера.' 
+      isDemo: true, 
+      warning: 'Ключи Telegram не настроены в окружении .env' 
     });
   }
+
+  // Экранируем спецсимволы для HTML, чтобы сообщение не "ломалось"
+  const safeName = name.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  const safeMessage = (message || 'Без комментария').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+  const htmlText = `
+<b>🆕 НОВЫЙ ЗАКАЗ: ЗАМЕР</b>
+──────────────────
+<b>👤 Имя:</b> ${safeName}
+<b>📞 Телефон:</b> <code>${phone}</code>
+<b>📏 Длина:</b> ${length ? length + ' м.п.' : 'не указана'}
+<b>💬 Коммент:</b> ${safeMessage}
+──────────────────
+🏭 <i>Система уведомлений "ЕвроЗаборы"</i>
+  `.trim();
 
   try {
     const url = `https://api.telegram.org/bot${token}/sendMessage`;
@@ -52,22 +49,26 @@ export default async function handler(req, res) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         chat_id: chatId,
-        text: text,
-        parse_mode: 'Markdown'
+        text: htmlText,
+        parse_mode: 'HTML'
       })
     });
 
     const result = await response.json();
 
-    if (response.ok) {
+    if (response.ok && result.ok) {
       return res.status(200).json({ success: true });
     } else {
-      console.error("Telegram API Error:", result);
-      return res.status(500).json({ error: 'Ошибка Telegram API: ' + (result.description || 'Неизвестно') });
+      // Если Telegram вернул ошибку (например, бот не запущен или ID неверный)
+      console.error("❌ Telegram API Error:", result);
+      return res.status(500).json({ 
+        error: 'Telegram API Error', 
+        details: result.description || 'Unknown error' 
+      });
     }
   } catch (error) {
-    console.error("Server Error:", error);
-    return res.status(500).json({ error: 'Ошибка сервера при отправке' });
+    console.error("❌ Critical Server Error:", error);
+    return res.status(500).json({ error: 'Внутренняя ошибка сервера' });
   }
 }
 
