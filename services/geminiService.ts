@@ -1,71 +1,46 @@
-import { GoogleGenAI } from "@google/genai";
 
 /**
- * Используем напрямую Google GenAI SDK для генерации концептов.
- * Ключ берется из окружения process.env.API_KEY.
+ * Клиентский сервис теперь работает только через защищенные API-роуты.
+ * Это скрывает API_KEY от конечного пользователя.
  */
+
+export interface ChatMessage {
+  role: string;
+  parts: { text: string }[];
+}
+
 export const generateGateConcept = async (promptDetails: string): Promise<string | null> => {
   try {
-    const apiKey = process.env.API_KEY;
-    if (!apiKey) {
-      console.error("API_KEY is not defined");
-      return null;
-    }
-
-    const ai = new GoogleGenAI({ apiKey });
-    
-    const fullPrompt = `Photorealistic architectural visualization of a modern EuroZabor (sectional concrete or mesh fence) with matching gates. 
-    Design request: ${promptDetails}. 
-    Environment: Suburban house facade, clean landscape, daylight. 
-    Materials: Decorative concrete texture (stone/brick), premium metal pillars, high quality finish. 8k resolution, cinematic lighting.`;
-
-    const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash-image',
-      contents: { parts: [{ text: fullPrompt }] },
-      config: {
-        imageConfig: {
-          aspectRatio: "16:9"
-        }
-      }
+    const response = await fetch('/api/generate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ promptDetails })
     });
-
-    const imagePart = response.candidates?.[0]?.content?.parts?.find(part => part.inlineData?.data);
-
-    if (imagePart?.inlineData?.data) {
-      return `data:image/png;base64,${imagePart.inlineData.data}`;
-    }
-
-    return null;
+    
+    if (!response.ok) return null;
+    const data = await response.json();
+    return data.image || null;
   } catch (error) {
-    console.error("Error generating fence concept with Gemini:", error);
+    console.error("Concept generation error:", error);
     return null;
   }
 };
 
-export const chatWithSupport = async (message: string, history: { role: string, parts: { text: string }[] }[]) => {
+export const chatWithSupport = async (message: string, history: ChatMessage[]): Promise<string> => {
   try {
-    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY! });
-    const model = 'gemini-3-flash-preview';
-    
-    const chat = ai.chats.create({
-      model,
-      config: {
-        systemInstruction: `Вы — интеллектуальный ассистент компании ООО "ЕвроЗаборы" (Макс). 
-        Ваша цель: помогать клиентам с вопросами о заборах, воротах, навесах и беседках. 
-        Информация о компании:
-        - Работаем в Ростове-на-Дону, Ростовской области, ДНР (Донецк, Макеевка) и ЛНР (Луганск).
-        - Производим еврозаборы (бетонные секции), 3D сетку Gitter, откатные и распашные ворота, навесы для авто, беседки Loft, стеллажи.
-        - Преимущества: собственное производство, работа по договору ООО, гарантия 2 года, бесплатный замер при заказе.
-        - Цены: от 2500 руб за погонный метр еврозабора "под ключ".
-        - Телефон: +7 (959) 187-89-49.
-        Отвечайте вежливо, кратко и профессионально на русском языке. Если не знаете ответа, предлагайте вызвать мастера на замер.`,
-      }
+    const response = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message, history })
     });
 
-    const result = await chat.sendMessage({ message });
-    return result.text;
+    if (!response.ok) throw new Error('Network response was not ok');
+    
+    const data = await response.json();
+    return data.text || "Извините, я не смог получить ответ. Попробуйте позже.";
   } catch (error) {
-    console.error("Chat error:", error);
-    return "Извините, сейчас я не могу ответить. Пожалуйста, позвоните нам по телефону +7 (959) 187-89-49.";
+    console.error("Chat support error:", error);
+    return "Мастер сейчас на объекте. Пожалуйста, оставьте заявку в форме обратной связи или позвоните: +7 (959) 187-89-49.";
   }
 };
+
