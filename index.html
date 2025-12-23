@@ -1,17 +1,19 @@
+
 <!DOCTYPE html>
 <html lang="ru" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ЕвроЗаборы: Ворота и ограждения | Ростов, ДНР, ЛНР</title>
-    <meta name="description" content="Изготовление и установка ЕвроЗаборов любой сложности, профессиональная сварка. Работаем по Ростовской области, ДНР и ЛНР. Индивидуальный дизайн." />
-    <meta name="keywords" content="еврозаборы, кованые ворота, забор, сварка, Ростов, ДНР, ЛНР, Донецк, Луганск, установка ворот" />
+    <title>ООО ЕвроЗаборы — Завод Ограждений и Ворот | Ростов, Воронеж, ЛНР, ДНР</title>
+    <meta name="description" content="Заводское производство еврозаборов и ворот. Установка в Ростове, Воронеже, Донецке, Луганске и Черноземье. Работа с НДС, официальный договор." />
+    <meta name="keywords" content="завод еврозаборов, производство ворот, еврозаборы ростов, ворота воронеж, лнр, днр, мариуполь, белгород, курск" />
     
-    <!-- Open Graph for Social Media -->
-    <meta property="og:title" content="ЕвроЗаборы: Ворота и ограждения под ключ" />
-    <meta property="og:description" content="Качественные ЕвроЗаборы и ворота. Выезд мастера в Ростовской области, ДНР и ЛНР." />
+    <!-- Open Graph -->
+    <meta property="og:title" content="ООО ЕвроЗаборы — Завод Ограждений и Ворот" />
+    <meta property="og:description" content="Профессиональные системы ограждений от завода-производителя. Юг и Центр России." />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://images.unsplash.com/photo-1622372658604-0373df45f22e?q=80&w=1200&auto=format&fit=crop" />
+    <meta property="og:url" content="https://xn----8sbeifqgd5ah8e0c.xn--p1ai" />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1558442086-8ea19a79cd4d?q=80&w=1200&auto=format&fit=crop" />
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -20,49 +22,32 @@
         theme: {
           extend: {
             colors: {
-              'metal-900': '#1a1a1a',
-              'metal-800': '#2d2d2d',
+              'metal-900': '#121212',
+              'metal-800': '#1e1e1e',
               'gold-500': '#c5a059',
               'gold-600': '#b08d4b',
             },
             fontFamily: {
-              sans: ['Helvetica', 'Arial', 'sans-serif'],
+              sans: ['Inter', 'system-ui', 'sans-serif'],
             }
           }
         }
       }
     </script>
-    
-    <!-- Structured Data (Schema.org) for Local Business -->
-    <script type="application/ld+json">
+    <script type="importmap">
     {
-      "@context": "https://schema.org",
-      "@type": "HomeAndConstructionBusiness",
-      "name": "ЕвроЗаборы",
-      "image": "https://images.unsplash.com/photo-1622372658604-0373df45f22e?q=80&w=800&auto=format&fit=crop",
-      "description": "Профессиональное изготовление ЕвроЗаборов и установка ворот в Ростовской области и на Донбассе.",
-      "address": {
-        "@type": "PostalAddress",
-        "addressRegion": "Rostov Region, DPR, LPR",
-        "addressCountry": "RU"
-      },
-      "priceRange": "$$"
+      "imports": {
+        "react": "https://esm.sh/react@^19.2.3",
+        "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+        "react/": "https://esm.sh/react@^19.2.3/",
+        "vite": "https://esm.sh/vite@^7.3.0",
+        "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2",
+        "@google/genai": "https://esm.sh/@google/genai@^1.33.0"
+      }
     }
     </script>
-<script type="importmap">
-{
-  "imports": {
-    "react": "https://esm.sh/react@^19.2.3",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "react/": "https://esm.sh/react@^19.2.3/",
-    "vite": "https://esm.sh/vite@^7.3.0",
-    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2",
-    "@google/genai": "https://esm.sh/@google/genai@^1.33.0"
-  }
-}
-</script>
-</head>
-  <body class="bg-gray-50 text-gray-900 antialiased">
+  </head>
+  <body class="bg-metal-900 text-gray-100 antialiased selection:bg-gold-500/30">
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>
