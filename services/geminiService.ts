@@ -40,7 +40,7 @@ export const chatWithSupport = async (message: string, history: ChatMessage[]): 
     return data.text || "Извините, я не смог получить ответ. Попробуйте позже.";
   } catch (error) {
     console.error("Chat support error:", error);
-    return "Мастер сейчас на объекте. Пожалуйста, оставьте заявку в форме обратной связи или позвоните: +7 (959) 187-89-49.";
+    return "Мастер сейчас на объекте. Пожалуйста, оставьте заявку в форме обратной связи или позвоните менеджеру: +7 (992) 059-52-53.";
   }
 };
 
