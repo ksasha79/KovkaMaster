@@ -76,7 +76,7 @@ const Contact: React.FC<ContactProps> = ({ prefillMessage }) => {
                     <label className="text-[10px] uppercase font-black text-gray-500 tracking-widest ml-1">Ваше имя</label>
                     <input 
                       required
-                      className="w-full bg-metal-900 border border-gray-700 rounded-xl px-5 py-4 outline-none focus:border-gold-500 transition-all"
+                      className="w-full bg-metal-900 border border-gray-700 rounded-xl px-5 py-4 outline-none focus:border-gold-500 transition-all text-white"
                       placeholder="Иван"
                       value={formData.name}
                       onChange={e => setFormData({...formData, name: e.target.value})}
@@ -87,7 +87,7 @@ const Contact: React.FC<ContactProps> = ({ prefillMessage }) => {
                     <input 
                       required
                       type="tel"
-                      className="w-full bg-metal-900 border border-gray-700 rounded-xl px-5 py-4 outline-none focus:border-gold-500 transition-all"
+                      className="w-full bg-metal-900 border border-gray-700 rounded-xl px-5 py-4 outline-none focus:border-gold-500 transition-all text-white"
                       placeholder="+7 (___) ___-__-__"
                       value={formData.phone}
                       onChange={e => setFormData({...formData, phone: e.target.value})}
@@ -99,7 +99,7 @@ const Contact: React.FC<ContactProps> = ({ prefillMessage }) => {
                   <label className="text-[10px] uppercase font-black text-gray-500 tracking-widest ml-1">Примерная длина (метров)</label>
                   <input 
                     type="number"
-                    className="w-full bg-metal-900 border border-gray-700 rounded-xl px-5 py-4 outline-none focus:border-gold-500 transition-all"
+                    className="w-full bg-metal-900 border border-gray-700 rounded-xl px-5 py-4 outline-none focus:border-gold-500 transition-all text-white"
                     placeholder="40"
                     value={formData.length}
                     onChange={e => setFormData({...formData, length: e.target.value})}
@@ -109,7 +109,7 @@ const Contact: React.FC<ContactProps> = ({ prefillMessage }) => {
                 <div className="space-y-2">
                   <label className="text-[10px] uppercase font-black text-gray-500 tracking-widest ml-1">Комментарий к заказу</label>
                   <textarea 
-                    className="w-full bg-metal-900 border border-gray-700 rounded-xl px-5 py-4 outline-none focus:border-gold-500 transition-all h-32 resize-none"
+                    className="w-full bg-metal-900 border border-gray-700 rounded-xl px-5 py-4 outline-none focus:border-gold-500 transition-all h-32 resize-none text-white"
                     placeholder="Какой забор вас интересует?"
                     value={formData.message}
                     onChange={e => setFormData({...formData, message: e.target.value})}
@@ -135,9 +135,14 @@ const Contact: React.FC<ContactProps> = ({ prefillMessage }) => {
           {/* Правая часть: Контакты */}
           <div className="flex flex-col justify-center space-y-12">
             <div>
-              <h3 className="text-gold-500 font-black uppercase tracking-[0.3em] text-sm mb-4">Прямая связь</h3>
-              <a href="tel:+79591878949" className="text-5xl md:text-6xl font-black hover:text-gold-500 transition-colors tracking-tighter">
+              <h3 className="text-gold-500 font-black uppercase tracking-[0.3em] text-sm mb-4">Прямая связь (Завод)</h3>
+              <a href="tel:+79591878949" className="text-4xl md:text-5xl font-black hover:text-gold-500 transition-colors tracking-tighter block mb-8">
                 +7 (959) 187-89-49
+              </a>
+              
+              <h3 className="text-gold-500 font-black uppercase tracking-[0.3em] text-sm mb-4">Отдел продаж (Менеджер)</h3>
+              <a href="tel:+79920595253" className="text-4xl md:text-5xl font-black hover:text-gold-500 transition-colors tracking-tighter block">
+                +7 (992) 059-52-53
               </a>
             </div>
             
