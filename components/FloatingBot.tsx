@@ -10,7 +10,7 @@ interface Message {
 const FloatingBot: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'bot', text: 'Инженер завода приветствует вас. Я готов проконсультировать по техническим вопросам: армирование, марка бетона, сроки производства или стоимость забора под ключ.' }
+    { role: 'bot', text: 'Инженер завода «Евро-Заборы» приветствует вас. Я готов проконсультировать по техническим вопросам: армирование, марка бетона, сроки производства или стоимость забора под ключ.' }
   ]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -64,7 +64,7 @@ const FloatingBot: React.FC = () => {
                 <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-4 border-metal-900 rounded-full"></div>
               </div>
               <div>
-                <h4 className="text-sm font-black uppercase tracking-tight">ЕвроЗаборы</h4>
+                <h4 className="text-sm font-black uppercase tracking-tight">Евро-Заборы</h4>
                 <div className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 bg-gold-500 rounded-full animate-pulse"></span>
                   <span className="text-[9px] text-gold-500 uppercase tracking-[0.2em] font-black">Инженер-технолог online</span>
