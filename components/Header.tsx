@@ -1,85 +1,82 @@
+
 import React, { useState } from 'react';
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
-    { name: 'Главная', href: '#hero' },
+    { name: 'Проекты', href: '#portfolio' },
     { name: 'Услуги', href: '#services' },
-    { name: 'Портфолио', href: '#portfolio' },
     { name: 'Цены', href: '#pricing' },
-    { name: 'Вопросы', href: '#faq' },
     { name: 'Контакты', href: '#contact' },
   ];
 
   return (
-    <header className="fixed w-full z-50 bg-metal-900/95 text-white backdrop-blur-sm border-b border-gold-600/30 shadow-lg">
+    <header className="fixed w-full z-50 bg-metal-900/80 backdrop-blur-md border-b border-white/5 shadow-2xl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
-          <div className="flex-shrink-0 flex items-center">
-            <span className="font-black text-2xl tracking-tighter text-gold-500 flex items-center">
-              <span className="bg-gold-500 text-metal-900 px-2 mr-1 rounded-sm text-xl">E</span>
-              ЕВРО<span className="text-white font-light">ЗАБОРЫ</span>
-            </span>
+        <div className="flex justify-between items-center h-24">
+          <div className="flex-shrink-0">
+            <a href="#hero" className="flex items-center gap-3 group">
+              <span className="bg-gold-500 text-metal-900 w-10 h-10 flex items-center justify-center rounded-lg text-2xl font-black transition-transform group-hover:scale-105">E</span>
+              <div className="flex flex-col">
+                <span className="font-black text-xl tracking-tight text-white uppercase group-hover:text-gold-500 transition-colors leading-none">Евро-Заборы</span>
+                <span className="text-[10px] text-gold-600 font-bold uppercase tracking-widest mt-1">Завод Ограждений</span>
+              </div>
+            </a>
           </div>
           
-          {/* Desktop Menu */}
-          <div className="hidden lg:block">
-            <div className="ml-10 flex items-baseline space-x-6">
+          <div className="hidden lg:flex items-center space-x-8">
+            <nav className="flex items-center space-x-10 mr-4">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
-                  className="text-gray-300 hover:text-gold-500 transition-colors px-2 py-2 rounded-md text-xs font-bold uppercase tracking-widest"
+                  className="text-gray-400 hover:text-white transition-colors text-[10px] font-black uppercase tracking-[0.2em]"
                 >
                   {link.name}
                 </a>
               ))}
+            </nav>
+            
+            <div className="flex items-center gap-4">
               <a 
                 href="tel:+79591878949" 
-                className="ml-4 bg-gold-600 hover:bg-gold-500 text-white px-5 py-2.5 rounded-sm text-sm font-black shadow-lg transition-all transform hover:scale-105 active:scale-95"
+                className="px-6 py-3 bg-white/5 border border-white/10 text-white rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-metal-900 transition-all active:scale-95"
               >
-                +7 (959) 187-89-49
+                Завод: +7 (959) 187-89-49
+              </a>
+              <a 
+                href="tel:+79920595253" 
+                className="px-6 py-3 bg-gold-600 text-white rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-gold-500 transition-all active:scale-95 shadow-lg shadow-gold-600/20"
+              >
+                Менеджер: +7 (992) 059-52-53
               </a>
             </div>
           </div>
 
-          {/* Mobile menu button */}
           <div className="lg:hidden">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gold-500 hover:text-white transition-colors"
-            >
+            <button onClick={() => setIsOpen(!isOpen)} className="text-white p-2">
               <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                {isOpen ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                )}
+                {isOpen ? <path d="M6 18L18 6M6 6l12 12" strokeWidth={2}/> : <path d="M4 6h16M4 12h16M4 18h16" strokeWidth={2}/>}
               </svg>
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu */}
       {isOpen && (
-        <div className="lg:hidden bg-metal-900 border-t border-gray-800">
-          <div className="px-2 pt-4 pb-6 space-y-1 sm:px-3">
+        <div className="lg:hidden bg-metal-900 border-t border-white/5 p-6 animate-in fade-in slide-in-from-top-4">
+          <div className="space-y-4">
             {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className="text-gray-300 hover:text-gold-500 block px-4 py-3 border-b border-gray-800/50 text-base font-bold uppercase tracking-widest"
-              >
-                {link.name}
-              </a>
+              <a key={link.name} href={link.href} onClick={() => setIsOpen(false)} className="block py-4 text-xl font-black uppercase tracking-widest text-white border-b border-white/5">{link.name}</a>
             ))}
-            <div className="px-4 py-4">
-               <a href="tel:+79591878949" className="block text-center bg-gold-600 text-white py-4 rounded font-bold">
-                 Позвонить мастеру
-               </a>
+            <div className="grid gap-3 pt-4">
+              <a href="tel:+79591878949" className="block text-center bg-white/5 border border-white/10 text-white py-4 rounded-2xl font-black uppercase tracking-widest text-xs">
+                Завод: +7 (959) 187-89-49
+              </a>
+              <a href="tel:+79920595253" className="block text-center bg-gold-600 text-white py-4 rounded-2xl font-black uppercase tracking-widest text-xs">
+                Менеджер: +7 (992) 059-52-53
+              </a>
             </div>
           </div>
         </div>
