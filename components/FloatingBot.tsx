@@ -28,7 +28,6 @@ const FloatingBot: React.FC = () => {
     const userMessageText = inputValue;
     const newMessage: Message = { role: 'user', text: userMessageText };
     
-    // Подготовка истории для API до обновления стейта
     const chatHistory: ChatMessage[] = messages.map(msg => ({
       role: msg.role === 'bot' ? 'model' : 'user',
       parts: [{ text: msg.text }]
@@ -115,7 +114,7 @@ const FloatingBot: React.FC = () => {
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleSend()}
                   placeholder="Ваш технический вопрос..."
-                  className="flex-grow bg-transparent border-none px-4 py-3 text-[13px] outline-none placeholder:text-gray-400 font-medium"
+                  className="flex-grow bg-transparent border-none px-4 py-3 text-[13px] text-metal-900 outline-none placeholder:text-gray-400 font-medium"
                 />
               </div>
               <button 
