@@ -10,7 +10,7 @@ interface Message {
 const FloatingBot: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'bot', text: 'Инженер завода «Евро-Заборы» приветствует вас. Я готов проконсультировать по техническим вопросам: армирование, марка бетона, сроки производства или стоимость забора под ключ.' }
+    { role: 'bot', text: 'С наступающим Новым годом! 🎄 Я — инженер завода «Евро-Заборы». Готов проконсультировать вас по зимнему монтажу, праздничным скидкам и техническим вопросам производства.' }
   ]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -43,7 +43,7 @@ const FloatingBot: React.FC = () => {
     } catch (e) {
       setMessages(prev => [...prev, { 
         role: 'bot', 
-        text: 'Сбой связи. Пожалуйста, обратитесь напрямую к менеджеру отдела продаж: +7 (992) 059-52-53.' 
+        text: 'Сбой связи. Пожалуйста, обратитесь к нашему новогоднему менеджеру: +7 (992) 059-52-53.' 
       }]);
     } finally {
       setIsLoading(false);
@@ -56,17 +56,17 @@ const FloatingBot: React.FC = () => {
         <div className="absolute bottom-24 right-0 w-[340px] md:w-[420px] h-[600px] bg-white rounded-[2.5rem] shadow-[0_30px_90px_rgba(0,0,0,0.4)] flex flex-col overflow-hidden border border-gray-100 animate-in fade-in slide-in-from-bottom-10 duration-500">
           {/* Header */}
           <div className="p-6 bg-metal-900 text-white flex justify-between items-center relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-gold-500/10 rounded-full blur-3xl"></div>
+            <div className="absolute top-0 right-0 w-32 h-32 bg-xmas-red/20 rounded-full blur-3xl"></div>
             <div className="flex items-center gap-4 relative z-10">
               <div className="relative">
                 <div className="w-12 h-12 bg-gold-500 rounded-2xl flex items-center justify-center font-black text-metal-900 text-2xl transform rotate-3 shadow-lg">E</div>
-                <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-4 border-metal-900 rounded-full"></div>
+                <div className="absolute -top-1 -left-1 text-lg">🎅</div>
               </div>
               <div>
-                <h4 className="text-sm font-black uppercase tracking-tight">Евро-Заборы</h4>
+                <h4 className="text-sm font-black uppercase tracking-tight">Евро-Заборы ❄️</h4>
                 <div className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-gold-500 rounded-full animate-pulse"></span>
-                  <span className="text-[9px] text-gold-500 uppercase tracking-[0.2em] font-black">Инженер-технолог online</span>
+                  <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
+                  <span className="text-[9px] text-gray-400 uppercase tracking-[0.2em] font-black">Online-инженер</span>
                 </div>
               </div>
             </div>
@@ -96,9 +96,9 @@ const FloatingBot: React.FC = () => {
             {isLoading && (
               <div className="flex justify-start">
                 <div className="bg-white px-5 py-4 rounded-3xl border border-gray-100 flex items-center gap-2 shadow-sm">
-                  <div className="w-1.5 h-1.5 bg-gold-500 rounded-full animate-bounce [animation-duration:0.8s]"></div>
-                  <div className="w-1.5 h-1.5 bg-gold-500 rounded-full animate-bounce [animation-duration:0.8s] [animation-delay:0.2s]"></div>
-                  <div className="w-1.5 h-1.5 bg-gold-500 rounded-full animate-bounce [animation-duration:0.8s] [animation-delay:0.4s]"></div>
+                  <div className="w-1.5 h-1.5 bg-xmas-red rounded-full animate-bounce"></div>
+                  <div className="w-1.5 h-1.5 bg-gold-500 rounded-full animate-bounce [animation-delay:0.2s]"></div>
+                  <div className="w-1.5 h-1.5 bg-xmas-red rounded-full animate-bounce [animation-delay:0.4s]"></div>
                 </div>
               </div>
             )}
@@ -107,20 +107,20 @@ const FloatingBot: React.FC = () => {
           {/* Input */}
           <div className="p-6 bg-white border-t border-gray-100">
             <div className="flex gap-4 items-center">
-              <div className="flex-grow bg-gray-50 p-2 rounded-2xl border-2 border-transparent focus-within:border-gold-500/30 transition-all flex items-center">
+              <div className="flex-grow bg-gray-50 p-2 rounded-2xl border-2 border-transparent focus-within:border-xmas-red/20 transition-all flex items-center">
                 <input 
                   type="text" 
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-                  placeholder="Ваш технический вопрос..."
+                  placeholder="Задать праздничный вопрос..."
                   className="flex-grow bg-transparent border-none px-4 py-3 text-[13px] text-metal-900 outline-none placeholder:text-gray-400 font-medium"
                 />
               </div>
               <button 
                 onClick={handleSend}
                 disabled={isLoading || !inputValue.trim()}
-                className="bg-gold-500 text-metal-900 w-14 h-14 rounded-2xl flex items-center justify-center hover:bg-metal-900 hover:text-white transition-all disabled:opacity-20 shadow-xl shadow-gold-500/10 active:scale-90 flex-shrink-0"
+                className="bg-xmas-red text-white w-14 h-14 rounded-2xl flex items-center justify-center hover:bg-metal-900 transition-all disabled:opacity-20 shadow-xl shadow-red-500/10 active:scale-90 flex-shrink-0"
               >
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 19l9-7-9-7v14z" />
@@ -134,7 +134,7 @@ const FloatingBot: React.FC = () => {
       <button 
         onClick={() => setIsOpen(!isOpen)}
         className={`w-16 h-16 rounded-2xl flex items-center justify-center shadow-2xl transition-all duration-500 transform hover:scale-105 active:scale-95 ${
-          isOpen ? 'bg-metal-900 text-white' : 'bg-gold-500 text-metal-900'
+          isOpen ? 'bg-metal-900 text-white' : 'bg-xmas-red text-white'
         }`}
       >
         {isOpen ? (
@@ -142,9 +142,12 @@ const FloatingBot: React.FC = () => {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
           </svg>
         ) : (
-          <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-          </svg>
+          <div className="relative">
+            <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+            </svg>
+            <span className="absolute -top-3 -right-3 text-lg animate-bounce">🎁</span>
+          </div>
         )}
       </button>
     </div>
@@ -152,3 +155,4 @@ const FloatingBot: React.FC = () => {
 };
 
 export default FloatingBot;
+
