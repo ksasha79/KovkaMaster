@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { CONTACTS } from '../config';
 
 const Footer: React.FC = () => {
   return (
@@ -10,11 +11,11 @@ const Footer: React.FC = () => {
           <div className="lg:col-span-1">
             <span className="font-black text-2xl tracking-tighter text-white flex items-center mb-8">
               <span className="bg-gold-500 text-metal-900 px-2 mr-1 rounded-sm uppercase">E</span>
-              ЕВРО-ЗАБОРЫ
+              {CONTACTS.COMPANY_NAME.toUpperCase()}
             </span>
             <p className="text-xs leading-relaxed mb-8 uppercase tracking-widest">
-              ЗАВОД СИСТЕМ ОГРАЖДЕНИЙ. <br/>
-              ПРОМЫШЛЕННЫЙ МАСШТАБ.
+              ПРОИЗВОДСТВО СИСТЕМ ОГРАЖДЕНИЙ. <br/>
+              ИНДУСТРИАЛЬНЫЙ ПОДХОД.
             </p>
           </div>
 
@@ -34,15 +35,29 @@ const Footer: React.FC = () => {
             <div className="space-y-6">
               <div>
                 <span className="text-[9px] uppercase font-black text-gray-700 block mb-1">Завод</span>
-                <a href="tel:+79591878949" className="block text-xl font-black text-white hover:text-gold-500 transition-colors tracking-tighter">+7 (959) 187-89-49</a>
+                <a href={`tel:+${CONTACTS.FACTORY_PHONE}`} className="block text-xl font-black text-white hover:text-gold-500 transition-colors tracking-tighter">{CONTACTS.FACTORY_PHONE_DISPLAY}</a>
               </div>
               <div>
                 <span className="text-[9px] uppercase font-black text-gray-700 block mb-1">Менеджер</span>
-                <a href="tel:+79920595253" className="block text-xl font-black text-white hover:text-gold-500 transition-colors tracking-tighter">+7 (992) 059-52-53</a>
+                <a href={`tel:+${CONTACTS.MANAGER_PHONE}`} className="block text-xl font-black text-white hover:text-gold-500 transition-colors tracking-tighter">{CONTACTS.MANAGER_PHONE_DISPLAY}</a>
               </div>
               <div className="flex gap-4">
-                <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-gold-600 transition-colors text-[10px] font-black">TG</a>
-                <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-gold-600 transition-colors text-[10px] font-black">WA</a>
+                <a 
+                  href={`https://t.me/${CONTACTS.TELEGRAM_USER}`} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-gold-600 transition-colors text-[10px] font-black"
+                >
+                  TG
+                </a>
+                <a 
+                  href={`https://wa.me/${CONTACTS.WHATSAPP_LINK}`} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-gold-600 transition-colors text-[10px] font-black"
+                >
+                  WA
+                </a>
               </div>
             </div>
           </div>
@@ -50,7 +65,7 @@ const Footer: React.FC = () => {
           <div>
             <h3 className="text-white text-[10px] font-black uppercase tracking-[0.4em] mb-10">Юридически</h3>
             <p className="text-[9px] uppercase leading-loose font-bold tracking-widest text-gray-800">
-              ООО «ЕВРО-ЗАБОРЫ» <br/>
+              {CONTACTS.COMPANY_NAME} <br/>
               Завод Ограждений и Ворот. <br/>
               Все права защищены © {new Date().getFullYear()}
             </p>
@@ -69,3 +84,4 @@ const Footer: React.FC = () => {
 };
 
 export default Footer;
+
