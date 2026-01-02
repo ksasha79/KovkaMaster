@@ -1,53 +1,46 @@
+
 import React from 'react';
 
 const stats = [
-  { label: 'Лет опыта', value: '15+', icon: '🏗️' },
-  { label: 'Объектов сдано', value: '2540', icon: '🏠' },
-  { label: 'Тонн металла', value: '1900+', icon: '⚙️' },
-  { label: 'Гарантия', value: '2 года', icon: '🛡️' },
+  { label: 'Лет на рынке', value: '15+', icon: '🎄' },
+  { label: 'Заборов в 2024', value: '2540', icon: '🎁' },
+  { label: 'Тонн арматуры', value: '1900+', icon: '❄️' },
+  { label: 'Гарантия', value: '2 года', icon: '🕯️' },
 ];
 
 const Stats: React.FC = () => {
   return (
-    <section className="py-20 bg-metal-900 border-y border-gold-600/30 relative overflow-hidden">
-      {/* Фоновый паттерн с более яркими точками */}
-      <div className="absolute inset-0 opacity-10 pointer-events-none">
-        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(#c5a059_1px,transparent_1px)] [background-size:30px_30px]"></div>
+    <section className="py-24 bg-metal-900 border-y border-white/5 relative overflow-hidden">
+      <div className="absolute inset-0 opacity-20 pointer-events-none">
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(#c5a059_1px,transparent_1px)] [background-size:40px_40px]"></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-12">
           {stats.map((stat, idx) => (
             <div key={idx} className="text-center group flex flex-col items-center">
-              {/* Иконка с анимацией */}
-              <div className="text-5xl mb-6 transform group-hover:scale-125 group-hover:rotate-12 transition-all duration-500 filter drop-shadow-[0_0_10px_rgba(197,160,89,0.3)]">
-                {stat.icon}
+              <div className="text-5xl mb-8 transform group-hover:scale-125 group-hover:rotate-12 transition-all duration-700">
+                <span className="filter drop-shadow-[0_0_15px_rgba(197,160,89,0.4)]">{stat.icon}</span>
               </div>
               
-              {/* Число с градиентом и свечением */}
-              <div className="text-5xl md:text-6xl font-black mb-3 tracking-tighter">
-                <span className="bg-clip-text text-transparent bg-gradient-to-b from-gold-500 to-gold-600 filter drop-shadow-[0_2px_10px_rgba(197,160,89,0.5)]">
+              <div className="text-6xl md:text-7xl font-black mb-4 tracking-tighter">
+                <span className="text-white drop-shadow-[0_4px_20px_rgba(255,255,255,0.1)]">
                   {stat.value}
                 </span>
               </div>
               
-              {/* Подпись с увеличенным трекингом */}
-              <div className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-gold-500/80 font-black mb-4">
+              <div className="text-[10px] md:text-xs uppercase tracking-[0.5em] text-gold-500 font-black mb-6 opacity-80">
                 {stat.label}
               </div>
               
-              {/* Декоративная линия */}
-              <div className="h-1 w-8 bg-gold-600/30 group-hover:w-16 group-hover:bg-gold-500 transition-all duration-500 rounded-full"></div>
+              <div className="h-0.5 w-10 bg-gold-600/20 group-hover:w-20 group-hover:bg-xmas-red transition-all duration-500 rounded-full"></div>
             </div>
           ))}
         </div>
       </div>
-      
-      {/* Боковой блик для объема */}
-      <div className="absolute -left-20 top-0 w-40 h-full bg-gold-600/5 blur-3xl rounded-full pointer-events-none"></div>
-      <div className="absolute -right-20 top-0 w-40 h-full bg-gold-600/5 blur-3xl rounded-full pointer-events-none"></div>
     </section>
   );
 };
 
 export default Stats;
+
