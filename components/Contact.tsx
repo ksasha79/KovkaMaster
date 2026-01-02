@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import { CONTACTS } from '../config';
 
 interface ContactProps {
   prefillMessage?: string;
@@ -61,7 +62,7 @@ const Contact: React.FC<ContactProps> = ({ prefillMessage }) => {
               <div className="bg-gold-600/10 border border-gold-500/30 p-10 rounded-3xl text-center animate-fade-in">
                 <div className="text-5xl mb-4">✅</div>
                 <h3 className="text-2xl font-bold text-gold-500 uppercase mb-2">Заявка отправлена!</h3>
-                <p className="text-gray-300 mb-6">Бот уже передал ваш заказ в отдел продаж. Ожидайте звонка.</p>
+                <p className="text-gray-300 mb-6">Бот уже передал ваш заказ в отдел продаж {CONTACTS.COMPANY_NAME}. Ожидайте звонка.</p>
                 <button 
                   onClick={() => setStatus('idle')}
                   className="text-xs font-black uppercase tracking-widest text-gold-500 border-b border-gold-600 pb-1"
@@ -136,21 +137,31 @@ const Contact: React.FC<ContactProps> = ({ prefillMessage }) => {
           <div className="flex flex-col justify-center space-y-12">
             <div>
               <h3 className="text-gold-500 font-black uppercase tracking-[0.3em] text-sm mb-4">Прямая связь (Завод)</h3>
-              <a href="tel:+79591878949" className="text-4xl md:text-5xl font-black hover:text-gold-500 transition-colors tracking-tighter block mb-8">
-                +7 (959) 187-89-49
+              <a href={`tel:+${CONTACTS.FACTORY_PHONE}`} className="text-4xl md:text-5xl font-black hover:text-gold-500 transition-colors tracking-tighter block mb-8">
+                {CONTACTS.FACTORY_PHONE_DISPLAY}
               </a>
               
               <h3 className="text-gold-500 font-black uppercase tracking-[0.3em] text-sm mb-4">Отдел продаж (Менеджер)</h3>
-              <a href="tel:+79920595253" className="text-4xl md:text-5xl font-black hover:text-gold-500 transition-colors tracking-tighter block">
-                +7 (992) 059-52-53
-              </a>
+              <div className="space-y-4">
+                <a href={`tel:+${CONTACTS.MANAGER_PHONE}`} className="text-4xl md:text-5xl font-black hover:text-gold-500 transition-colors tracking-tighter block">
+                  {CONTACTS.MANAGER_PHONE_DISPLAY}
+                </a>
+                <div className="flex gap-4">
+                  <a href={`https://t.me/${CONTACTS.TELEGRAM_USER}`} target="_blank" className="flex items-center gap-2 bg-white/5 border border-white/10 px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-gold-600 transition-all">
+                    <span>Telegram</span>
+                  </a>
+                  <a href={`https://wa.me/${CONTACTS.WHATSAPP_LINK}`} target="_blank" className="flex items-center gap-2 bg-white/5 border border-white/10 px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-green-600 transition-all">
+                    <span>WhatsApp</span>
+                  </a>
+                </div>
+              </div>
             </div>
             
             <div className="grid sm:grid-cols-2 gap-8">
               <div className="p-8 bg-metal-800 rounded-3xl border border-gray-800">
                 <div className="text-3xl mb-4">📩</div>
                 <h4 className="font-black uppercase text-[10px] tracking-widest text-gray-500 mb-2">Email отдела</h4>
-                <p className="font-bold">evrozabory6@gmail.com</p>
+                <p className="font-bold">{CONTACTS.EMAIL}</p>
               </div>
               <div className="p-8 bg-metal-800 rounded-3xl border border-gray-800">
                 <div className="text-3xl mb-4">📍</div>
