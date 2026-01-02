@@ -1,6 +1,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { chatWithSupport, ChatMessage } from '../services/geminiService';
+import { CONTACTS } from '../config';
 
 interface Message {
   role: 'user' | 'bot';
@@ -43,7 +44,7 @@ const FloatingBot: React.FC = () => {
     } catch (e) {
       setMessages(prev => [...prev, { 
         role: 'bot', 
-        text: 'Сбой связи. Пожалуйста, обратитесь к нашему новогоднему менеджеру: +7 (992) 059-52-53.' 
+        text: `Сбой связи. Пожалуйста, обратитесь к нашему новогоднему менеджеру напрямую: ${CONTACTS.MANAGER_PHONE_DISPLAY}.` 
       }]);
     } finally {
       setIsLoading(false);
