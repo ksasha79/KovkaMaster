@@ -17,7 +17,10 @@ const Header: React.FC = () => {
         <div className="flex justify-between items-center h-24">
           <div className="flex-shrink-0">
             <a href="#hero" className="flex items-center gap-3 group">
-              <span className="bg-gold-500 text-metal-900 w-10 h-10 flex items-center justify-center rounded-lg text-2xl font-black transition-transform group-hover:scale-105">E</span>
+              <span className="bg-gold-500 text-metal-900 w-10 h-10 flex items-center justify-center rounded-lg text-2xl font-black transition-transform group-hover:scale-110 relative">
+                E
+                <span className="absolute -top-2 -right-2 text-sm">🎄</span>
+              </span>
               <div className="flex flex-col">
                 <span className="font-black text-xl tracking-tight text-white uppercase group-hover:text-gold-500 transition-colors leading-none">Евро-Заборы</span>
                 <span className="text-[10px] text-gold-600 font-bold uppercase tracking-widest mt-1">Завод Ограждений</span>
@@ -25,8 +28,8 @@ const Header: React.FC = () => {
             </a>
           </div>
           
-          <div className="hidden lg:flex items-center space-x-8">
-            <nav className="flex items-center space-x-10 mr-4">
+          <div className="hidden lg:flex items-center space-x-6">
+            <nav className="flex items-center space-x-8 mr-4">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
@@ -38,18 +41,26 @@ const Header: React.FC = () => {
               ))}
             </nav>
             
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
+              <div className="flex flex-col items-end mr-2">
+                <a 
+                  href="tel:+79591878949" 
+                  className="text-[11px] font-black text-white hover:text-gold-500 transition-colors"
+                >
+                  Завод: +7 (959) 187-89-49
+                </a>
+                <a 
+                  href="tel:+79920595253" 
+                  className="text-[11px] font-black text-gold-500 hover:text-white transition-colors"
+                >
+                  Менеджер: +7 (992) 059-52-53
+                </a>
+              </div>
               <a 
-                href="tel:+79591878949" 
-                className="px-6 py-3 bg-white/5 border border-white/10 text-white rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-metal-900 transition-all active:scale-95"
+                href="#contact" 
+                className="px-6 py-3 bg-xmas-red text-white rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-metal-900 transition-all active:scale-95 shadow-lg shadow-red-600/20"
               >
-                Завод: +7 (959) 187-89-49
-              </a>
-              <a 
-                href="tel:+79920595253" 
-                className="px-6 py-3 bg-gold-600 text-white rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-gold-500 transition-all active:scale-95 shadow-lg shadow-gold-600/20"
-              >
-                Менеджер: +7 (992) 059-52-53
+                Получить подарок 🎁
               </a>
             </div>
           </div>
@@ -66,7 +77,7 @@ const Header: React.FC = () => {
 
       {isOpen && (
         <div className="lg:hidden bg-metal-900 border-t border-white/5 p-6 animate-in fade-in slide-in-from-top-4">
-          <div className="space-y-4">
+          <div className="space-y-4 text-center">
             {navLinks.map((link) => (
               <a key={link.name} href={link.href} onClick={() => setIsOpen(false)} className="block py-4 text-xl font-black uppercase tracking-widest text-white border-b border-white/5">{link.name}</a>
             ))}
