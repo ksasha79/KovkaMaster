@@ -38,6 +38,15 @@ const initialReviews: Review[] = [
     avatar: "",
     rating: 5,
     date: "20 авг 2025"
+  },
+  {
+    id: 4,
+    name: "Дмитрий",
+    location: "г. Чертково",
+    text: "Не знаю как заборы, но сайт хорош!",
+    avatar: "",
+    rating: 5,
+    date: "15 янв 2026"
   }
 ];
 
@@ -331,5 +340,4 @@ const Reviews: React.FC = () => {
 };
 
 export default Reviews;
-
 
