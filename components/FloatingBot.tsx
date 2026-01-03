@@ -1,4 +1,5 @@
 
+
 import React, { useState, useRef, useEffect } from 'react';
 import { chatWithSupport, ChatMessage } from '../services/geminiService';
 import { CONTACTS } from '../config';
@@ -11,7 +12,7 @@ interface Message {
 const FloatingBot: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'bot', text: 'С Новым 2025 годом! 🎄 Я — инженер завода «Евро-Заборы». Праздники начались, но мы уже принимаем заявки на весенний сезон по спеццене. Готов проконсультировать вас по зимнему монтажу и 3D-проектированию.' }
+    { role: 'bot', text: 'Поздравляю с наступившим Новым 2025 годом! 🎄 Январь — лучшее время для планирования. Мы уже вышли с каникул и принимаем заказы на весенний сезон по фиксированным ценам прошлого года. Как я могу помочь вам с выбором забора или 3D-проектом сегодня?' }
   ]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -67,7 +68,7 @@ const FloatingBot: React.FC = () => {
                 <h4 className="text-sm font-black uppercase tracking-tight">Евро-Заборы ❄️</h4>
                 <div className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
-                  <span className="text-[9px] text-gray-400 uppercase tracking-[0.2em] font-black">Online-инженер</span>
+                  <span className="text-[9px] text-gray-400 uppercase tracking-[0.2em] font-black">Инженер-консультант</span>
                 </div>
               </div>
             </div>
