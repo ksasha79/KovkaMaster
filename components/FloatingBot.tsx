@@ -11,7 +11,7 @@ interface Message {
 const FloatingBot: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'bot', text: 'С наступающим Новым годом! 🎄 Я — инженер завода «Евро-Заборы». Готов проконсультировать вас по зимнему монтажу, праздничным скидкам и техническим вопросам производства.' }
+    { role: 'bot', text: 'С Новым 2025 годом! 🎄 Я — инженер завода «Евро-Заборы». Праздники начались, но мы уже принимаем заявки на весенний сезон по спеццене. Готов проконсультировать вас по зимнему монтажу и 3D-проектированию.' }
   ]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -44,7 +44,7 @@ const FloatingBot: React.FC = () => {
     } catch (e) {
       setMessages(prev => [...prev, { 
         role: 'bot', 
-        text: `Сбой связи. Пожалуйста, обратитесь к нашему новогоднему менеджеру напрямую: ${CONTACTS.MANAGER_PHONE_DISPLAY}.` 
+        text: `Сбой связи. Пожалуйста, обратитесь к нашему менеджеру напрямую: ${CONTACTS.MANAGER_PHONE_DISPLAY}.` 
       }]);
     } finally {
       setIsLoading(false);
@@ -114,7 +114,7 @@ const FloatingBot: React.FC = () => {
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-                  placeholder="Задать праздничный вопрос..."
+                  placeholder="Задать инженерный вопрос..."
                   className="flex-grow bg-transparent border-none px-4 py-3 text-[13px] text-metal-900 outline-none placeholder:text-gray-400 font-medium"
                 />
               </div>
