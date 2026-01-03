@@ -19,5 +19,9 @@ export const CONTACTS = {
   
   // Название компании
   COMPANY_NAME: "ООО «Евро-Заборы»",
-  WEBSITE_URL: "евро-заборы.рф"
+  WEBSITE_URL: "евро-заборы.рф",
+
+  // Ссылка на фоновое 3D видео (mp4)
+  // Для примера поставлю качественный архитектурный фон. Замените на свое видео.
+  HERO_VIDEO_URL: "https://player.vimeo.com/external/494252666.sd.mp4?s=bc2463e2646274b572620257e80f4f91e3e7f480&profile_id=164&oauth2_token_id=57447761"
 };
