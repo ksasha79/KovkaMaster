@@ -3,7 +3,7 @@ import React from 'react';
 
 const stats = [
   { label: 'Лет на рынке', value: '15+', icon: '🎄' },
-  { label: 'Заборов в 2024', value: '2540', icon: '🎁' },
+  { label: 'Заборов в 2025', value: '2540', icon: '🎁' },
   { label: 'Тонн арматуры', value: '1900+', icon: '❄️' },
   { label: 'Гарантия', value: '2 года', icon: '🕯️' },
 ];
