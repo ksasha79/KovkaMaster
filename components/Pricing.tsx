@@ -30,7 +30,7 @@ const Pricing: React.FC = () => {
     <section id="pricing" className="py-32 bg-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-24">
-          <h2 className="text-[10px] font-black text-gold-600 uppercase tracking-[0.6em] mb-4">Price List 2024</h2>
+          <h2 className="text-[10px] font-black text-gold-600 uppercase tracking-[0.6em] mb-4">Price List 2026</h2>
           <h3 className="text-5xl md:text-7xl font-black text-metal-900 uppercase tracking-tighter leading-none">
             ЗАВОДСКИЕ ЦЕНЫ <br/> <span className="text-gold-500">БЕЗ ПОСРЕДНИКОВ</span>
           </h3>
@@ -95,3 +95,4 @@ const Pricing: React.FC = () => {
 };
 
 export default Pricing;
+
