@@ -1,3 +1,3 @@
-// Этот файл перемещен в components/Contact.tsx для предотвращения ошибок сборки.
-// Папка api/ зарезервирована для серверных функций.
-export default function Dummy() { return null; }
+// Файл перемещен в components/Contact.tsx. 
+// Оставлен как заглушка для корректной работы сборщика.
+export default function ContactPlaceholder() { return null; }
