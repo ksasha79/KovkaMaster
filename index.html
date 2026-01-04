@@ -6,9 +6,22 @@
     <title>ООО Евро-Заборы — Завод систем ограждений</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-      // Имитация окружения для предотвращения ошибок в библиотеках
+      // 1. Имитация окружения (необходимо для некоторых библиотек)
       window.process = { env: { NODE_ENV: 'production' } };
       
+      // 2. Глобальный отлов ошибок
+      window.onerror = function(msg, url, line, col, error) {
+        console.error("Critical error:", msg, error);
+        const root = document.getElementById('root');
+        if (root && root.innerHTML.trim() === '') {
+          root.innerHTML = '<div style="padding: 40px; color: white; background: #111; font-family: sans-serif; text-align: center;">' +
+            '<h3 style="color: #e2b35a;">Ошибка загрузки интерфейса</h3>' +
+            '<p style="opacity: 0.7;">' + msg + '</p>' +
+            '<button onclick="location.reload()" style="background: #c5a059; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold;">Обновить страницу</button>' +
+            '</div>';
+        }
+      };
+
       tailwind.config = {
         theme: {
           extend: {
@@ -38,9 +51,8 @@
         border: 1px solid rgba(255, 255, 255, 0.05);
       }
       #root { min-height: 100vh; }
-      @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
-      .animate-fade-in { animation: fade-in 0.5s ease-out forwards; }
     </style>
+    <!-- Только необходимые библиотеки, без дубликатов и инструментов разработки -->
     <script type="importmap">
 {
   "imports": {
@@ -59,6 +71,7 @@
   </head>
   <body>
     <div id="root"></div>
+    <!-- Загрузка основного скрипта как модуля -->
     <script type="module" src="./index.tsx"></script>
   </body>
 </html>
