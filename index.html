@@ -4,24 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ООО Евро-Заборы — Завод систем ограждений</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- 1. ПОЛИФИЛЛЫ (СРАЗУ) -->
     <script>
-      // 1. Имитация окружения (необходимо для некоторых библиотек)
       window.process = { env: { NODE_ENV: 'production' } };
-      
-      // 2. Глобальный отлов ошибок
       window.onerror = function(msg, url, line, col, error) {
-        console.error("Critical error:", msg, error);
+        console.error("Global Error:", msg);
         const root = document.getElementById('root');
         if (root && root.innerHTML.trim() === '') {
-          root.innerHTML = '<div style="padding: 40px; color: white; background: #111; font-family: sans-serif; text-align: center;">' +
-            '<h3 style="color: #e2b35a;">Ошибка загрузки интерфейса</h3>' +
-            '<p style="opacity: 0.7;">' + msg + '</p>' +
-            '<button onclick="location.reload()" style="background: #c5a059; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold;">Обновить страницу</button>' +
+          root.innerHTML = '<div style="background:#0a0a0c; color:#e2b35a; padding:40px; text-align:center; font-family:sans-serif; height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center;">' +
+            '<h2 style="margin-bottom:10px;">Ошибка запуска сайта</h2>' +
+            '<p style="color:white; opacity:0.6; font-size:14px;">' + msg + '</p>' +
+            '<button onclick="location.reload()" style="margin-top:20px; background:#c5a059; color:#0a0a0c; border:none; padding:10px 20px; border-radius:8px; cursor:pointer; font-weight:bold;">Обновить страницу</button>' +
             '</div>';
         }
       };
+    </script>
 
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
       tailwind.config = {
         theme: {
           extend: {
@@ -35,6 +36,7 @@
         }
       }
     </script>
+
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap');
       body { 
@@ -50,9 +52,9 @@
         -webkit-backdrop-filter: blur(12px);
         border: 1px solid rgba(255, 255, 255, 0.05);
       }
-      #root { min-height: 100vh; }
     </style>
-    <!-- Только необходимые библиотеки, без дубликатов и инструментов разработки -->
+
+    <!-- 2. ЧИСТЫЙ IMPORTMAP (БЕЗ VITE) -->
     <script type="importmap">
 {
   "imports": {
@@ -71,9 +73,7 @@
   </head>
   <body>
     <div id="root"></div>
-    <!-- Загрузка основного скрипта как модуля -->
     <script type="module" src="./index.tsx"></script>
   </body>
 </html>
-
 
