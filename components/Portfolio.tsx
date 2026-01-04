@@ -10,16 +10,32 @@ const Portfolio: React.FC<PortfolioProps> = ({ onOrderClick }) => {
   const [selectedItem, setSelectedItem] = useState<CatalogItem | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [activeCategory, setActiveCategory] = useState<CatalogItem['category'] | 'all'>('all');
+  
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [generatedImg, setGeneratedImg] = useState<string | null>(null);
 
   const openModal = (item: CatalogItem) => {
     setSelectedItem(item);
     setCurrentImageIndex(0);
+    setGeneratedImg(null);
     document.body.style.overflow = 'hidden';
   };
 
   const closeModal = () => {
     setSelectedItem(null);
     document.body.style.overflow = 'unset';
+  };
+
+  const handleAiGenerate = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!selectedItem || isGenerating) return;
+    
+    setIsGenerating(true);
+    const result = await generateGateConcept(`${selectedItem.title} in the style of ${selectedItem.category}`);
+    if (result) {
+      setGeneratedImg(result);
+    }
+    setIsGenerating(false);
   };
 
   const nextImage = (e?: React.MouseEvent) => {
@@ -50,8 +66,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ onOrderClick }) => {
           <div className="h-1 w-24 bg-gold-600 mx-auto mt-4 rounded-full"></div>
         </div>
 
-        {/* Фильтры по категориям */}
-        <div className="flex flex-wrap justify-center gap-2 mb-16 max-w-4xl mx-auto">
+        <div className="flex flex-wrap justify-center gap-2 mb-16">
           {[
             { id: 'all', label: 'Все' },
             { id: 'concrete', label: 'Еврозаборы' },
@@ -63,8 +78,8 @@ const Portfolio: React.FC<PortfolioProps> = ({ onOrderClick }) => {
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id as any)}
-              className={`px-6 py-3 rounded-full text-[10px] font-black uppercase tracking-widest transition-all duration-300 border ${
-                activeCategory === cat.id ? 'bg-gold-600 border-gold-600 text-white shadow-xl' : 'border-gray-700 text-gray-400 hover:text-white hover:border-gray-500'
+              className={`px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all border ${
+                activeCategory === cat.id ? 'bg-gold-600 border-gold-600 text-white shadow-xl' : 'border-gray-700 text-gray-400 hover:text-white'
               }`}
             >
               {cat.label}
@@ -74,18 +89,18 @@ const Portfolio: React.FC<PortfolioProps> = ({ onOrderClick }) => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {filteredItems.map((item) => (
-            <div key={item.id} onClick={() => openModal(item)} className="group bg-metal-900 rounded-[2.5rem] overflow-hidden border border-gray-800 hover:border-gold-600/50 transition-all duration-500 cursor-pointer shadow-2xl flex flex-col h-full">
-              <div className="relative h-72 overflow-hidden">
-                <img src={item.gallery[0].url} alt={item.title} onError={handleImageError} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-1000" />
-                <div className="absolute top-6 left-6 bg-gold-600/90 text-white text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest backdrop-blur-sm">{item.location}</div>
+            <div key={item.id} onClick={() => openModal(item)} className="group bg-metal-900 rounded-3xl overflow-hidden border border-gray-800 hover:border-gold-600/50 transition-all cursor-pointer shadow-2xl flex flex-col h-full">
+              <div className="relative h-64 overflow-hidden">
+                <img src={item.gallery[0].url} alt={item.title} onError={handleImageError} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" />
+                <div className="absolute top-4 left-4 bg-gold-600/90 text-white text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-widest backdrop-blur-sm">{item.location}</div>
               </div>
-              <div className="p-10 flex-grow flex flex-col justify-between">
+              <div className="p-8 flex-grow flex flex-col justify-between">
                 <div>
-                  <h4 className="text-xl font-black mb-3 group-hover:text-gold-500 transition-colors uppercase leading-tight">{item.title}</h4>
-                  <div className="text-gold-500 font-black text-lg mb-6">{item.priceStart}</div>
+                  <h4 className="text-lg font-black mb-2 group-hover:text-gold-500 transition-colors uppercase">{item.title}</h4>
+                  <div className="text-gold-500 font-black text-base mb-4">{item.priceStart}</div>
                 </div>
-                <div className="flex items-center text-[10px] text-gray-500 group-hover:text-gold-600 font-black uppercase tracking-[0.2em] border-t border-gray-800 pt-6 transition-colors">
-                  СМОТРЕТЬ ДЕТАЛИ →
+                <div className="text-[9px] text-gray-500 font-black uppercase tracking-widest border-t border-gray-800 pt-4">
+                  ПОДРОБНЕЕ →
                 </div>
               </div>
             </div>
@@ -93,38 +108,41 @@ const Portfolio: React.FC<PortfolioProps> = ({ onOrderClick }) => {
         </div>
       </div>
 
-      {/* MODAL */}
       {selectedItem && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/98 backdrop-blur-xl p-4" onClick={closeModal}>
-          <div className="relative max-w-7xl w-full h-[90vh] flex flex-col md:flex-row gap-8 bg-metal-900 rounded-[3rem] overflow-hidden border border-gray-800 shadow-[0_0_100px_rgba(0,0,0,0.8)]" onClick={e => e.stopPropagation()}>
-            <div className="md:w-2/3 relative h-full bg-black group">
-               <img src={selectedItem.gallery[currentImageIndex].url} className="w-full h-full object-contain p-4" />
-               <button onClick={prevImage} className="absolute left-6 top-1/2 -translate-y-1/2 bg-white/5 backdrop-blur-md p-5 rounded-full opacity-0 group-hover:opacity-100 transition-all hover:bg-gold-600"><svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg></button>
-               <button onClick={nextImage} className="absolute right-6 top-1/2 -translate-y-1/2 bg-white/5 backdrop-blur-md p-5 rounded-full opacity-0 group-hover:opacity-100 transition-all hover:bg-gold-600"><svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg></button>
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-xl p-4 md:p-10" onClick={closeModal}>
+          <div className="relative max-w-6xl w-full max-h-[90vh] flex flex-col md:flex-row bg-metal-900 rounded-3xl overflow-hidden border border-gray-800" onClick={e => e.stopPropagation()}>
+            <div className="md:w-3/5 relative min-h-[300px] bg-black group flex items-center justify-center">
+               <img src={generatedImg || selectedItem.gallery[currentImageIndex].url} className="w-full h-full object-contain" />
+               <button onClick={prevImage} className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/5 p-3 rounded-full hover:bg-gold-600 transition-all">←</button>
+               <button onClick={nextImage} className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/5 p-3 rounded-full hover:bg-gold-600 transition-all">→</button>
+               <div className="absolute bottom-4 left-1/2 -translate-x-1/2">
+                  <button 
+                    onClick={handleAiGenerate}
+                    disabled={isGenerating}
+                    className="bg-gold-600 text-white px-6 py-2 rounded-full text-[9px] font-black uppercase tracking-widest hover:bg-gold-500 transition-all flex items-center gap-2 whitespace-nowrap"
+                  >
+                    {isGenerating ? "Генерация..." : "✨ ИИ Концепт"}
+                  </button>
+               </div>
             </div>
-            <div className="md:w-1/3 p-12 flex flex-col justify-between overflow-y-auto">
-               <div>
-                  <div className="inline-block px-3 py-1 bg-gold-600/10 rounded-md mb-6">
-                    <span className="text-gold-500 text-[10px] font-black uppercase tracking-widest">Категория: {selectedItem.category}</span>
+            
+            <div className="md:w-2/5 p-8 overflow-y-auto">
+               <div className="mb-6">
+                  <span className="text-gold-500 text-[9px] font-black uppercase tracking-widest block mb-2">{selectedItem.category}</span>
+                  <h3 className="text-2xl font-black text-white uppercase mb-4">{selectedItem.title}</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed">{selectedItem.description}</p>
+               </div>
+               <div className="space-y-4 mb-8">
+                  <div className="flex justify-between py-2 border-b border-gray-800 text-sm">
+                    <span className="text-gray-500 uppercase font-bold">Цена</span>
+                    <span className="text-gold-500 font-black">{selectedItem.priceStart}</span>
                   </div>
-                  <h3 className="text-3xl md:text-4xl font-black text-white mb-8 leading-none uppercase">{selectedItem.title}</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed mb-10">{selectedItem.description}</p>
-                  
-                  <div className="space-y-4">
-                     <div className="flex justify-between items-center py-4 border-b border-gray-800">
-                        <span className="text-xs uppercase text-gray-500 font-bold">Ориентировочно</span>
-                        <span className="text-gold-500 font-black">{selectedItem.priceStart}</span>
-                     </div>
-                     <div className="flex justify-between items-center py-4 border-b border-gray-800">
-                        <span className="text-xs uppercase text-gray-500 font-bold">Срок готовности</span>
-                        <span className="text-white font-bold">от 3-х дней</span>
-                     </div>
+                  <div className="flex justify-between py-2 border-b border-gray-800 text-sm">
+                    <span className="text-gray-500 uppercase font-bold">Монтаж</span>
+                    <span className="text-white font-bold">от 3 дней</span>
                   </div>
                </div>
-               <div className="mt-12 space-y-4">
-                  <button onClick={() => { onOrderClick(selectedItem.title); closeModal(); }} className="w-full bg-gold-600 hover:bg-gold-500 text-white py-6 rounded-2xl font-black uppercase tracking-widest transition-all shadow-xl active:scale-95">Заказать расчет</button>
-                  <button onClick={closeModal} className="w-full text-gray-500 hover:text-white transition-colors text-xs font-bold uppercase tracking-widest">Вернуться к списку</button>
-               </div>
+               <button onClick={() => { onOrderClick(selectedItem.title); closeModal(); }} className="w-full bg-gold-600 hover:bg-gold-500 text-white py-4 rounded-xl font-black uppercase tracking-widest transition-all">Заказать расчет</button>
             </div>
           </div>
         </div>
