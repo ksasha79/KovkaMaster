@@ -1,18 +1,18 @@
 
 import React, { useState } from 'react';
-import Header from './components/Header';
-import Hero from './components/Hero';
-import Stats from './components/Stats';
-import Services from './components/Services';
-import Steps from './components/Steps';
-import Portfolio from './components/Portfolio';
-import Pricing from './components/Pricing';
-import About from './components/About';
-import Reviews from './components/Reviews';
-import FAQ from './components/FAQ';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
-import FloatingBot from './components/FloatingBot';
+import Header from './components/Header.tsx';
+import Hero from './components/Hero.tsx';
+import Stats from './components/Stats.tsx';
+import Services from './components/Services.tsx';
+import Steps from './components/Steps.tsx';
+import Portfolio from './components/Portfolio.tsx';
+import Pricing from './components/Pricing.tsx';
+import About from './components/About.tsx';
+import Reviews from './components/Reviews.tsx';
+import FAQ from './components/FAQ.tsx';
+import Contact from './components/Contact.tsx';
+import Footer from './components/Footer.tsx';
+import FloatingBot from './components/FloatingBot.tsx';
 
 function App() {
   const [prefillMessage, setPrefillMessage] = useState('');
@@ -26,7 +26,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col font-sans selection:bg-gold-500 selection:text-white">
+    <div className="min-h-screen bg-metal-900 flex flex-col font-sans selection:bg-gold-500 selection:text-white overflow-x-hidden">
       <Header />
       <main className="flex-grow">
         <Hero />
