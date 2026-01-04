@@ -31,15 +31,16 @@ if (container) {
         <App />
       </React.StrictMode>
     );
-    console.log("Приложение успешно инициализировано.");
+    console.log("App initialized successfully");
   } catch (error) {
-    console.error("Ошибка при рендеринге React:", error);
-    container.innerHTML = `<div style="padding: 20px; color: white; text-align: center;">
-      <h2>Ошибка загрузки сайта</h2>
-      <p>Пожалуйста, обновите страницу или попробуйте позже.</p>
+    console.error("React render error:", error);
+    // Резервный механизм вывода ошибки на экран
+    container.innerHTML = `<div style="padding: 40px; text-align: center; color: white;">
+      <h2>Ошибка загрузки</h2>
+      <p>Пожалуйста, обновите страницу или попробуйте зайти с другого браузера.</p>
     </div>`;
   }
 } else {
-  console.error("Критическая ошибка: Контейнер #root не найден.");
+  console.error("Root element not found");
 }
 
