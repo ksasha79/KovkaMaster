@@ -5,7 +5,7 @@
  */
 
 import { GoogleGenAI } from "@google/genai";
-import { CONTACTS } from '../config.ts';
+import { CONTACTS } from '../config';
 
 export interface ChatMessage {
   role: 'user' | 'model';
@@ -13,18 +13,16 @@ export interface ChatMessage {
 }
 
 const getAI = () => {
-  const apiKey = process.env.API_KEY;
-  if (!apiKey) throw new Error("API Key is missing");
+  const apiKey = (window as any).process?.env?.API_KEY || process.env.API_KEY;
+  if (!apiKey) throw new Error("API_KEY is not defined");
   return new GoogleGenAI({ apiKey });
 };
 
-const SYSTEM_INSTRUCTION = `Вы — ИИ-инженер завода ООО «Евро-Заборы» (евро-заборы.рф).
-Ваша задача: профессионально консультировать по заборам, воротам и навесам.
-МЫ ПРОИЗВОДИТЕЛИ (ЗАВОД), а не перекупы.
-ЛОКАЦИИ: Ростовская область, ДНР (Донецк, Мариуполь), ЛНР, Воронежская область.
-ХАРАКТЕРИСТИКИ: Бетон М350, ГОСТ-армирование, порошковая покраска.
+const SYSTEM_INSTRUCTION = `Вы — ведущий инженер завода ООО «Евро-Заборы».
+МЫ ПРОИЗВОДИТЕЛИ. Полный цикл: бетон М350, армирование ГОСТ, порошковая покраска.
+ЛОКАЦИИ: Ростовская обл, ДНР (Мариуполь, Донецк), ЛНР, Воронежская обл.
 КОНТАКТЫ: Менеджер ${CONTACTS.MANAGER_PHONE_DISPLAY}.
-Если клиент хочет расчет или замер — просите его проскроллить вниз к форме или звонить.`;
+Если клиент хочет расчет — направляйте его к форме внизу сайта. Поздравляйте с 2026 годом.`;
 
 export const chatWithSupport = async (message: string, history: ChatMessage[]): Promise<string> => {
   try {
@@ -37,10 +35,10 @@ export const chatWithSupport = async (message: string, history: ChatMessage[]): 
         temperature: 0.7 
       }
     });
-    return response.text || "Связь с производством временно ограничена. Позвоните нам: " + CONTACTS.MANAGER_PHONE_DISPLAY;
+    return response.text || "Связь временно недоступна. Пожалуйста, позвоните нам.";
   } catch (error) {
     console.error("AI Chat Error:", error);
-    return "Наши инженеры сейчас на замере. Пожалуйста, оставьте ваш номер в форме внизу страницы.";
+    return "Инженеры сейчас на производстве. Оставьте заявку в форме обратной связи.";
   }
 };
 
@@ -50,19 +48,18 @@ export const generateGateConcept = async (promptDetails: string): Promise<string
     const response = await ai.models.generateContent({
       model: 'gemini-2.5-flash-image',
       contents: { 
-        parts: [{ text: `Architectural visualization: ${promptDetails}, high-end luxury fence and gate, modern house background, golden hour lighting, 8k photorealistic.` }] 
+        parts: [{ text: `Architectural visualization: ${promptDetails}, high-end luxury fence system, modern landscaping, cinematic lighting, photorealistic 8k.` }] 
       }
     });
     
-    for (const part of response.candidates?.[0]?.content?.parts || []) {
-      if (part.inlineData) {
-        return `data:image/png;base64,${part.inlineData.data}`;
-      }
+    // Ищем часть с данными изображения
+    const imagePart = response.candidates?.[0]?.content?.parts.find(p => p.inlineData);
+    if (imagePart && imagePart.inlineData) {
+      return `data:image/png;base64,${imagePart.inlineData.data}`;
     }
     return null;
   } catch (error) {
-    console.error("Image Generation Error:", error);
+    console.error("Image Gen Error:", error);
     return null;
   }
 };
-
