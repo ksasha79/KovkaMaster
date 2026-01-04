@@ -25,7 +25,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="bg-metal-900 min-h-screen text-white selection:bg-gold-500 selection:text-metal-900">
+    <div className="bg-brand-black min-h-screen text-white">
       <Header />
       <main>
         <Hero />
