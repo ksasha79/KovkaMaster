@@ -15,25 +15,21 @@
 ///  </React.StrictMode>
 ///);
 
-
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import App from './App.tsx';
+import App from './App';
 
-const initApp = () => {
-  const container = document.getElementById('root');
-  if (!container) return;
-  
-  const root = createRoot(container);
-  root.render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  );
-};
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initApp);
-} else {
-  initApp();
+const container = document.getElementById('root');
+if (container) {
+  try {
+    const root = createRoot(container);
+    root.render(
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    );
+  } catch (error) {
+    console.error("Render error:", error);
+    container.innerHTML = `<div style="color: white; padding: 20px;">Ошибка рендеринга: ${error instanceof Error ? error.message : 'Неизвестная ошибка'}</div>`;
+  }
 }
