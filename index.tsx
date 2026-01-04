@@ -16,6 +16,7 @@
 ///);
 
 
+
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
@@ -29,6 +30,14 @@ if (container) {
       <App />
     </React.StrictMode>
   );
+  // Плавное проявление после загрузки всех ресурсов
+  window.addEventListener('load', () => {
+    container.classList.add('loaded');
+  });
+  // Резервное включение видимости, если событие load не сработало
+  setTimeout(() => {
+    container.classList.add('loaded');
+  }, 1500);
 } else {
-  console.error("Ошибка: корневой элемент #root не найден.");
+  console.error("Критическая ошибка: Контейнер #root не найден в документе.");
 }
