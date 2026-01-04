@@ -17,16 +17,19 @@ const Footer: React.FC = () => {
               ПРОИЗВОДСТВО СИСТЕМ ОГРАЖДЕНИЙ. <br/>
               ИНДУСТРИАЛЬНЫЙ ПОДХОД.
             </p>
+            <div className="mt-4 text-[9px] text-gray-800 uppercase tracking-tighter">
+              Ключевые слова: еврозаборы, бетонные заборы, установка ворот, навесы для авто в Ростове, Донецке и Луганске.
+            </div>
           </div>
 
           <div>
-            <h3 className="text-white text-[10px] font-black uppercase tracking-[0.4em] mb-10">Регионы присутствия</h3>
+            <h3 className="text-white text-[10px] font-black uppercase tracking-[0.4em] mb-10">Регионы монтажа</h3>
             <ul className="space-y-3 text-[10px] uppercase font-bold tracking-[0.2em] text-gray-600">
-              <li>Ростовская область</li>
-              <li>ЛНР / ДНР (Мариуполь)</li>
-              <li>Воронежская область</li>
-              <li>Белгород / Курск</li>
-              <li>Тамбов / Липецк</li>
+              <li>Ростов-на-Дону и область</li>
+              <li>ДНР (Донецк, Мариуполь, Макеевка)</li>
+              <li>ЛНР (Луганск, Алчевск)</li>
+              <li>Воронеж и область</li>
+              <li>Белгород, Курск, Липецк</li>
             </ul>
           </div>
 
@@ -67,7 +70,8 @@ const Footer: React.FC = () => {
             <p className="text-[9px] uppercase leading-loose font-bold tracking-widest text-gray-800">
               {CONTACTS.COMPANY_NAME} <br/>
               Завод Ограждений и Ворот. <br/>
-              Все права защищены © {new Date().getFullYear()}
+              Все права защищены © {new Date().getFullYear()} <br/>
+              Официальный сайт: {CONTACTS.WEBSITE_URL}
             </p>
           </div>
 
