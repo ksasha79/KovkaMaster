@@ -6,7 +6,7 @@ const Header: React.FC = () => {
   const companyTitle = CONTACTS?.COMPANY_NAME ? CONTACTS.COMPANY_NAME.replace('ООО ', '') : 'Евро-Заборы';
 
   return (
-    <header className="fixed w-full z-50 glass border-b border-white/5">
+    <header className="fixed w-full z-50 glass">
       <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
         
         {/* Лого и Бренд */}
@@ -53,12 +53,9 @@ const Header: React.FC = () => {
             Замер бесплатно
           </a>
         </div>
-        
       </div>
     </header>
   );
 };
 
 export default Header;
-
-
