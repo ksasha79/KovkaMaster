@@ -1,54 +1,45 @@
-
 <!DOCTYPE html>
 <html lang="ru" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ООО Евро-Заборы — Завод систем ограждений</title>
-    
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="ООО Евро-Заборы — промышленное производство еврозаборов, ворот и навесов. Заводское качество, монтаж под ключ в Ростове-на-Дону, ДНР, ЛНР и Воронежской области. Работаем с НДС." />
-    <meta name="keywords" content="ООО Евро-Заборы, завод заборов, еврозаборы Ростов, купить забор ДНР, установка заборов Луганск, бетонные заборы, навесы для авто" />
-
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
+      // Имитация окружения для предотвращения ошибок в библиотеках
+      window.process = { env: { NODE_ENV: 'production' } };
+      
       tailwind.config = {
         theme: {
           extend: {
             colors: {
-              'metal-900': '#0a0a0a',
-              'metal-800': '#111111',
-              'gold-500': '#c5a059',
-              'gold-600': '#a38446',
-            },
-            fontFamily: {
-              sans: ['Inter', 'system-ui', 'sans-serif'],
+              'metal-900': '#0a0a0c',
+              'metal-800': '#121216',
+              'gold-600': '#c5a059',
+              'gold-500': '#e2b35a',
             },
           }
         }
       }
     </script>
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap');
       body { 
-        background-color: #0a0a0a; 
+        background-color: #0a0a0c; 
         color: white; 
-        margin: 0; 
-        font-family: 'Inter', sans-serif; 
-        overflow-x: hidden; 
+        font-family: 'Inter', sans-serif;
+        margin: 0;
+        -webkit-font-smoothing: antialiased;
       }
-      #root { min-height: 100vh; }
-      
-      .glass { 
-        background: rgba(10, 10, 10, 0.85); 
-        backdrop-filter: blur(12px); 
+      .glass {
+        background: rgba(18, 18, 22, 0.8);
+        backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
         border: 1px solid rgba(255, 255, 255, 0.05);
       }
-      
-      ::-webkit-scrollbar { width: 6px; }
-      ::-webkit-scrollbar-track { background: #0a0a0a; }
-      ::-webkit-scrollbar-thumb { background: #c5a059; border-radius: 10px; }
+      #root { min-height: 100vh; }
+      @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+      .animate-fade-in { animation: fade-in 0.5s ease-out forwards; }
     </style>
     <script type="importmap">
 {
@@ -71,7 +62,5 @@
     <script type="module" src="./index.tsx"></script>
   </body>
 </html>
-
-
 
 
