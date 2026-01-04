@@ -13,8 +13,8 @@ export interface ChatMessage {
 }
 
 const getAI = () => {
-  const apiKey = (window as any).process?.env?.API_KEY || process.env.API_KEY;
-  if (!apiKey) throw new Error("API_KEY is not defined");
+  const apiKey = process.env.API_KEY;
+  if (!apiKey) throw new Error("API_KEY is not set");
   return new GoogleGenAI({ apiKey });
 };
 
@@ -22,7 +22,7 @@ const SYSTEM_INSTRUCTION = `Вы — ведущий инженер завода 
 МЫ ПРОИЗВОДИТЕЛИ. Полный цикл: бетон М350, армирование ГОСТ, порошковая покраска.
 ЛОКАЦИИ: Ростовская обл, ДНР (Мариуполь, Донецк), ЛНР, Воронежская обл.
 КОНТАКТЫ: Менеджер ${CONTACTS.MANAGER_PHONE_DISPLAY}.
-Если клиент хочет расчет — направляйте его к форме внизу сайта. Поздравляйте с 2026 годом.`;
+Если клиент хочет расчет — направляйте его к форме внизу сайта. Поздравляйте с наступающим 2026 годом.`;
 
 export const chatWithSupport = async (message: string, history: ChatMessage[]): Promise<string> => {
   try {
@@ -35,10 +35,10 @@ export const chatWithSupport = async (message: string, history: ChatMessage[]): 
         temperature: 0.7 
       }
     });
-    return response.text || "Связь временно недоступна. Пожалуйста, позвоните нам.";
+    return response.text || "Связь с производством прервана. Позвоните нам.";
   } catch (error) {
     console.error("AI Chat Error:", error);
-    return "Инженеры сейчас на производстве. Оставьте заявку в форме обратной связи.";
+    return "Инженеры на замере. Оставьте заявку в форме внизу страницы.";
   }
 };
 
@@ -48,11 +48,10 @@ export const generateGateConcept = async (promptDetails: string): Promise<string
     const response = await ai.models.generateContent({
       model: 'gemini-2.5-flash-image',
       contents: { 
-        parts: [{ text: `Architectural visualization: ${promptDetails}, high-end luxury fence system, modern landscaping, cinematic lighting, photorealistic 8k.` }] 
+        parts: [{ text: `High-end architectural visualization: ${promptDetails}, luxury fence system, modern landscaping, cinematic lighting, photorealistic 8k.` }] 
       }
     });
     
-    // Ищем часть с данными изображения
     const imagePart = response.candidates?.[0]?.content?.parts.find(p => p.inlineData);
     if (imagePart && imagePart.inlineData) {
       return `data:image/png;base64,${imagePart.inlineData.data}`;
