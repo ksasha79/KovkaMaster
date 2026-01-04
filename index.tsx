@@ -24,20 +24,22 @@ import App from './App.tsx';
 const container = document.getElementById('root');
 
 if (container) {
-  const root = createRoot(container);
-  root.render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  );
-  // Плавное проявление после загрузки всех ресурсов
-  window.addEventListener('load', () => {
-    container.classList.add('loaded');
-  });
-  // Резервное включение видимости, если событие load не сработало
-  setTimeout(() => {
-    container.classList.add('loaded');
-  }, 1500);
+  try {
+    const root = createRoot(container);
+    root.render(
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    );
+    console.log("Приложение успешно инициализировано.");
+  } catch (error) {
+    console.error("Ошибка при рендеринге React:", error);
+    container.innerHTML = `<div style="padding: 20px; color: white; text-align: center;">
+      <h2>Ошибка загрузки сайта</h2>
+      <p>Пожалуйста, обновите страницу или попробуйте позже.</p>
+    </div>`;
+  }
 } else {
-  console.error("Критическая ошибка: Контейнер #root не найден в документе.");
+  console.error("Критическая ошибка: Контейнер #root не найден.");
 }
+
