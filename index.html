@@ -4,53 +4,74 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ООО Евро-Заборы — Новогодние Скидки на Ограждения | евро-заборы.рф</title>
-    <meta name="description" content="Заводское производство евро-заборов. Зимние акции и подарки при заказе замера. Установка в Ростове, Воронеже, ДНР, ЛНР." />
+    <title>Купить Еврозаборы в Ростове, ДНР, ЛНР — Цены от производителя | ООО «Евро-Заборы»</title>
+    <meta name="description" content="Завод по производству еврозаборов, ворот и навесов. Профессиональный монтаж в Ростове-на-Дону, Донецке, Мариуполе, Луганске. Зимние скидки, замер 0 ₽. Официальный сайт евро-заборы.рф." />
+    <meta name="keywords" content="еврозаборы купить, заборы ростов, еврозаборы днр, еврозаборы лнр, установка заборов мариуполь, бетонные заборы цена, ворота откатные купить" />
     
+    <!-- Open Graph for Social Media -->
+    <meta property="og:title" content="Завод Евро-Заборы | Производство и Монтаж" />
+    <meta property="og:description" content="Идеальная фиксация ваших ограждений. Работаем по всему Югу России и новым регионам." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://евро-заборы.рф" />
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
         theme: {
           extend: {
             colors: {
-              'metal-900': '#121212',
-              'metal-800': '#1e1e1e',
-              'gold-500': '#c5a059',
-              'gold-600': '#b08d4b',
-              'xmas-red': '#b91c1c',
+              'metal-900': '#0a0a0a',
+              'metal-800': '#141414',
+              'gold-500': '#d4af37',
+              'gold-600': '#b8860b',
+              'xmas-red': '#cc0000',
             },
             fontFamily: {
               sans: ['Inter', 'system-ui', 'sans-serif'],
-            }
+            },
           }
         }
       }
     </script>
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "ООО Евро-Заборы",
+      "image": "https://евро-заборы.рф/og-image.jpg",
+      "@id": "https://евро-заборы.рф",
+      "url": "https://евро-заборы.рф",
+      "telephone": "+79920595253",
+      "priceRange": "RUB",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Ростов-на-Дону",
+        "addressRegion": "Ростовская область",
+        "addressCountry": "RU"
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "opens": "09:00",
+        "closes": "18:00"
+      }
+    }
+    </script>
+
     <style>
-      /* Эффект падающего снега */
-      .snow-container {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 9999;
-      }
-      .snowflake {
-        position: absolute;
-        top: -10px;
-        color: white;
-        opacity: 0.8;
-        font-size: 1em;
-        user-select: none;
-        animation: fall linear infinite;
-      }
-      @keyframes fall {
-        to {
-          transform: translateY(105vh) translateX(20px);
-        }
-      }
+      .snow-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; }
+      .snowflake { position: absolute; top: -10px; color: rgba(255,255,255,0.4); font-size: 1em; user-select: none; animation: fall linear infinite; }
+      @keyframes fall { to { transform: translateY(105vh) translateX(20px) rotate(360deg); } }
+      html { scroll-behavior: smooth; }
     </style>
     <script type="importmap">
     {
@@ -65,7 +86,7 @@
     }
     </script>
   </head>
-  <body class="bg-metal-900 text-gray-100 antialiased selection:bg-gold-500/30">
+  <body class="bg-metal-900 text-gray-100 antialiased selection:bg-gold-500/50">
     <div class="snow-container" id="snow"></div>
     <div id="root"></div>
     <script>
@@ -74,17 +95,18 @@
         if (!snow) return;
         const flake = document.createElement('div');
         flake.className = 'snowflake';
-        flake.innerHTML = '❄';
+        flake.innerHTML = '❅';
         flake.style.left = Math.random() * 100 + 'vw';
-        flake.style.animationDuration = Math.random() * 3 + 2 + 's';
-        flake.style.opacity = Math.random();
-        flake.style.fontSize = Math.random() * 10 + 10 + 'px';
+        flake.style.animationDuration = Math.random() * 5 + 5 + 's';
+        flake.style.opacity = Math.random() * 0.5;
+        flake.style.fontSize = Math.random() * 15 + 10 + 'px';
         snow.appendChild(flake);
-        setTimeout(() => flake.remove(), 5000);
+        setTimeout(() => flake.remove(), 10000);
       }
-      setInterval(createSnowflake, 150);
+      setInterval(createSnowflake, 300);
     </script>
     <script type="module" src="/index.tsx"></script>
   </body>
 </html>
+
 
