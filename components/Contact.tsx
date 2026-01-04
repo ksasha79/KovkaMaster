@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { CONTACTS } from '../config';
+import { CONTACTS } from '../config.ts';
 
 interface ContactProps {
   prefillMessage?: string;
@@ -34,12 +34,11 @@ const Contact: React.FC<ContactProps> = ({ prefillMessage }) => {
         body: JSON.stringify(formData),
       });
 
-      const result = await response.json();
-
       if (response.ok) {
         setStatus('success');
         setFormData({ name: '', phone: '', message: '', length: '' });
       } else {
+        const result = await response.json();
         throw new Error(result.error || 'Ошибка при отправке');
       }
     } catch (err: any) {
@@ -49,133 +48,93 @@ const Contact: React.FC<ContactProps> = ({ prefillMessage }) => {
   };
 
   return (
-    <section id="contact" className="py-24 bg-metal-900 text-white relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-16">
-          
-          {/* Левая часть: Форма */}
-          <div className="bg-metal-800 p-8 md:p-12 rounded-[2.5rem] border border-gray-800 shadow-2xl">
-            <h2 className="text-4xl font-black mb-6 uppercase tracking-tight">Вызвать замерщика</h2>
-            <p className="text-gray-400 mb-10">Оставьте заявку, и наш инженер свяжется с вами для согласования времени бесплатного замера.</p>
-
-            {status === 'success' ? (
-              <div className="bg-gold-600/10 border border-gold-500/30 p-10 rounded-3xl text-center animate-fade-in">
-                <div className="text-5xl mb-4">✅</div>
-                <h3 className="text-2xl font-bold text-gold-500 uppercase mb-2">Заявка отправлена!</h3>
-                <p className="text-gray-300 mb-6">Бот уже передал ваш заказ в отдел продаж {CONTACTS.COMPANY_NAME}. Ожидайте звонка.</p>
-                <button 
-                  onClick={() => setStatus('idle')}
-                  className="text-xs font-black uppercase tracking-widest text-gold-500 border-b border-gold-600 pb-1"
-                >
-                  Отправить еще одну
-                </button>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label className="text-[10px] uppercase font-black text-gray-500 tracking-widest ml-1">Ваше имя</label>
-                    <input 
-                      required
-                      className="w-full bg-metal-900 border border-gray-700 rounded-xl px-5 py-4 outline-none focus:border-gold-500 transition-all text-white"
-                      placeholder="Иван"
-                      value={formData.name}
-                      onChange={e => setFormData({...formData, name: e.target.value})}
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-[10px] uppercase font-black text-gray-500 tracking-widest ml-1">Телефон</label>
-                    <input 
-                      required
-                      type="tel"
-                      className="w-full bg-metal-900 border border-gray-700 rounded-xl px-5 py-4 outline-none focus:border-gold-500 transition-all text-white"
-                      placeholder="+7 (___) ___-__-__"
-                      value={formData.phone}
-                      onChange={e => setFormData({...formData, phone: e.target.value})}
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-[10px] uppercase font-black text-gray-500 tracking-widest ml-1">Примерная длина (метров)</label>
-                  <input 
-                    type="number"
-                    className="w-full bg-metal-900 border border-gray-700 rounded-xl px-5 py-4 outline-none focus:border-gold-500 transition-all text-white"
-                    placeholder="40"
-                    value={formData.length}
-                    onChange={e => setFormData({...formData, length: e.target.value})}
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-[10px] uppercase font-black text-gray-500 tracking-widest ml-1">Комментарий к заказу</label>
-                  <textarea 
-                    className="w-full bg-metal-900 border border-gray-700 rounded-xl px-5 py-4 outline-none focus:border-gold-500 transition-all h-32 resize-none text-white"
-                    placeholder="Какой забор вас интересует?"
-                    value={formData.message}
-                    onChange={e => setFormData({...formData, message: e.target.value})}
-                  />
-                </div>
-
-                {status === 'error' && (
-                  <p className="text-red-500 text-xs font-bold uppercase tracking-widest bg-red-500/10 p-4 rounded-lg border border-red-500/20">
-                    ❌ Ошибка: {errorText || 'Не удалось отправить. Попробуйте позвонить.'}
-                  </p>
-                )}
-
-                <button 
-                  disabled={status === 'sending'}
-                  className="w-full bg-gold-600 hover:bg-gold-500 disabled:opacity-50 text-white font-black uppercase tracking-[0.3em] py-5 rounded-xl transition-all active:scale-95 shadow-lg shadow-gold-600/20"
-                >
-                  {status === 'sending' ? 'Отправка...' : 'Отправить заявку'}
-                </button>
-              </form>
-            )}
-          </div>
-
-          {/* Правая часть: Контакты */}
-          <div className="flex flex-col justify-center space-y-12">
-            <div>
-              <h3 className="text-gold-500 font-black uppercase tracking-[0.3em] text-sm mb-4">Прямая связь (Завод)</h3>
-              <a href={`tel:+${CONTACTS.FACTORY_PHONE}`} className="text-4xl md:text-5xl font-black hover:text-gold-500 transition-colors tracking-tighter block mb-8">
-                {CONTACTS.FACTORY_PHONE_DISPLAY}
-              </a>
-              
-              <h3 className="text-gold-500 font-black uppercase tracking-[0.3em] text-sm mb-4">Отдел продаж (Менеджер)</h3>
-              <div className="space-y-4">
-                <a href={`tel:+${CONTACTS.MANAGER_PHONE}`} className="text-4xl md:text-5xl font-black hover:text-gold-500 transition-colors tracking-tighter block">
-                  {CONTACTS.MANAGER_PHONE_DISPLAY}
-                </a>
-                <div className="flex gap-4">
-                  <a href={`https://t.me/${CONTACTS.TELEGRAM_USER}`} target="_blank" className="flex items-center gap-2 bg-white/5 border border-white/10 px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-gold-600 transition-all">
-                    <span>Telegram</span>
-                  </a>
-                  <a href={`https://wa.me/${CONTACTS.WHATSAPP_LINK}`} target="_blank" className="flex items-center gap-2 bg-white/5 border border-white/10 px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-green-600 transition-all">
-                    <span>WhatsApp</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-            
-            <div className="grid sm:grid-cols-2 gap-8">
-              <div className="p-8 bg-metal-800 rounded-3xl border border-gray-800">
-                <div className="text-3xl mb-4">📩</div>
-                <h4 className="font-black uppercase text-[10px] tracking-widest text-gray-500 mb-2">Email отдела</h4>
-                <p className="font-bold">{CONTACTS.EMAIL}</p>
-              </div>
-              <div className="p-8 bg-metal-800 rounded-3xl border border-gray-800">
-                <div className="text-3xl mb-4">📍</div>
-                <h4 className="font-black uppercase text-[10px] tracking-widest text-gray-500 mb-2">Регион работы</h4>
-                <p className="font-bold">Ростов, ЛНР, ДНР, Воронеж</p>
-              </div>
-            </div>
-          </div>
-
+    <section id="contact" className="py-24 bg-metal-800 border-y border-white/5">
+      <div className="max-w-4xl mx-auto px-4">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-6xl font-black mb-6 uppercase tracking-tighter text-white">НУЖЕН <span className="text-gold-500">ЗАМЕР?</span></h2>
+          <p className="text-gray-400 uppercase tracking-widest text-xs font-bold">Оставьте заявку, и наш инженер приедет к вам бесплатно</p>
         </div>
+        
+        {status === 'success' ? (
+          <div className="p-16 rounded-[3rem] bg-gold-600/10 border border-gold-500/30 text-center animate-in zoom-in duration-500">
+            <div className="text-6xl mb-6">🤝</div>
+            <h3 className="text-3xl font-black text-gold-500 mb-4 uppercase">ЗАЯВКА ПРИНЯТА!</h3>
+            <p className="text-gray-300 font-medium">Менеджер перезвонит вам в течение 15 минут для уточнения адреса замера.</p>
+            <button 
+              onClick={() => setStatus('idle')}
+              className="mt-8 text-xs font-black uppercase tracking-widest text-gold-500 border-b border-gold-600 pb-1"
+            >
+              Отправить еще одну
+            </button>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <label className="text-[10px] font-black uppercase text-gray-500 tracking-widest ml-4">Ваше имя</label>
+                <input 
+                  required 
+                  type="text" 
+                  placeholder="Иван Петров" 
+                  className="w-full px-8 py-5 rounded-2xl bg-metal-900 border border-white/10 outline-none focus:border-gold-500 text-white transition-all font-bold" 
+                  value={formData.name}
+                  onChange={e => setFormData({...formData, name: e.target.value})}
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="text-[10px] font-black uppercase text-gray-500 tracking-widest ml-4">Номер телефона</label>
+                <input 
+                  required 
+                  type="tel" 
+                  placeholder="+7 (___) ___-__-__" 
+                  className="w-full px-8 py-5 rounded-2xl bg-metal-900 border border-white/10 outline-none focus:border-gold-500 text-white transition-all font-bold" 
+                  value={formData.phone}
+                  onChange={e => setFormData({...formData, phone: e.target.value})}
+                />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <label className="text-[10px] font-black uppercase text-gray-500 tracking-widest ml-4">Примерная длина (метров)</label>
+              <input 
+                type="number" 
+                placeholder="40" 
+                className="w-full px-8 py-5 rounded-2xl bg-metal-900 border border-white/10 outline-none focus:border-gold-500 text-white transition-all font-bold" 
+                value={formData.length}
+                onChange={e => setFormData({...formData, length: e.target.value})}
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="text-[10px] font-black uppercase text-gray-500 tracking-widest ml-4">Что вас интересует?</label>
+              <textarea 
+                placeholder="Например: Еврозабор 40 метров и откатные ворота..." 
+                className="w-full px-8 py-5 rounded-2xl bg-metal-900 border border-white/10 outline-none focus:border-gold-500 text-white transition-all h-40 resize-none font-bold"
+                value={formData.message}
+                onChange={e => setFormData({...formData, message: e.target.value})}
+              ></textarea>
+            </div>
+
+            {status === 'error' && (
+              <p className="text-red-500 text-xs font-bold uppercase tracking-widest bg-red-500/10 p-4 rounded-lg border border-red-500/20 text-center">
+                ❌ Ошибка: {errorText || 'Не удалось отправить. Попробуйте позвонить.'}
+              </p>
+            )}
+
+            <button 
+              disabled={status === 'sending'}
+              className="w-full py-6 bg-gold-600 hover:bg-gold-500 disabled:opacity-50 text-metal-900 font-black uppercase tracking-[0.3em] rounded-2xl transition-all shadow-2xl shadow-gold-600/20 active:scale-95"
+            >
+              {status === 'sending' ? 'Отправка...' : 'Записаться на бесплатный замер'}
+            </button>
+            <p className="text-center text-[9px] text-gray-600 uppercase font-bold tracking-widest mt-6">
+              Нажимая кнопку, вы соглашаетесь на обработку персональных данных
+            </p>
+          </form>
+        )}
       </div>
     </section>
   );
 };
 
 export default Contact;
+
 
