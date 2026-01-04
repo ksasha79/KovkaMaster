@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ООО «Евро-Заборы» — Завод систем ограждений</title>
+    <title>ИП — Стратегия и Развитие | Личный бренд</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       window.process = { 
@@ -17,23 +17,50 @@
         theme: {
           extend: {
             colors: {
-              'metal-900': '#0a0a0c',
-              'metal-800': '#121216',
-              'gold-500': '#d4af37',
-              'gold-600': '#b8860b',
-              'xmas-red': '#cc0000',
+              'brand-black': '#000000',
+              'brand-dark': '#0a0a0a',
+              'brand-gold': '#D4AF37',
+              'brand-grey': '#1a1a1a',
             }
           }
         }
       };
     </script>
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&display=swap');
-      body { background-color: #0a0a0c; color: white; font-family: 'Inter', sans-serif; margin: 0; overflow-x: hidden; }
-      .glass { background: rgba(18, 18, 22, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); }
-      .text-gradient { background: linear-gradient(to right, #d4af37, #ffffff, #b8860b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-      .snowflake { position: fixed; top: -10px; color: white; pointer-events: none; z-index: 9999; animation: fall linear forwards; opacity: 0.2; }
-      @keyframes fall { to { transform: translateY(105vh) rotate(360deg); } }
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
+      body { 
+        background-color: #000000; 
+        color: #ffffff; 
+        font-family: 'Inter', sans-serif; 
+        margin: 0; 
+        overflow-x: hidden; 
+      }
+      .glass-card {
+        background: rgba(26, 26, 26, 0.6);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(212, 175, 55, 0.1);
+        transition: all 0.3s ease;
+      }
+      .glass-card:hover {
+        border-color: rgba(212, 175, 55, 0.5);
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+      }
+      .text-gold {
+        background: linear-gradient(to right, #D4AF37, #FBE7A1, #B8860B);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #000000;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #D4AF37;
+        border-radius: 4px;
+      }
     </style>
     <script type="importmap">
 {
@@ -54,17 +81,5 @@
   <body>
     <div id="root"></div>
     <script type="module" src="./index.tsx"></script>
-    <script>
-      function createSnowflake() {
-        const flake = document.createElement('div');
-        flake.className = 'snowflake';
-        flake.innerHTML = '❅';
-        flake.style.left = Math.random() * 100 + 'vw';
-        flake.style.animationDuration = Math.random() * 5 + 5 + 's';
-        document.body.appendChild(flake);
-        setTimeout(() => flake.remove(), 10000);
-      }
-      setInterval(createSnowflake, 500);
-    </script>
   </body>
 </html>
