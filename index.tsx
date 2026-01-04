@@ -17,9 +17,10 @@
 
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import App from './App';
+import App from './App.tsx';
 
 const container = document.getElementById('root');
+
 if (container) {
   try {
     const root = createRoot(container);
@@ -28,8 +29,13 @@ if (container) {
         <App />
       </React.StrictMode>
     );
-  } catch (error) {
-    console.error("Render error:", error);
-    container.innerHTML = `<div style="color: white; padding: 20px;">Ошибка рендеринга: ${error instanceof Error ? error.message : 'Неизвестная ошибка'}</div>`;
+  } catch (err) {
+    console.error("Critical rendering failure:", err);
+    container.innerHTML = `
+      <div style="background:#0a0a0c; color:white; padding:40px; text-align:center; height:100vh; display:flex; flex-direction:column; justify-content:center;">
+        <h2 style="color:#e2b35a;">Ошибка отображения контента</h2>
+        <p style="opacity:0.7;">${err instanceof Error ? err.message : 'Неизвестная ошибка модуля'}</p>
+      </div>
+    `;
   }
 }
