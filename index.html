@@ -6,10 +6,14 @@
     <title>ООО «Евро-Заборы» — Завод систем ограждений</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-      // 1. Полифилл окружения (Критически важно для работы библиотек в браузере)
-      window.process = { env: { NODE_ENV: 'production', API_KEY: '' } };
+      // Инициализация глобального окружения до загрузки любых модулей
+      window.process = { 
+        env: { 
+          NODE_ENV: 'production',
+          API_KEY: '' // Будет автоматически подставлено платформой
+        } 
+      };
       
-      // 2. Конфигурация темы
       tailwind.config = {
         theme: {
           extend: {
@@ -22,22 +26,11 @@
             }
           }
         }
-      }
-
-      // 3. Обработка фатальных ошибок
-      window.onerror = function(m) {
-        if (document.getElementById('root').innerHTML === '') {
-          document.getElementById('root').innerHTML = `<div style="background:#0a0a0c;color:white;height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;font-family:sans-serif;text-align:center;padding:20px;">
-            <h1 style="color:#d4af37">ООО «ЕВРО-ЗАБОРЫ»</h1>
-            <p style="opacity:0.5;margin-top:10px;">Запуск производственной системы... Если экран не исчез, нажмите кнопку:</p>
-            <button onclick="location.reload()" style="margin-top:20px;background:#d4af37;border:none;padding:12px 24px;border-radius:12px;cursor:pointer;font-weight:bold;">ОБНОВИТЬ</button>
-          </div>`;
-        }
       };
     </script>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&display=swap');
-      body { background-color: #0a0a0c; color: white; font-family: 'Inter', sans-serif; margin: 0; }
+      body { background-color: #0a0a0c; color: white; font-family: 'Inter', sans-serif; margin: 0; overflow-x: hidden; }
       .glass { background: rgba(18, 18, 22, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); }
       .text-gradient { background: linear-gradient(to right, #d4af37, #ffffff, #b8860b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
       .snowflake { position: fixed; top: -10px; color: white; pointer-events: none; z-index: 9999; animation: fall linear forwards; opacity: 0.2; }
@@ -76,4 +69,3 @@
     </script>
   </body>
 </html>
-
