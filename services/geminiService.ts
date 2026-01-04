@@ -13,18 +13,15 @@ export interface ChatMessage {
 }
 
 const getAI = () => {
-  const apiKey = process.env.API_KEY;
-  if (!apiKey) throw new Error("API_KEY is missing");
-  return new GoogleGenAI({ apiKey });
+  return new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
 };
 
 const SYSTEM_PROMPT = `Вы — ведущий инженер-консультант ООО «Евро-Заборы».
-МЫ — ЗАВОД. Промышленное производство полного цикла.
-ЛОКАЦИИ: Ростовская обл., ДНР (Мариуполь, Донецк), ЛНР.
+МЫ — ЗАВОД. Промышленное производство систем ограждений.
+ЛОКАЦИИ: Ростовская обл., ДНР, ЛНР.
 ТЕХНОЛОГИЯ: Бетон М350, стальное армирование ГОСТ.
-ЦЕЛЬ: Консультировать клиентов по выбору заборов, ворот, навесов и стеллажей.
-Направляйте клиентов на бесплатный замер или к менеджеру по номеру ${CONTACTS.MANAGER_PHONE_DISPLAY}.
-Стиль общения: Профессиональный, технически подкованный, вежливый и уверенный.`;
+ЦЕЛЬ: Консультировать по выбору заборов, ворот, навесов.
+Направляйте клиентов на замер по номеру ${CONTACTS.MANAGER_PHONE_DISPLAY}.`;
 
 export const chatWithSupport = async (message: string, history: ChatMessage[]): Promise<string> => {
   try {
@@ -37,30 +34,25 @@ export const chatWithSupport = async (message: string, history: ChatMessage[]): 
         temperature: 0.7 
       }
     });
-    return response.text || "Связь с производственным цехом прервана. Пожалуйста, оставьте заявку.";
+    return response.text || "Извините, сейчас связь с цехом прервана.";
   } catch (error) {
     console.error("AI Error:", error);
-    return "Инженеры сейчас на замере. Пожалуйста, позвоните нам напрямую для консультации.";
+    return "Инженеры сейчас на объектах. Пожалуйста, позвоните нам.";
   }
 };
 
 export const generateGateConcept = async (promptDetails: string): Promise<string | null> => {
   try {
     const ai = getAI();
-    const fullPrompt = `High-end professional architectural visualization of bespoke perimeter fencing and gates. 
-    Category and Style: ${promptDetails}. 
-    Details: Photorealistic, 8k resolution, cinematic lighting, luxury residential property context. 
-    Materials: Reinforced concrete or high-quality wrought iron. No text or watermarks.`;
-
     const response = await ai.models.generateContent({
       model: 'gemini-2.5-flash-image',
-      contents: { parts: [{ text: fullPrompt }] },
+      contents: { parts: [{ text: `Professional architectural render of ${promptDetails}, photorealistic, 8k, industrial design.` }] },
     });
 
     if (response.candidates?.[0]?.content?.parts) {
       for (const part of response.candidates[0].content.parts) {
         if (part.inlineData) {
-          return `data:${part.inlineData.mimeType || 'image/png'};base64,${part.inlineData.data}`;
+          return `data:image/png;base64,${part.inlineData.data}`;
         }
       }
     }
