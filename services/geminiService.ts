@@ -12,20 +12,17 @@ export interface ChatMessage {
   parts: { text: string }[];
 }
 
-const getAI = () => {
-  return new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
-};
-
 const SYSTEM_PROMPT = `Вы — ведущий инженер-консультант ООО «Евро-Заборы».
-МЫ — ЗАВОД. Промышленное производство систем ограждений.
-ЛОКАЦИИ: Ростовская обл., ДНР, ЛНР.
+МЫ — ЗАВОД. Промышленное производство полного цикла.
+ЛОКАЦИИ: Ростовская область, ДНР (Мариуполь, Донецк), ЛНР.
 ТЕХНОЛОГИЯ: Бетон М350, стальное армирование ГОСТ.
-ЦЕЛЬ: Консультировать по выбору заборов, ворот, навесов.
-Направляйте клиентов на замер по номеру ${CONTACTS.MANAGER_PHONE_DISPLAY}.`;
+ЦЕЛЬ: Консультировать клиентов по выбору заборов, ворот, навесов.
+Направляйте клиентов на бесплатный замер по номеру ${CONTACTS.MANAGER_PHONE_DISPLAY}.
+Стиль общения: Деловой, экспертный, вежливый.`;
 
 export const chatWithSupport = async (message: string, history: ChatMessage[]): Promise<string> => {
   try {
-    const ai = getAI();
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     const response = await ai.models.generateContent({
       model: 'gemini-3-flash-preview',
       contents: [...history, { role: 'user', parts: [{ text: message }] }],
@@ -34,19 +31,23 @@ export const chatWithSupport = async (message: string, history: ChatMessage[]): 
         temperature: 0.7 
       }
     });
-    return response.text || "Извините, сейчас связь с цехом прервана.";
+    return response.text || "Связь с заводом временно прервана. Пожалуйста, позвоните нам напрямую.";
   } catch (error) {
-    console.error("AI Error:", error);
-    return "Инженеры сейчас на объектах. Пожалуйста, позвоните нам.";
+    console.error("Gemini Error:", error);
+    return "Инженеры сейчас на линии производства. Пожалуйста, оставьте заявку, и мы перезвоним.";
   }
 };
 
 export const generateGateConcept = async (promptDetails: string): Promise<string | null> => {
   try {
-    const ai = getAI();
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     const response = await ai.models.generateContent({
       model: 'gemini-2.5-flash-image',
-      contents: { parts: [{ text: `Professional architectural render of ${promptDetails}, photorealistic, 8k, industrial design.` }] },
+      contents: { 
+        parts: [{ 
+          text: `High-quality architectural visualization of a modern perimeter fence or gate system. Style: ${promptDetails}. Industrial luxury design, 8k resolution, photorealistic.` 
+        }] 
+      },
     });
 
     if (response.candidates?.[0]?.content?.parts) {
@@ -58,7 +59,7 @@ export const generateGateConcept = async (promptDetails: string): Promise<string
     }
     return null;
   } catch (error) {
-    console.error("Image gen error:", error);
+    console.error("Generation Error:", error);
     return null;
   }
 };
