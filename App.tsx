@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
-import Header from './components/Header';
-import Hero from './components/Hero';
-import Stats from './components/Stats';
-import Services from './components/Services';
-import Portfolio from './components/Portfolio';
-import About from './components/About';
-import Steps from './components/Steps';
-import Pricing from './components/Pricing';
-import Reviews from './components/Reviews';
-import FAQ from './components/FAQ';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
-import FloatingBot from './components/FloatingBot';
+import Header from './components/Header.tsx';
+import Hero from './components/Hero.tsx';
+import Stats from './components/Stats.tsx';
+import Services from './components/Services.tsx';
+import Portfolio from './components/Portfolio.tsx';
+import About from './components/About.tsx';
+import Steps from './components/Steps.tsx';
+import Pricing from './components/Pricing.tsx';
+import Reviews from './components/Reviews.tsx';
+import FAQ from './components/FAQ.tsx';
+import Contact from './components/Contact.tsx';
+import Footer from './components/Footer.tsx';
+import FloatingBot from './components/FloatingBot.tsx';
 
 const App: React.FC = () => {
   const [prefill, setPrefill] = useState('');
 
   const handleOrder = (title: string) => {
-    setPrefill(`Интересует проект: ${title}. Нужен расчет стоимости.`);
+    setPrefill(`Запрос на расчет проекта: ${title}`);
     const contactSection = document.getElementById('contact');
     if (contactSection) {
       contactSection.scrollIntoView({ behavior: 'smooth' });
@@ -25,9 +25,9 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="bg-brand-black min-h-screen text-white">
+    <div className="bg-brand-black min-h-screen text-white flex flex-col">
       <Header />
-      <main>
+      <main className="flex-grow">
         <Hero />
         <Stats />
         <Services />
