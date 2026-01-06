@@ -92,33 +92,6 @@
   </head>
   <body>
     <div id="root"></div>
-    
-    <!-- Основной скрипт приложения -->
     <script type="module" src="./index.tsx"></script>
-
-    <!-- Скрипт-диагност (сработает только если приложение не загрузится) -->
-    <script type="module">
-      setTimeout(() => {
-        const root = document.getElementById('root');
-        if (root && root.children.length === 0) {
-          console.warn('Приложение не отрисовалось за 3 секунды. Проверьте консоль на наличие ошибок импорта.');
-        }
-      }, 3000);
-
-      window.addEventListener('error', (event) => {
-        if (event.message.includes('import')) {
-          const root = document.getElementById('root');
-          if (root) {
-            root.innerHTML = `
-              <div style="padding: 40px; color: white; background: #111; font-family: sans-serif; text-align: center; border: 1px solid #333; margin: 20px; border-radius: 20px;">
-                <h2 style="color: #D4AF37;">Упс! Ошибка загрузки</h2>
-                <p style="opacity: 0.7;">${event.message}</p>
-                <button onclick="location.reload()" style="background: #D4AF37; color: black; border: none; padding: 12px 24px; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 20px;">Перезагрузить сайт</button>
-              </div>
-            `;
-          }
-        }
-      });
-    </script>
   </body>
 </html>
