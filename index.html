@@ -6,24 +6,15 @@
     <title>ООО «Евро-Заборы» — Завод систем ограждений и ворот</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-      // Глобальная настройка окружения
-      window.process = { 
-        env: { 
-          NODE_ENV: 'production',
-          API_KEY: '' 
-        } 
-      };
-      
+      window.process = { env: { NODE_ENV: 'production', API_KEY: '' } };
       tailwind.config = {
         theme: {
           extend: {
             colors: {
               'brand-black': '#000000',
-              'brand-dark': '#0a0a0a',
+              'brand-dark': '#080808',
               'brand-gold': '#D4AF37',
-              'brand-grey': '#1a1a1a',
-              'metal-900': '#000000',
-              'metal-800': '#0a0a0a',
+              'brand-grey': '#111111',
               'gold-500': '#D4AF37',
               'gold-600': '#B8860B',
             }
@@ -35,18 +26,12 @@
       @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
       
       body { 
-        background-color: #000000; 
-        color: #ffffff; 
+        background-color: #000; 
+        color: #fff; 
         font-family: 'Inter', sans-serif; 
-        margin: 0; 
-        overflow-x: hidden; 
-      }
-
-      .glass-card {
-        background: rgba(26, 26, 26, 0.6);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(212, 175, 55, 0.1);
-        transition: all 0.3s ease;
+        margin: 0;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
       }
 
       .text-gold {
@@ -61,19 +46,28 @@
         font-weight: 900;
         text-transform: uppercase;
         letter-spacing: 0.1em;
-        transition: all 0.3s ease;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         display: inline-flex;
         align-items: center;
         justify-content: center;
         border: none;
-        cursor: pointer;
       }
-      .btn-gold:hover {
-        box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
-        transform: translateY(-2px);
-      }
-    </style>
 
+      .btn-gold:active {
+        transform: scale(0.95);
+      }
+
+      .glass-card {
+        background: rgba(20, 20, 20, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(212, 175, 55, 0.1);
+      }
+
+      ::-webkit-scrollbar { width: 5px; }
+      ::-webkit-scrollbar-track { background: #000; }
+      ::-webkit-scrollbar-thumb { background: #D4AF37; }
+    </style>
     <script type="importmap">
 {
   "imports": {
@@ -81,7 +75,11 @@
     "react-dom": "https://esm.sh/react-dom@19.0.0",
     "react-dom/client": "https://esm.sh/react-dom@19.0.0/client?deps=react@19.0.0",
     "react/jsx-runtime": "https://esm.sh/react@19.0.0/jsx-runtime?deps=react@19.0.0",
-    "@google/genai": "https://esm.sh/@google/genai@1.34.0"
+    "@google/genai": "https://esm.sh/@google/genai@1.34.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "vite": "https://esm.sh/vite@^7.3.0",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
   }
 }
 </script>
