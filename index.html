@@ -2,7 +2,7 @@
 <html lang="ru" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <title>ООО «Евро-Заборы» — Завод систем ограждений и ворот</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -30,8 +30,8 @@
         color: #fff; 
         font-family: 'Inter', sans-serif; 
         margin: 0;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+        overflow-x: hidden;
+        -webkit-tap-highlight-color: transparent;
       }
 
       .text-gold {
@@ -46,15 +46,10 @@
         font-weight: 900;
         text-transform: uppercase;
         letter-spacing: 0.1em;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: all 0.3s ease;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        border: none;
-      }
-
-      .btn-gold:active {
-        transform: scale(0.95);
       }
 
       .glass-card {
@@ -64,9 +59,14 @@
         border: 1px solid rgba(212, 175, 55, 0.1);
       }
 
-      ::-webkit-scrollbar { width: 5px; }
-      ::-webkit-scrollbar-track { background: #000; }
-      ::-webkit-scrollbar-thumb { background: #D4AF37; }
+      /* Исправление скролла на iOS */
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
     </style>
     <script type="importmap">
 {
