@@ -6,7 +6,7 @@
     <title>ООО «Евро-Заборы» — Завод систем ограждений и ворот</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-      // Инициализация глобальных переменных для работы в браузере
+      // Глобальная настройка окружения
       window.process = { 
         env: { 
           NODE_ENV: 'production',
@@ -33,6 +33,7 @@
     </script>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
+      
       body { 
         background-color: #000000; 
         color: #ffffff; 
@@ -40,33 +41,46 @@
         margin: 0; 
         overflow-x: hidden; 
       }
-      #root { min-height: 100vh; display: flex; flex-direction: column; }
+
       .glass-card {
         background: rgba(26, 26, 26, 0.6);
         backdrop-filter: blur(10px);
         border: 1px solid rgba(212, 175, 55, 0.1);
         transition: all 0.3s ease;
       }
+
       .text-gold {
         background: linear-gradient(to right, #D4AF37, #FBE7A1, #B8860B);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
       }
-      .animate-fade-in {
-        animation: fadeIn 0.8s ease-out forwards;
+
+      .btn-gold {
+        background: linear-gradient(45deg, #D4AF37, #B8860B);
+        color: #000;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        cursor: pointer;
       }
-      @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
+      .btn-gold:hover {
+        box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+        transform: translateY(-2px);
       }
     </style>
+
     <script type="importmap">
 {
   "imports": {
     "react": "https://esm.sh/react@19.0.0",
     "react-dom": "https://esm.sh/react-dom@19.0.0",
-    "react-dom/client": "https://esm.sh/react-dom@19.0.0/client",
-    "react/jsx-runtime": "https://esm.sh/react@19.0.0/jsx-runtime",
+    "react-dom/client": "https://esm.sh/react-dom@19.0.0/client?deps=react@19.0.0",
+    "react/jsx-runtime": "https://esm.sh/react@19.0.0/jsx-runtime?deps=react@19.0.0",
     "@google/genai": "https://esm.sh/@google/genai@1.34.0"
   }
 }
@@ -74,6 +88,33 @@
   </head>
   <body>
     <div id="root"></div>
+    
+    <!-- Основной скрипт приложения -->
     <script type="module" src="./index.tsx"></script>
+
+    <!-- Скрипт-диагност (сработает только если приложение не загрузится) -->
+    <script type="module">
+      setTimeout(() => {
+        const root = document.getElementById('root');
+        if (root && root.children.length === 0) {
+          console.warn('Приложение не отрисовалось за 3 секунды. Проверьте консоль на наличие ошибок импорта.');
+        }
+      }, 3000);
+
+      window.addEventListener('error', (event) => {
+        if (event.message.includes('import')) {
+          const root = document.getElementById('root');
+          if (root) {
+            root.innerHTML = `
+              <div style="padding: 40px; color: white; background: #111; font-family: sans-serif; text-align: center; border: 1px solid #333; margin: 20px; border-radius: 20px;">
+                <h2 style="color: #D4AF37;">Упс! Ошибка загрузки</h2>
+                <p style="opacity: 0.7;">${event.message}</p>
+                <button onclick="location.reload()" style="background: #D4AF37; color: black; border: none; padding: 12px 24px; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 20px;">Перезагрузить сайт</button>
+              </div>
+            `;
+          }
+        }
+      });
+    </script>
   </body>
 </html>
