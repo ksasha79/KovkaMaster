@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { chatWithSupport, ChatMessage } from '../services/geminiService';
+import { chatWithSupport, ChatMessage } from '../services/geminiService.ts';
 
 const FloatingBot: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<{role: 'user' | 'bot', text: string}[]>([
-    { role: 'bot', text: 'Здравствуйте! Я ИИ-инженер ООО «Евро-Заборы». Готов рассчитать стоимость или проконсультировать по материалам. Какой проект вас интересует?' }
+    { role: 'bot', text: 'Здравствуйте! Я инженер-консультант ООО «Евро-Заборы». Помогу с расчетом или выбором конструкции. Что вас интересует?' }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -12,7 +12,7 @@ const FloatingBot: React.FC = () => {
 
   useEffect(() => {
     if (scrollRef.current) scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-  }, [messages]);
+  }, [messages, isLoading]);
 
   const handleSend = async () => {
     if (!input.trim() || isLoading) return;
@@ -32,43 +32,53 @@ const FloatingBot: React.FC = () => {
   };
 
   return (
-    <div className="fixed bottom-8 right-8 z-[100]">
+    <div className="fixed bottom-4 right-4 md:bottom-8 md:right-8 z-[100]">
       {isOpen && (
-        <div className="absolute bottom-20 right-0 w-[350px] md:w-[400px] h-[500px] glass-card rounded-2xl flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-5">
-          <div className="p-6 bg-brand-gold text-black flex justify-between items-center">
-            <span className="font-black uppercase text-xs tracking-widest">Инженер-Консультант (ИИ)</span>
-            <button onClick={() => setIsOpen(false)}>✕</button>
+        <div className="absolute bottom-16 right-0 w-[calc(100vw-2rem)] md:w-[400px] h-[70vh] md:h-[550px] glass-card rounded-2xl flex flex-col overflow-hidden border-brand-gold/30 shadow-2xl animate-in slide-in-from-bottom-4">
+          <div className="p-4 md:p-6 bg-brand-gold text-black flex justify-between items-center shrink-0">
+            <div className="flex items-center gap-3">
+               <div className="w-8 h-8 bg-black rounded-lg flex items-center justify-center text-brand-gold font-bold text-xs">EZ</div>
+               <span className="font-black uppercase text-[10px] tracking-widest">Консультация ИИ</span>
+            </div>
+            <button onClick={() => setIsOpen(false)} className="p-2 hover:bg-black/10 rounded-full transition-colors">✕</button>
           </div>
           
-          <div ref={scrollRef} className="flex-grow overflow-y-auto p-6 space-y-4">
+          <div ref={scrollRef} className="flex-grow overflow-y-auto p-4 md:p-6 space-y-4 bg-brand-dark">
             {messages.map((m, i) => (
               <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                <div className={`max-w-[80%] p-4 rounded-xl text-sm ${m.role === 'user' ? 'bg-brand-gold text-black' : 'bg-brand-grey text-gray-300'}`}>
+                <div className={`max-w-[90%] p-3 md:p-4 rounded-xl text-sm ${m.role === 'user' ? 'bg-brand-gold text-black font-semibold' : 'bg-brand-grey text-gray-300 border border-white/5'}`}>
                   {m.text}
                 </div>
               </div>
             ))}
-            {isLoading && <div className="text-xs text-gray-500 animate-pulse">Думаю над ответом...</div>}
+            {isLoading && (
+              <div className="flex gap-2 p-3 bg-brand-grey/50 rounded-xl w-fit">
+                <span className="w-1.5 h-1.5 bg-brand-gold rounded-full animate-bounce"></span>
+                <span className="w-1.5 h-1.5 bg-brand-gold rounded-full animate-bounce [animation-delay:0.2s]"></span>
+                <span className="w-1.5 h-1.5 bg-brand-gold rounded-full animate-bounce [animation-delay:0.4s]"></span>
+              </div>
+            )}
           </div>
 
-          <div className="p-6 border-t border-white/5 flex gap-2">
+          <div className="p-4 md:p-6 border-t border-white/5 flex gap-2 bg-brand-dark shrink-0">
             <input 
-              className="flex-grow bg-transparent border-none outline-none text-sm"
-              placeholder="Спросить про бетон М350..."
+              className="flex-grow bg-white/5 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-brand-gold text-sm text-white"
+              placeholder="Задать вопрос..."
               value={input}
               onChange={e => setInput(e.target.value)}
-              onKeyPress={e => e.key === 'Enter' && handleSend()}
+              onKeyDown={e => e.key === 'Enter' && handleSend()}
             />
-            <button onClick={handleSend} className="text-brand-gold">➜</button>
+            <button onClick={handleSend} className="bg-brand-gold text-black w-10 h-10 rounded-xl flex items-center justify-center hover:scale-105 transition-transform shrink-0 font-bold">➜</button>
           </div>
         </div>
       )}
 
       <button 
         onClick={() => setIsOpen(!isOpen)}
-        className="w-16 h-16 bg-brand-gold rounded-full flex items-center justify-center text-black text-2xl shadow-2xl hover:scale-110 transition-transform"
+        className="w-14 h-14 md:w-16 md:h-16 bg-brand-gold rounded-full flex items-center justify-center text-black shadow-2xl hover:scale-110 transition-transform border-4 border-black"
+        aria-label="Открыть чат"
       >
-        {isOpen ? '✕' : '🏗️'}
+        <span className="text-xl md:text-2xl font-bold">{isOpen ? '✕' : '⚙️'}</span>
       </button>
     </div>
   );
