@@ -3,7 +3,62 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ООО «Евро-Заборы» — Завод систем ограждений (евро-заборы.рф)</title>
+    
+    <!-- SEO Meta Tags -->
+    <title>ООО «Евро-Заборы» — Завод систем ограждений и ворот (Ростов, ДНР, ЛНР)</title>
+    <meta name="description" content="Завод систем ограждений ООО «Евро-Заборы». Собственное производство еврозаборов, откатных ворот и навесов. Профессиональный монтаж в Ростове-на-Дону, ДНР и ЛНР. Гарантия 2 года." />
+    <meta name="keywords" content="еврозаборы ростов, купить бетонный забор, откатные ворота донецк, производство заборов лнр, установка заборов под ключ, евро-заборы.рф" />
+    <link rel="canonical" href="https://евро-заборы.рф" />
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="ООО «Евро-Заборы» — Производство и монтаж ограждений" />
+    <meta property="og:description" content="Профессиональные системы ограждений от производителя. Еврозаборы, ворота, навесы с доставкой и установкой по Югу России." />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=1200&auto=format&fit=crop" />
+
+    <!-- Микроразметка JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "ООО «Евро-Заборы»",
+      "image": "https://images.unsplash.com/photo-1589939705384-5185137a7f0f",
+      "@id": "https://евро-заборы.рф",
+      "url": "https://евро-заборы.рф",
+      "telephone": "+79000000000",
+      "priceRange": "RUB",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "ул. Производственная, 1",
+        "addressLocality": "Ростов-на-Дону",
+        "addressRegion": "Ростовская область",
+        "postalCode": "344000",
+        "addressCountry": "RU"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 47.2357,
+        "longitude": 39.7015
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "opens": "09:00",
+        "closes": "18:00"
+      },
+      "sameAs": [
+        "https://t.me/euro_zabory_bot"
+      ]
+    }
+    </script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
@@ -17,8 +72,15 @@
               'brand-dark': '#080808',
               'brand-gold': '#D4AF37',
               'brand-grey': '#111111',
-              'gold-500': '#D4AF37',
-              'gold-600': '#B8860B',
+              'metal': {
+                900: '#0f172a',
+                800: '#1e293b',
+                700: '#334155',
+              },
+              'gold': {
+                500: '#D4AF37',
+                600: '#B8860B',
+              }
             }
           }
         }
@@ -80,10 +142,10 @@
     "react-dom/client": "https://esm.sh/react-dom@19.0.0/client?deps=react@19.0.0",
     "react/jsx-runtime": "https://esm.sh/react@19.0.0/jsx-runtime?deps=react@19.0.0",
     "@google/genai": "https://esm.sh/@google/genai@1.34.0",
-    "vite": "https://esm.sh/vite@^7.3.1",
-    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
     "react/": "https://esm.sh/react@^19.2.3/",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
+    "vite": "https://esm.sh/vite@^7.3.1",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
   }
 }
 </script>
