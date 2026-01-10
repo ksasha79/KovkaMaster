@@ -20,6 +20,16 @@ const FloatingBot: React.FC = () => {
     if (!userMsg.trim() || isLoading) return;
     
     if (!forcedText) setInput('');
+    
+    // Создаем копию текущей истории ПЕРЕД добавлением нового сообщения
+    // Gemini API ожидает историю ДО текущего сообщения в параметре contents
+    const currentHistory: ChatMessage[] = messages
+      .filter(m => m.role !== 'bot' || messages.indexOf(m) !== 0) // Исключаем только самое первое приветствие
+      .map(m => ({
+        role: m.role === 'bot' ? 'model' : 'user',
+        parts: [{ text: m.text }]
+      }));
+
     setMessages(prev => [...prev, { role: 'user', text: userMsg }]);
     setIsLoading(true);
 
@@ -39,18 +49,14 @@ const FloatingBot: React.FC = () => {
       return;
     }
 
-    // ВАЖНО: Gemini требует, чтобы история начиналась с сообщения USER. 
-    // Мы исключаем самое первое сообщение бота из истории.
-    const history: ChatMessage[] = messages
-      .slice(1) // Пропускаем первое приветственное сообщение бота
-      .map(m => ({
-        role: m.role === 'bot' ? 'model' : 'user',
-        parts: [{ text: m.text }]
-      }));
-
-    const response = await chatWithSupport(userMsg, history);
-    setMessages(prev => [...prev, { role: 'bot', text: response }]);
-    setIsLoading(false);
+    try {
+      const response = await chatWithSupport(userMsg, currentHistory);
+      setMessages(prev => [...prev, { role: 'bot', text: response }]);
+    } catch (err) {
+      setMessages(prev => [...prev, { role: 'bot', text: "Произошла ошибка при получении ответа. Пожалуйста, попробуйте позже." }]);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
