@@ -9,36 +9,50 @@ export interface ChatMessage {
 const SYSTEM_PROMPT = `Вы — ведущий инженер завода ООО «Евро-Заборы».
 Ваша миссия: консультировать клиентов по выбору заборов, ворот и навесов. 
 Тон: профессиональный, дружелюбный, экспертный.
-Вы должны помогать с выбором материалов (бетон, металл, автоматика) и ориентировать по процессу замера.
-Если просят цену — говорите, что точная смета составляется после замера, но базовые цены есть на сайте (от 2500 руб/м.п.).
-Контакты для связи: ${CONTACTS.MANAGER_PHONE_DISPLAY}.`;
+Важно: Отвечай кратко и по делу. Не используй сложные термины без пояснения.
+Контакты для связи: ${CONTACTS.MANAGER_PHONE_DISPLAY}.
+Базовая цена: от 2500 руб/м.п. за бетонные заборы.`;
 
 export const chatWithSupport = async (message: string, history: ChatMessage[]): Promise<string> => {
   try {
-    // Создаем инстанс прямо перед вызовом, чтобы использовать актуальный ключ из окружения
-    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+    const apiKey = process.env.API_KEY;
+    if (!apiKey) {
+      throw new Error("API Key is missing in environment variables.");
+    }
+
+    const ai = new GoogleGenAI({ apiKey });
+    
+    // Используем gemini-flash-latest для лучшей совместимости
     const response = await ai.models.generateContent({
-      model: 'gemini-3-flash-preview',
+      model: 'gemini-flash-latest',
       contents: [...history, { role: 'user', parts: [{ text: message }] }],
       config: { 
         systemInstruction: SYSTEM_PROMPT,
+        temperature: 0.7,
+        topP: 0.8,
+        topK: 40
       }
     });
-    return response.text || "Извините, возникла ошибка связи. Попробуйте позвонить нам.";
+
+    return response.text || "Прошу прощения, я задумался. Можете повторить вопрос?";
   } catch (error) {
-    console.error("AI Error:", error);
-    return "Связь прервана. Наш номер: " + CONTACTS.PHONE_DISPLAY;
+    console.error("AI Service Error:", error);
+    // Более информативное сообщение об ошибке в консоль поможет при отладке
+    return `Извините, сейчас я не могу ответить. Пожалуйста, позвоните нашему менеджеру: ${CONTACTS.PHONE_DISPLAY}`;
   }
 };
 
 export const generateGateConcept = async (promptDetails: string): Promise<string | null> => {
   try {
-    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+    const apiKey = process.env.API_KEY;
+    if (!apiKey) return null;
+
+    const ai = new GoogleGenAI({ apiKey });
     const response = await ai.models.generateContent({
       model: 'gemini-2.5-flash-image',
       contents: { 
         parts: [{ 
-          text: `Modern high-quality fence and gate design, professional architectural photography, 8k, sunset lighting, luxury house background: ${promptDetails}` 
+          text: `Photorealistic modern architectural shot of high-end fence and gates, brand style 'Euro-Zabory', professional photography, 8k: ${promptDetails}` 
         }] 
       },
     });
