@@ -27,13 +27,26 @@ const Contact: React.FC<ContactProps> = ({ prefillMessage }) => {
     setErrorText('');
 
     try {
-      // Имитация отправки, так как бэкенд может быть недоступен в данной среде
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      setStatus('success');
-      setFormData({ name: '', phone: '', message: '', length: '' });
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setStatus('success');
+        setFormData({ name: '', phone: '', message: '', length: '' });
+      } else {
+        throw new Error(result.error || 'Ошибка при отправке');
+      }
     } catch (err: any) {
+      console.error('Contact error:', err);
       setStatus('error');
-      setErrorText('Ошибка сети. Пожалуйста, попробуйте позже.');
+      setErrorText(err.message || 'Ошибка сети. Пожалуйста, попробуйте позже.');
     }
   };
 
@@ -44,7 +57,7 @@ const Contact: React.FC<ContactProps> = ({ prefillMessage }) => {
           <div className="bg-metal-800 p-8 md:p-12 rounded-3xl border border-gray-800 shadow-2xl">
             <h2 className="text-3xl font-black mb-6 uppercase tracking-tight">Вызвать замерщика</h2>
             {status === 'success' ? (
-              <div className="bg-gold-600/10 border border-gold-500/30 p-8 rounded-2xl text-center">
+              <div className="bg-gold-600/10 border border-gold-500/30 p-8 rounded-2xl text-center animate-fade-in">
                 <div className="text-4xl mb-4">✅</div>
                 <h3 className="text-xl font-bold text-gold-500 uppercase mb-2">Заявка принята!</h3>
                 <p className="text-gray-400 text-sm mb-6">Наш менеджер свяжется с вами в течение 15 минут.</p>
@@ -52,6 +65,11 @@ const Contact: React.FC<ContactProps> = ({ prefillMessage }) => {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
+                {status === 'error' && (
+                  <div className="bg-red-500/10 border border-red-500/50 p-4 rounded-xl text-red-500 text-xs font-bold uppercase tracking-wider">
+                    ⚠️ {errorText}
+                  </div>
+                )}
                 <div className="grid md:grid-cols-2 gap-6">
                   <input 
                     required
