@@ -83,8 +83,9 @@ const Portfolio: React.FC<PortfolioProps> = ({ onOrderClick }) => {
               <div className="relative h-72 overflow-hidden">
                 <img 
                   src={item.gallery[0].url} 
-                  alt={item.title} 
+                  alt={`${item.title} — ${item.category} от завода Евро-Заборы, ${item.location}`} 
                   className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-1000"
+                  loading="lazy"
                 />
                 <div className="absolute top-6 left-6 bg-brand-gold text-black text-[9px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest">
                   {item.location}
@@ -92,7 +93,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ onOrderClick }) => {
               </div>
               <div className="p-10 flex-grow flex flex-col">
                 <span className="text-brand-gold text-[10px] font-black uppercase tracking-widest mb-4 block opacity-60">
-                  {item.category}
+                  {item.category === 'concrete' ? 'Бетонный забор' : item.category === 'gates' ? 'Ворота' : 'Конструкция'}
                 </span>
                 <h4 className="text-2xl font-black mb-4 group-hover:text-brand-gold transition-colors uppercase leading-tight">
                   {item.title}
@@ -109,18 +110,19 @@ const Portfolio: React.FC<PortfolioProps> = ({ onOrderClick }) => {
 
       {/* Modal */}
       {selectedItem && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-2xl p-6" onClick={closeModal}>
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-2xl p-6" onClick={closeModal} role="dialog" aria-modal="true">
           <div className="relative max-w-6xl w-full flex flex-col md:flex-row bg-brand-dark rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl" onClick={e => e.stopPropagation()}>
             {/* Gallery Side */}
             <div className="md:w-3/5 relative min-h-[400px] bg-black group/modal">
                <img 
                  src={generatedImg || selectedItem.gallery[currentImageIndex].url} 
+                 alt={`${selectedItem.title} - фото выполненного проекта`}
                  className="w-full h-full object-contain"
                />
                
                <div className="absolute inset-0 flex items-center justify-between px-6 opacity-0 group-hover/modal:opacity-100 transition-opacity">
-                  <button onClick={prevImage} className="w-14 h-14 bg-black/50 hover:bg-brand-gold hover:text-black rounded-full flex items-center justify-center transition-all text-xl">←</button>
-                  <button onClick={nextImage} className="w-14 h-14 bg-black/50 hover:bg-brand-gold hover:text-black rounded-full flex items-center justify-center transition-all text-xl">→</button>
+                  <button onClick={prevImage} className="w-14 h-14 bg-black/50 hover:bg-brand-gold hover:text-black rounded-full flex items-center justify-center transition-all text-xl" aria-label="Предыдущее фото">←</button>
+                  <button onClick={nextImage} className="w-14 h-14 bg-black/50 hover:bg-brand-gold hover:text-black rounded-full flex items-center justify-center transition-all text-xl" aria-label="Следующее фото">→</button>
                </div>
 
                <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-full px-12 flex flex-col items-center gap-4">
