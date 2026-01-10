@@ -4,7 +4,7 @@ import { chatWithSupport, ChatMessage } from '../services/geminiService.ts';
 const FloatingBot: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<{role: 'user' | 'bot', text: string}[]>([
-    { role: 'bot', text: 'Здравствуйте! Я инженер-консультант ООО «Евро-Заборы». Помогу с расчетом или выбором конструкции. Что вас интересует?' }
+    { role: 'bot', text: 'Хо-хо-хо! Я новогодний помощник Евро-Заборов. С чем помочь в этот праздничный вечер?' }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -32,27 +32,35 @@ const FloatingBot: React.FC = () => {
   };
 
   return (
-    <div className="fixed bottom-4 right-4 md:bottom-8 md:right-8 z-[100]">
+    <div className="fixed bottom-10 right-10 z-[100]">
       {isOpen && (
-        <div className="absolute bottom-16 right-0 w-[calc(100vw-2rem)] md:w-[400px] h-[70vh] md:h-[550px] glass-card rounded-2xl flex flex-col overflow-hidden border-brand-gold/30 shadow-2xl animate-in slide-in-from-bottom-4">
-          <div className="p-4 md:p-6 bg-brand-gold text-black flex justify-between items-center shrink-0">
-            <div className="flex items-center gap-3">
-               <div className="w-8 h-8 bg-black rounded-lg flex items-center justify-center text-brand-gold font-bold text-xs">EZ</div>
-               <span className="font-black uppercase text-[10px] tracking-widest">Консультация ИИ</span>
+        <div className="absolute bottom-24 right-0 w-[380px] h-[550px] winter-glass rounded-[2rem] flex flex-col shadow-2xl overflow-hidden animate-fade-up border-brand-gold/20">
+          <div className="p-6 bg-gradient-to-r from-red-700 to-red-900 border-b border-white/10 flex justify-between items-center">
+            <div className="flex items-center gap-4">
+              <div className="text-3xl">🎅</div>
+              <div>
+                <h4 className="text-[10px] font-black uppercase tracking-widest text-white/90">Помощник Санты</h4>
+                <div className="flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span>
+                  <span className="text-[8px] text-green-100 uppercase font-black">Снежит</span>
+                </div>
+              </div>
             </div>
-            <button onClick={() => setIsOpen(false)} className="p-2 hover:bg-black/10 rounded-full transition-colors">✕</button>
+            <button onClick={() => setIsOpen(false)} className="text-white/40 hover:text-white transition-colors">
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
           </div>
           
-          <div ref={scrollRef} className="flex-grow overflow-y-auto p-4 md:p-6 space-y-4 bg-brand-dark">
+          <div ref={scrollRef} className="flex-grow overflow-y-auto p-6 space-y-4 bg-winter-blue/90">
             {messages.map((m, i) => (
               <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                <div className={`max-w-[90%] p-3 md:p-4 rounded-xl text-sm ${m.role === 'user' ? 'bg-brand-gold text-black font-semibold' : 'bg-brand-grey text-gray-300 border border-white/5'}`}>
-                  {m.text}
+                <div className={`max-w-[80%] p-4 rounded-2xl ${m.role === 'user' ? 'bg-brand-gold text-black rounded-tr-none font-bold' : 'bg-white/5 text-blue-100 rounded-tl-none border border-white/10'}`}>
+                  <p className="text-sm leading-relaxed">{m.text}</p>
                 </div>
               </div>
             ))}
             {isLoading && (
-              <div className="flex gap-2 p-3 bg-brand-grey/50 rounded-xl w-fit">
+              <div className="flex gap-2 p-2">
                 <span className="w-1.5 h-1.5 bg-brand-gold rounded-full animate-bounce"></span>
                 <span className="w-1.5 h-1.5 bg-brand-gold rounded-full animate-bounce [animation-delay:0.2s]"></span>
                 <span className="w-1.5 h-1.5 bg-brand-gold rounded-full animate-bounce [animation-delay:0.4s]"></span>
@@ -60,25 +68,27 @@ const FloatingBot: React.FC = () => {
             )}
           </div>
 
-          <div className="p-4 md:p-6 border-t border-white/5 flex gap-2 bg-brand-dark shrink-0">
+          <div className="p-4 bg-winter-dark border-t border-white/10 flex gap-3">
             <input 
-              className="flex-grow bg-white/5 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-brand-gold text-sm text-white"
-              placeholder="Задать вопрос..."
+              className="flex-grow bg-white/5 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-brand-gold transition-all text-white text-xs"
+              placeholder="Спросить о новогодних скидках..."
               value={input}
               onChange={e => setInput(e.target.value)}
               onKeyDown={e => e.key === 'Enter' && handleSend()}
             />
-            <button onClick={handleSend} className="bg-brand-gold text-black w-10 h-10 rounded-xl flex items-center justify-center hover:scale-105 transition-transform shrink-0 font-bold">➜</button>
+            <button onClick={handleSend} className="bg-red-700 text-white px-4 rounded-xl hover:bg-red-600 transition-all">
+              ❄️
+            </button>
           </div>
         </div>
       )}
 
       <button 
         onClick={() => setIsOpen(!isOpen)}
-        className="w-14 h-14 md:w-16 md:h-16 bg-brand-gold rounded-full flex items-center justify-center text-black shadow-2xl hover:scale-110 transition-transform border-4 border-black"
-        aria-label="Открыть чат"
+        className="group relative w-16 h-16 bg-red-700 rounded-full flex items-center justify-center text-3xl shadow-[0_10px_40px_rgba(196,30,58,0.5)] hover:scale-110 transition-all active:scale-95 z-50 border-4 border-white/20"
       >
-        <span className="text-xl md:text-2xl font-bold">{isOpen ? '✕' : '⚙️'}</span>
+        <span className="relative z-10">🎁</span>
+        <div className="absolute inset-0 bg-white/10 rounded-full animate-ping"></div>
       </button>
     </div>
   );
