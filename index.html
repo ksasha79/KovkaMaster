@@ -20,7 +20,9 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-      // Удаляем ручное переопределение process.env, чтобы не блокировать API_KEY
+      // Инициализируем process для SDK, но не переопределяем API_KEY вручную
+      window.process = window.process || { env: {} };
+      
       tailwind.config = {
         theme: {
           extend: {
