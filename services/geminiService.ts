@@ -15,39 +15,26 @@ const SYSTEM_PROMPT = `Вы — ведущий инженер завода ОО�
 
 export const chatWithSupport = async (message: string, history: ChatMessage[]): Promise<string> => {
   try {
-    const apiKey = process.env.API_KEY;
-    if (!apiKey) {
-      throw new Error("API Key is missing in environment variables.");
-    }
-
-    const ai = new GoogleGenAI({ apiKey });
-    
-    // Используем gemini-flash-latest для лучшей совместимости
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     const response = await ai.models.generateContent({
-      model: 'gemini-flash-latest',
+      model: 'gemini-3-flash-preview',
       contents: [...history, { role: 'user', parts: [{ text: message }] }],
       config: { 
         systemInstruction: SYSTEM_PROMPT,
-        temperature: 0.7,
-        topP: 0.8,
-        topK: 40
       }
     });
 
-    return response.text || "Прошу прощения, я задумался. Можете повторить вопрос?";
-  } catch (error) {
-    console.error("AI Service Error:", error);
-    // Более информативное сообщение об ошибке в консоль поможет при отладке
-    return `Извините, сейчас я не могу ответить. Пожалуйста, позвоните нашему менеджеру: ${CONTACTS.PHONE_DISPLAY}`;
+    return response.text || "Извините, не удалось получить ответ. Пожалуйста, попробуйте еще раз.";
+  } catch (error: any) {
+    console.error("Gemini API Error:", error);
+    // Возвращаем более техническую ошибку в консоль для отладки
+    return `Ошибка связи с ИИ. Пожалуйста, обратитесь к менеджеру: ${CONTACTS.PHONE_DISPLAY}`;
   }
 };
 
 export const generateGateConcept = async (promptDetails: string): Promise<string | null> => {
   try {
-    const apiKey = process.env.API_KEY;
-    if (!apiKey) return null;
-
-    const ai = new GoogleGenAI({ apiKey });
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     const response = await ai.models.generateContent({
       model: 'gemini-2.5-flash-image',
       contents: { 
