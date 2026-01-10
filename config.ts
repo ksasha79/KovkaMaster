@@ -59,16 +59,32 @@ export interface ContactConfig {
 ///  HERO_VIDEO_URL: "https://player.vimeo.com/external/371433846.sd.mp4?s=231519c1701abc06174090299933bb38581cc8d1&profile_id=164&oauth2_token_id=57447761"
 ///};
 
+///export const CONTACTS = {
+///  COMPANY_NAME: "ООО «Евро-Заборы»",
+///  SLOGAN: "Завод систем ограждений №1",
+///  PHONE: "79591878949",
+///  PHONE_DISPLAY: "+7 (959) 187-89-49",
+///  MANAGER_PHONE: "79920595253",
+///  MANAGER_PHONE_DISPLAY: "+7 (992) 059-52-53",
+///  EMAIL: "info@euro-zabory.ru",
+///  LOCATION: "Ростов-на-Дону / ДНР / ЛНР",
+///  TELEGRAM_USER: "euro_zabor_manager",
+///  WHATSAPP_LINK: "79920595253",
+///  FACTORY_ADDRESS: "г. Ростов-на-Дону, ул. Производственная, 12"
+///};
+
 export const CONTACTS = {
   COMPANY_NAME: "ООО «Евро-Заборы»",
-  SLOGAN: "Завод систем ограждений №1",
+  BRAND_NAME: "Евро-Заборы",
+  SLOGAN: "Завод систем ограждений полного цикла",
   PHONE: "79591878949",
   PHONE_DISPLAY: "+7 (959) 187-89-49",
-  MANAGER_PHONE: "79920595253",
-  MANAGER_PHONE_DISPLAY: "+7 (992) 059-52-53",
-  EMAIL: "info@euro-zabory.ru",
-  LOCATION: "Ростов-на-Дону / ДНР / ЛНР",
-  TELEGRAM_USER: "euro_zabor_manager",
-  WHATSAPP_LINK: "79920595253",
-  FACTORY_ADDRESS: "г. Ростов-на-Дону, ул. Производственная, 12"
+  MANAGER_PHONE: "79912644770",
+  MANAGER_PHONE_DISPLAY: "+7 (959) 187-89-49",
+  EMAIL: "evrozabory6@gmail.com",
+  LOCATION: "Ростов-на-Дону, ДНР, ЛНР, Воронеж, Белгород, Курск, Тамбов, Липецк ",
+  TELEGRAM_USER: "8201704520",
+  WHATSAPP_LINK: "79591878949",
+  DOMAIN: "евро-заборы.рф",
+  FACTORY_ADDRESS: "Производственная база: г. Аксай, ул. Промышленная / Прямые поставки в Мариуполь, Донецк, Луганск"
 };
