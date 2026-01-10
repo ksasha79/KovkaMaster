@@ -39,10 +39,14 @@ const FloatingBot: React.FC = () => {
       return;
     }
 
-    const history: ChatMessage[] = messages.map(m => ({
-      role: m.role === 'bot' ? 'model' : 'user',
-      parts: [{ text: m.text }]
-    }));
+    // ВАЖНО: Gemini требует, чтобы история начиналась с сообщения USER. 
+    // Мы исключаем самое первое сообщение бота из истории.
+    const history: ChatMessage[] = messages
+      .slice(1) // Пропускаем первое приветственное сообщение бота
+      .map(m => ({
+        role: m.role === 'bot' ? 'model' : 'user',
+        parts: [{ text: m.text }]
+      }));
 
     const response = await chatWithSupport(userMsg, history);
     setMessages(prev => [...prev, { role: 'bot', text: response }]);
@@ -52,13 +56,13 @@ const FloatingBot: React.FC = () => {
   return (
     <div className="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-[100]">
       {isOpen && (
-        <div className="absolute bottom-24 right-0 w-[calc(100vw-3rem)] md:w-[420px] h-[650px] glass-card rounded-[3rem] flex flex-col shadow-2xl overflow-hidden border border-brand-gold/30 animate-fade-in">
-          <div className="p-8 bg-brand-gold text-black flex justify-between items-center">
+        <div className="absolute bottom-24 right-0 w-[calc(100vw-3rem)] md:w-[420px] h-[650px] glass-card rounded-[3rem] flex flex-col shadow-2xl overflow-hidden border border-brand-gold/30 animate-fade-in bg-brand-black">
+          <div className="p-8 bg-brand-gold text-black flex justify-between items-center shadow-lg">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 bg-black rounded-2xl flex items-center justify-center font-black text-brand-gold text-sm shadow-xl">EZ</div>
               <div>
-                <h4 className="text-[11px] font-black uppercase tracking-widest mb-1">Техническая поддержка</h4>
-                <div className="flex items-center gap-1.5">
+                <h4 className="text-[11px] font-black uppercase tracking-widest mb-1 leading-none">Техническая поддержка</h4>
+                <div className="flex items-center gap-1.5 mt-1">
                   <span className="w-2 h-2 bg-black rounded-full animate-pulse"></span>
                   <span className="text-[9px] uppercase font-black opacity-60">Инженер на линии</span>
                 </div>
@@ -69,10 +73,10 @@ const FloatingBot: React.FC = () => {
             </button>
           </div>
           
-          <div ref={scrollRef} className="flex-grow overflow-y-auto p-8 space-y-6 bg-brand-black/95">
+          <div ref={scrollRef} className="flex-grow overflow-y-auto p-8 space-y-6">
             {messages.map((m, i) => (
               <div key={i} className={`flex flex-col ${m.role === 'user' ? 'items-end' : 'items-start'}`}>
-                <div className={`max-w-[85%] p-5 rounded-2xl text-[13px] leading-relaxed ${m.role === 'user' ? 'bg-brand-gold text-black rounded-tr-none font-bold' : 'bg-brand-grey text-gray-300 rounded-tl-none border border-white/5'}`}>
+                <div className={`max-w-[85%] p-5 rounded-2xl text-[13px] leading-relaxed shadow-sm ${m.role === 'user' ? 'bg-brand-gold text-black rounded-tr-none font-bold' : 'bg-brand-grey text-gray-300 rounded-tl-none border border-white/5'}`}>
                   {m.text}
                 </div>
                 {m.image && (
@@ -130,7 +134,7 @@ const FloatingBot: React.FC = () => {
         className="w-16 h-16 bg-brand-gold rounded-full flex items-center justify-center text-black shadow-[0_15px_50px_rgba(212,175,55,0.4)] hover:scale-110 transition-all border-4 border-brand-black"
         aria-label="Задать вопрос инженеру"
       >
-        <span className="text-2xl font-black">{isOpen ? '✕' : '⚙️'}</span>
+        <span className="text-2xl font-black">{isOpen ? '✕' : '💬'}</span>
       </button>
     </div>
   );
