@@ -1,40 +1,33 @@
-
-/**
- * Клиентский сервис теперь работает только через защищенные API-роуты.
- * Это скрывает API_KEY от конечного пользователя.
- */
-
 import { GoogleGenAI } from "@google/genai";
-import { CONTACTS } from '../config';
+import { CONTACTS } from '../config.ts';
 
 export interface ChatMessage {
   role: 'user' | 'model';
   parts: { text: string }[];
 }
 
-const SYSTEM_PROMPT = `Вы — ведущий инженер-консультант ООО «Евро-Заборы».
-МЫ — ЗАВОД. Промышленное производство полного цикла.
-ЛОКАЦИИ: Ростовская область, ДНР (Мариуполь, Донецк), ЛНР.
-ТЕХНОЛОГИЯ: Бетон М350, стальное армирование ГОСТ.
-ЦЕЛЬ: Консультировать клиентов по выбору заборов, ворот, навесов.
-Направляйте клиентов на бесплатный замер по номеру ${CONTACTS.MANAGER_PHONE_DISPLAY}.
-Стиль общения: Деловой, экспертный, вежливый.`;
+const SYSTEM_PROMPT = `Вы — ведущий инженер завода ООО «Евро-Заборы».
+Ваша миссия: консультировать клиентов по выбору заборов, ворот и навесов. 
+Тон: профессиональный, дружелюбный, экспертный.
+Вы должны помогать с выбором материалов (бетон, металл, автоматика) и ориентировать по процессу замера.
+Если просят цену — говорите, что точная смета составляется после замера, но базовые цены есть на сайте (от 2500 руб/м.п.).
+Контакты для связи: ${CONTACTS.MANAGER_PHONE_DISPLAY}.`;
 
 export const chatWithSupport = async (message: string, history: ChatMessage[]): Promise<string> => {
   try {
+    // Создаем инстанс прямо перед вызовом, чтобы использовать актуальный ключ из окружения
     const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     const response = await ai.models.generateContent({
       model: 'gemini-3-flash-preview',
       contents: [...history, { role: 'user', parts: [{ text: message }] }],
       config: { 
         systemInstruction: SYSTEM_PROMPT,
-        temperature: 0.7 
       }
     });
-    return response.text || "Связь с заводом временно прервана. Пожалуйста, позвоните нам напрямую.";
+    return response.text || "Извините, возникла ошибка связи. Попробуйте позвонить нам.";
   } catch (error) {
-    console.error("Gemini Error:", error);
-    return "Инженеры сейчас на линии производства. Пожалуйста, оставьте заявку, и мы перезвоним.";
+    console.error("AI Error:", error);
+    return "Связь прервана. Наш номер: " + CONTACTS.PHONE_DISPLAY;
   }
 };
 
@@ -45,7 +38,7 @@ export const generateGateConcept = async (promptDetails: string): Promise<string
       model: 'gemini-2.5-flash-image',
       contents: { 
         parts: [{ 
-          text: `High-quality architectural visualization of a modern perimeter fence or gate system. Style: ${promptDetails}. Industrial luxury design, 8k resolution, photorealistic.` 
+          text: `Modern high-quality fence and gate design, professional architectural photography, 8k, sunset lighting, luxury house background: ${promptDetails}` 
         }] 
       },
     });
@@ -59,7 +52,7 @@ export const generateGateConcept = async (promptDetails: string): Promise<string
     }
     return null;
   } catch (error) {
-    console.error("Generation Error:", error);
+    console.error("Image Gen Error:", error);
     return null;
   }
 };
