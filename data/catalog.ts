@@ -140,7 +140,7 @@ export const catalogData: CatalogItem[] = [
     priceStart: "от 3 800 ₽/п.м.",
     description: "Современное решение из оцинкованной стали с полимерным покрытием. Обеспечивает проветриваемость участка при полной приватности. Толщина металла 0.5 мм.",
     gallery: [
-      { label: "Фасадный вид", url: "https://images.unsplash.com/photo-1516715668466-4166f735cdad?q=80&w=1000&auto=format&fit=crop" },
+      { label: "Фасадный вид", url: "/images/4-Zaluzi/3.png" },
     ]
   },
   {
