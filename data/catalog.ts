@@ -106,15 +106,18 @@ export const catalogData: CatalogItem[] = [
 ---------------------
 */
  
+
 export interface GalleryImage {
   url: string;
   label: string;
 }
 
+export type CategoryType = 'metal' | 'mesh-3d' | 'chain-link' | 'brick-foundation';
+
 export interface CatalogItem {
   id: number;
   title: string;
-  category: 'concrete' | '3d-mesh' | 'gates' | 'installations' | 'canopies' | 'gazebos' | 'shelving';
+  category: CategoryType;
   description: string;
   priceStart: string;
   location: string;
@@ -124,38 +127,49 @@ export interface CatalogItem {
 export const catalogData: CatalogItem[] = [
   {
     id: 1,
-    title: "ЕвроЗабор 'Сланец Премиум'",
-    category: 'concrete',
-    location: "Воронеж, мкр. Шилово",
-    priceStart: "от 2 500 ₽/п.м.",
-    description: "Надежный забор с текстурой натурального сланца. Глубокое армирование, морозостойкий бетон марки М500. Установлен на чернозем с усилением столбов.",
+    title: "Металлический забор 'Жалюзи'",
+    category: 'metal',
+    location: "Воронеж, СНТ Отдых",
+    priceStart: "от 3 800 ₽/п.м.",
+    description: "Современное решение из оцинкованной стали с полимерным покрытием. Обеспечивает проветриваемость участка при полной приватности. Толщина металла 0.5 мм.",
     gallery: [
-      { label: "Фасадный вид", url: "https://images.unsplash.com/photo-1621905251918-48416bd8575a?q=80&w=1000&auto=format&fit=crop" },
-      { label: "Детали текстуры", url: "https://images.unsplash.com/photo-1590059132213-f93ca04f3f31?q=80&w=1000&auto=format&fit=crop" },
+      { label: "Фасадный вид", url: "https://images.unsplash.com/photo-1516715668466-4166f735cdad?q=80&w=1000&auto=format&fit=crop" },
     ]
   },
   {
     id: 2,
-    title: "Ворота 'Royal Gold'",
-    category: 'gates',
-    location: "Липецк",
-    priceStart: "от 45 000 ₽",
-    description: "Элитные распашные ворота с элементами художественной ковки. Заводская покраска Hammerite, устойчивая к перепадам температур.",
+    title: "Ограждение Сетка 3D Gitter",
+    category: 'mesh-3d',
+    location: "Воронеж, Промзона",
+    priceStart: "от 1 200 ₽/п.м.",
+    description: "Секционное ограждение из оцинкованной проволоки 4мм с V-образными ребрами жесткости. Идеально для больших территорий и складских комплексов.",
     gallery: [
-      { label: "Общий вид", url: "https://images.unsplash.com/photo-1505843513577-22bb7d21e455?q=80&w=1000&auto=format&fit=crop" },
+      { label: "Объект в Воронеже", url: "https://images.unsplash.com/photo-1621905251918-48416bd8575a?q=80&w=1000&auto=format&fit=crop" },
     ]
   },
   {
     id: 3,
-    title: "Навес 'Mega-Shield'",
-    category: 'canopies',
-    location: "Белгород",
-    priceStart: "от 5 500 ₽/м²",
-    description: "Усиленный ферменный навес из поликарбоната 10мм. Выдерживает сильные ветровые нагрузки центральной полосы России.",
+    title: "Забор из сетки Рабица",
+    category: 'chain-link',
+    location: "Семилуки, Воронежская обл.",
+    priceStart: "от 850 ₽/п.м.",
+    description: "Бюджетный и долговечный вариант. Сетка оцинкованная, не ржавеет. Установка внатяжку или в секциях из уголка. Монтаж за 1 день.",
     gallery: [
-      { label: "Проект в Белгороде", url: "https://images.unsplash.com/photo-1590059132213-f93ca04f3f31?q=80&w=1000&auto=format&fit=crop" },
+      { label: "Дачный вариант", url: "https://images.unsplash.com/photo-1590059132213-f93ca04f3f31?q=80&w=1000&auto=format&fit=crop" },
+    ]
+  },
+  {
+    id: 4,
+    title: "Кирпичные колонны + Лента",
+    category: 'brick-foundation',
+    location: "Новая Усмань",
+    priceStart: "от 12 000 ₽/п.м.",
+    description: "Капитальное ограждение на армированном ленточном фундаменте. Кирпич гиперпрессованный, заполнение пролетов — металлоштакетник. Глубина фундамента 1.2м (ниже промерзания).",
+    gallery: [
+      { label: "Премиум проект", url: "https://images.unsplash.com/photo-1505843513577-22bb7d21e455?q=80&w=1000&auto=format&fit=crop" },
     ]
   }
 ];
+
  
 
