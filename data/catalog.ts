@@ -143,7 +143,7 @@ export const catalogData: CatalogItem[] = [
       { label: "Фасадный вид", url: "/images/4-Zaluzi/3.png" },
       { label: "Фасадный вид", url: "/images/4-Zaluzi/1.jpeg" }, 
       { label: "Фасадный вид", url: "/images/4-Zaluzi/2.png" }, 
-      { label: "Фасадный вид", url: "/images/4-Zaluzi/4.png" },
+      { label: "Фасадный вид", url: "/images/4-Zaluzi/4.png" }
     ]
   },
   {
@@ -155,7 +155,7 @@ export const catalogData: CatalogItem[] = [
     description: "Секционное ограждение из оцинкованной проволоки 4мм с V-образными ребрами жесткости. Идеально для больших территорий и складских комплексов.",
     gallery: [
       { label: "Фасадный вид", url: "/images/2-3D Gitter/1.jpeg" },
-      { label: "Фасадный вид", url: "/images/2-3D Gitter/0.png" },   
+      { label: "Фасадный вид", url: "/images/2-3D Gitter/0.png" }   
     ]
   },
   {
@@ -166,8 +166,11 @@ export const catalogData: CatalogItem[] = [
     priceStart: "от 850 ₽/п.м.",
     description: "Бюджетный и долговечный вариант. Сетка оцинкованная, не ржавеет. Установка внатяжку или в секциях из уголка. Монтаж за 1 день.",
     gallery: [
-      { label: "Дачный вариант", url: "https://images.unsplash.com/photo-1590059132213-f93ca04f3f31?q=80&w=1000&auto=format&fit=crop" },
-    ]
+                { label: "Фасадный вид", url: "/images/1-Rabica/0.jpeg" },
+                { label: "Фасадный вид", url: "/images/1-Rabica/1.png" },
+                { label: "Фасадный вид", url: "/images/1-Rabica/2.jpeg" },
+                { label: "Фасадный вид", url: "/images/1-Rabica/3.jpeg" }
+            ]
   },
   {
     id: 4,
