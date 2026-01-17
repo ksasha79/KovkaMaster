@@ -3,22 +3,22 @@ import React from 'react';
 
 const services = [
   {
-    title: "Бетонные Заборы",
-    desc: "Производство секционных еврозаборов из бетона М500 с двойным армированием. Более 50 текстур в наличии.",
+    title: "Металлические системы",
+    desc: "Жалюзи, штакетник и профнастил премиум-класса с гарантией на покрытие 10 лет.",
     id: "01",
-    tag: "ХИТ ПРОДАЖ"
+    tag: "ПОПУЛЯРНО"
   },
   {
-    title: "Ворота и Калитки",
-    desc: "Изготовление распашных и откатных ворот любой сложности с установкой автоматики NICE или CAME.",
+    title: "Капитальный фундамент",
+    desc: "Проектирование и заливка ленточных фундаментов под кирпичные колонны с учетом воронежского грунта.",
     id: "02",
     tag: "ПОД КЛЮЧ"
   },
   {
-    title: "Металлоконструкции",
-    desc: "Навесы из поликарбоната, беседки и лестницы. Собственный сварочный цех и покрасочная камера.",
+    title: "Сетчатые ограждения",
+    desc: "Монтаж 3D-сетки и рабицы для частных участков и промышленных объектов.",
     id: "03",
-    tag: "ГАРАНТИЯ"
+    tag: "БЫСТРЫЙ МОНТАЖ"
   }
 ];
 
@@ -29,14 +29,14 @@ const Services: React.FC = () => {
         <div className="mb-24 text-center">
           <span className="text-brand-gold font-black uppercase tracking-[0.6em] text-[10px] mb-4 block">Наши направления</span>
           <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none">
-            ЧТО МЫ <span className="text-gold">ПРОИЗВОДИМ</span>
+            ЧТО МЫ <span className="text-gold">ПРЕДЛАГАЕМ</span>
           </h2>
         </div>
         
         <div className="grid lg:grid-cols-3 gap-8">
           {services.map((s, i) => (
             <div key={i} className="glass-card p-12 rounded-[2.5rem] group hover:border-brand-gold/50 transition-all duration-500">
-               <div className="text-brand-gold text-4xl mb-8">🏗️</div>
+               <div className="text-brand-gold text-4xl mb-8">🛠️</div>
                <div className="inline-block px-4 py-1 rounded-full bg-brand-gold/10 text-brand-gold text-[9px] font-black mb-6 border border-brand-gold/20">
                   {s.tag}
                 </div>
