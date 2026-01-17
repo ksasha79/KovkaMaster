@@ -141,7 +141,7 @@ export const catalogData: CatalogItem[] = [
     description: "Современное решение из оцинкованной стали с полимерным покрытием. Обеспечивает проветриваемость участка при полной приватности. Толщина металла 0.5 мм.",
     gallery: [
       { label: "Фасадный вид", url: "/images/4-Zaluzi/3.png" },
-      { label: "Фасадный вид", url: "/images/4-Zaluzi/1.png" }, 
+      { label: "Фасадный вид", url: "/images/4-Zaluzi/1.jpeg" }, 
       { label: "Фасадный вид", url: "/images/4-Zaluzi/2.png" }, 
       { label: "Фасадный вид", url: "/images/4-Zaluzi/4.png" },
     ]
@@ -154,7 +154,7 @@ export const catalogData: CatalogItem[] = [
     priceStart: "от 1 200 ₽/п.м.",
     description: "Секционное ограждение из оцинкованной проволоки 4мм с V-образными ребрами жесткости. Идеально для больших территорий и складских комплексов.",
     gallery: [
-      { label: "Фасадный вид", url: "/images/2-3D Gitter/1.png" },
+      { label: "Фасадный вид", url: "/images/2-3D Gitter/1.jpeg" },
       { label: "Фасадный вид", url: "/images/2-3D Gitter/0.png" },   
     ]
   },
