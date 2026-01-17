@@ -1,6 +1,7 @@
+
 import React, { useState } from 'react';
 import { generateGateConcept } from '../services/geminiService.ts';
-import { catalogData, CatalogItem } from '../data/catalog.ts';
+import { catalogData, CatalogItem, CategoryType } from '../data/catalog.ts';
 
 interface PortfolioProps {
   onOrderClick: (title: string) => void;
@@ -9,7 +10,7 @@ interface PortfolioProps {
 const Portfolio: React.FC<PortfolioProps> = ({ onOrderClick }) => {
   const [selectedItem, setSelectedItem] = useState<CatalogItem | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [activeCategory, setActiveCategory] = useState<CatalogItem['category'] | 'all'>('all');
+  const [activeCategory, setActiveCategory] = useState<CategoryType | 'all'>('all');
   
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedImg, setGeneratedImg] = useState<string | null>(null);
@@ -48,6 +49,14 @@ const Portfolio: React.FC<PortfolioProps> = ({ onOrderClick }) => {
     ? catalogData 
     : catalogData.filter(item => item.category === activeCategory);
 
+  const categoryLabels: Record<CategoryType | 'all', string> = {
+    all: 'Все работы',
+    metal: 'Металл',
+    'mesh-3d': 'Сетка 3D',
+    'chain-link': 'Рабица',
+    'brick-foundation': 'Кирпич + Лента'
+  };
+
   return (
     <section id="portfolio" className="py-32 bg-brand-black text-white">
       <div className="max-w-7xl mx-auto px-6">
@@ -60,15 +69,15 @@ const Portfolio: React.FC<PortfolioProps> = ({ onOrderClick }) => {
 
         {/* Filter */}
         <div className="flex flex-wrap justify-center gap-4 mb-20">
-          {['all', 'concrete', 'gates', 'canopies', 'gazebos'].map((cat) => (
+          {(['all', 'metal', 'mesh-3d', 'chain-link', 'brick-foundation'] as const).map((cat) => (
             <button
               key={cat}
-              onClick={() => setActiveCategory(cat as any)}
-              className={`px-8 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all border ${
+              onClick={() => setActiveCategory(cat)}
+              className={`px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all border ${
                 activeCategory === cat ? 'bg-brand-gold border-brand-gold text-black shadow-xl' : 'border-white/10 text-gray-400 hover:border-white/30'
               }`}
             >
-              {cat === 'all' ? 'Все' : cat === 'concrete' ? 'Бетон' : cat === 'gates' ? 'Ворота' : cat === 'canopies' ? 'Навесы' : 'Беседки'}
+              {categoryLabels[cat]}
             </button>
           ))}
         </div>
@@ -83,7 +92,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ onOrderClick }) => {
               <div className="relative h-72 overflow-hidden">
                 <img 
                   src={item.gallery[0].url} 
-                  alt={`${item.title} — ${item.category} от завода Евро-Заборы, ${item.location}`} 
+                  alt={`${item.title} — ${categoryLabels[item.category]} от завода Евро-Заборы, ${item.location}`} 
                   className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-1000"
                   loading="lazy"
                 />
@@ -93,7 +102,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ onOrderClick }) => {
               </div>
               <div className="p-10 flex-grow flex flex-col">
                 <span className="text-brand-gold text-[10px] font-black uppercase tracking-widest mb-4 block opacity-60">
-                  {item.category === 'concrete' ? 'Бетонный забор' : item.category === 'gates' ? 'Ворота' : 'Конструкция'}
+                  {categoryLabels[item.category]}
                 </span>
                 <h4 className="text-2xl font-black mb-4 group-hover:text-brand-gold transition-colors uppercase leading-tight">
                   {item.title}
@@ -144,14 +153,14 @@ const Portfolio: React.FC<PortfolioProps> = ({ onOrderClick }) => {
             </div>
             
             {/* Content Side */}
-            <div className="md:w-2/5 p-16 flex flex-col justify-center">
-               <div className="mb-10">
-                  <span className="text-brand-gold text-[10px] font-black uppercase tracking-[0.4em] block mb-4">{selectedItem.category}</span>
+            <div className="md:w-2/5 p-12 flex flex-col justify-center">
+               <div className="mb-8">
+                  <span className="text-brand-gold text-[10px] font-black uppercase tracking-[0.4em] block mb-4">{categoryLabels[selectedItem.category]}</span>
                   <h3 className="text-4xl font-black text-white uppercase mb-6 leading-tight">{selectedItem.title}</h3>
-                  <p className="text-gray-400 text-lg leading-relaxed font-light">{selectedItem.description}</p>
+                  <p className="text-gray-400 text-base leading-relaxed font-light">{selectedItem.description}</p>
                </div>
                
-               <div className="space-y-6 mb-12">
+               <div className="space-y-6 mb-10">
                   <div className="flex justify-between py-4 border-b border-white/5">
                     <span className="text-gray-500 uppercase text-xs font-bold tracking-widest">Цена проекта</span>
                     <span className="text-brand-gold font-black text-xl">{selectedItem.priceStart}</span>
@@ -164,7 +173,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ onOrderClick }) => {
 
                <button 
                  onClick={() => { onOrderClick(selectedItem.title); closeModal(); }}
-                 className="w-full btn-gold py-6 rounded-2xl font-black text-[10px] tracking-widest"
+                 className="w-full btn-gold py-5 rounded-2xl font-black text-[10px] tracking-widest"
                >
                  Заказать такой же расчет
                </button>
