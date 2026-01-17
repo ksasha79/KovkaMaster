@@ -166,10 +166,10 @@ export const catalogData: CatalogItem[] = [
     priceStart: "от 850 ₽/п.м.",
     description: "Бюджетный и долговечный вариант. Сетка оцинкованная, не ржавеет. Установка внатяжку или в секциях из уголка. Монтаж за 1 день.",
     gallery: [
-                { label: "Фасадный вид", url: "/images/1-Rabica/0.jpeg" },
-                { label: "Фасадный вид", url: "/images/1-Rabica/1.png" },
+                { label: "Фасадный вид", url: "/images/1-Rabica/0.png" },
+                { label: "Фасадный вид", url: "/images/1-Rabica/1.jpeg" },
                 { label: "Фасадный вид", url: "/images/1-Rabica/2.jpeg" },
-                { label: "Фасадный вид", url: "/images/1-Rabica/3.jpeg" }
+                { label: "Фасадный вид", url: "/images/1-Rabica/3.png" }
             ]
   },
   {
@@ -180,7 +180,10 @@ export const catalogData: CatalogItem[] = [
     priceStart: "от 12 000 ₽/п.м.",
     description: "Капитальное ограждение на армированном ленточном фундаменте. Кирпич гиперпрессованный, заполнение пролетов — металлоштакетник. Глубина фундамента 1.2м (ниже промерзания).",
     gallery: [
-      { label: "Премиум проект", url: "https://images.unsplash.com/photo-1505843513577-22bb7d21e455?q=80&w=1000&auto=format&fit=crop" },
+      { label: "Кирпичные колонны", url: "/images/3-Lenta/1.png" },
+      { label: "Кирпичные колонны", url: "/images/3-Lenta/2.jpeg" },
+      { label: "Кирпичные колонны", url: "/images/3-Lenta/3.jpeg" 
+      
     ]
   }
 ];
