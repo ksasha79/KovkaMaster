@@ -154,7 +154,8 @@ export const catalogData: CatalogItem[] = [
     priceStart: "от 1 200 ₽/п.м.",
     description: "Секционное ограждение из оцинкованной проволоки 4мм с V-образными ребрами жесткости. Идеально для больших территорий и складских комплексов.",
     gallery: [
-      { label: "Объект в Воронеже", url: "https://images.unsplash.com/photo-1621905251918-48416bd8575a?q=80&w=1000&auto=format&fit=crop" },
+      { label: "Фасадный вид", url: "/images/2-3D Gitter/1.png" },
+      { label: "Фасадный вид", url: "/images/2-3D Gitter/0.png" },   
     ]
   },
   {
