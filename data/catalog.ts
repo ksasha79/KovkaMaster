@@ -182,8 +182,8 @@ export const catalogData: CatalogItem[] = [
     gallery: [
       { label: "Кирпичные колонны", url: "/images/3-Lenta/1.png" },
       { label: "Кирпичные колонны", url: "/images/3-Lenta/2.jpeg" },
-      { label: "Кирпичные колонны", url: "/images/3-Lenta/3.jpeg" 
-      
+      { label: "Кирпичные колонны", url: "/images/3-Lenta/3.jpeg" }
+    
     ]
   }
 ];
