@@ -1,4 +1,4 @@
-export interface GalleryImage {
+/** export interface GalleryImage {
   url: string;
   label: string;
 }
@@ -20,7 +20,7 @@ export interface CatalogItem {
  * 2. В поле 'url' укажите путь: "/images/ваше_имя_файла.jpg"
  * 3. Поле 'category' определяет, в каком фильтре на сайте будет отображаться работа.
  * 4. В массиве 'gallery' первое фото будет обложкой карточки, остальные — в слайдере внутри.
- */
+ 
 
 export const catalogData: CatalogItem[] = [
   {
@@ -102,3 +102,60 @@ export const catalogData: CatalogItem[] = [
     ]
   }
 ];
+эксперимент
+---------------------
+*/
+ 
+export interface GalleryImage {
+  url: string;
+  label: string;
+}
+
+export interface CatalogItem {
+  id: number;
+  title: string;
+  category: 'concrete' | '3d-mesh' | 'gates' | 'installations' | 'canopies' | 'gazebos' | 'shelving';
+  description: string;
+  priceStart: string;
+  location: string;
+  gallery: GalleryImage[];
+}
+
+export const catalogData: CatalogItem[] = [
+  {
+    id: 1,
+    title: "ЕвроЗабор 'Сланец Премиум'",
+    category: 'concrete',
+    location: "Воронеж, мкр. Шилово",
+    priceStart: "от 2 500 ₽/п.м.",
+    description: "Надежный забор с текстурой натурального сланца. Глубокое армирование, морозостойкий бетон марки М500. Установлен на чернозем с усилением столбов.",
+    gallery: [
+      { label: "Фасадный вид", url: "https://images.unsplash.com/photo-1621905251918-48416bd8575a?q=80&w=1000&auto=format&fit=crop" },
+      { label: "Детали текстуры", url: "https://images.unsplash.com/photo-1590059132213-f93ca04f3f31?q=80&w=1000&auto=format&fit=crop" },
+    ]
+  },
+  {
+    id: 2,
+    title: "Ворота 'Royal Gold'",
+    category: 'gates',
+    location: "Липецк",
+    priceStart: "от 45 000 ₽",
+    description: "Элитные распашные ворота с элементами художественной ковки. Заводская покраска Hammerite, устойчивая к перепадам температур.",
+    gallery: [
+      { label: "Общий вид", url: "https://images.unsplash.com/photo-1505843513577-22bb7d21e455?q=80&w=1000&auto=format&fit=crop" },
+    ]
+  },
+  {
+    id: 3,
+    title: "Навес 'Mega-Shield'",
+    category: 'canopies',
+    location: "Белгород",
+    priceStart: "от 5 500 ₽/м²",
+    description: "Усиленный ферменный навес из поликарбоната 10мм. Выдерживает сильные ветровые нагрузки центральной полосы России.",
+    gallery: [
+      { label: "Проект в Белгороде", url: "https://images.unsplash.com/photo-1590059132213-f93ca04f3f31?q=80&w=1000&auto=format&fit=crop" },
+    ]
+  }
+];
+ 
+
