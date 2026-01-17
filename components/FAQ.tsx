@@ -1,25 +1,26 @@
+
 import React, { useState } from 'react';
 
 const faqs = [
   {
-    question: "Почему нельзя просто привезти и установить забор без замера и проекта?",
-    answer: "ЕвроЗабор — это массивная конструкция весом в несколько тонн. Без предварительной нивелировки участка (определения перепадов высот) и анализа типа грунта забор может «поплыть» или наклониться уже после первой зимы из-за пучения почвы. Проектирование позволяет нам рассчитать точную глубину бетонирования, создать правильные «ступеньки» на уклонах и гарантировать идеальную геометрию ограждения на десятилетия."
+    question: "Почему в Воронежской области важно бетонировать столбы ниже 1.2 метра?",
+    answer: "Воронежская область характеризуется глубоким промерзанием чернозема и глинистых почв. Если установить забор выше уровня промерзания (обычно это 1.1-1.2м), силы морозного пучения просто «выдавят» столбы весной. Мы производим монтаж с учетом этих особенностей, гарантируя, что ваш забор останется идеально ровным десятилетиями."
   },
   {
-    question: "Сколько стоит выезд мастера на замер?",
-    answer: "Выезд инженера в пределах Ростова-на-Дону, а также в крупные города ДНР и ЛНР (Донецк, Макеевка, Луганск) при заключении договора осуществляется бесплатно. Специалист привозит с собой образцы текстур и лазерное оборудование для точного расчета сметы на месте."
+    question: "В чем преимущество 3D-сетки перед обычным профлистом для участков в Черноземье?",
+    answer: "3D-сетка (Gitter) обеспечивает отличную проветриваемость участка. На открытых пространствах Воронежской степи часто бывают сильные ветровые нагрузки — сетка не имеет парусности, в отличие от сплошного профлиста. Кроме того, она не затеняет посадки, что критично для плодородного чернозема."
   },
   {
-    question: "Какую гарантию вы даете на монтаж?",
-    answer: "Мы предоставляем официальную гарантию 2 года на устойчивость конструкции и сохранность геометрии. Это возможно благодаря нашей технологии глубокого бетонирования и строгому соблюдению проектных отметок."
+    question: "Сколько времени занимает строительство забора с кирпичными колоннами и лентой?",
+    answer: "Это капитальное строительство. Первый этап — копка траншеи и заливка армированной ленты (3-5 дней на набор прочности бетона). Затем — возведение колонн и монтаж пролетов. В среднем, объект длиной 20-30 метров в Новой Усмани или Рамони мы сдаем за 14-18 рабочих дней."
   },
   {
-    question: "Как осуществляется доставка тяжелых секций в ДНР и ЛНР?",
-    answer: "У нас есть собственный парк грузовых автомобилей с манипуляторами. Мы берем на себя все вопросы логистики и проезда через пункты пропуска. Вы получаете готовое изделие и профессиональную монтажную бригаду прямо у себя на участке."
+    question: "Работаете ли вы по области (Семилуки, Лиски, Борисоглебск)?",
+    answer: "Да, мы работаем по всей Воронежской области. У нас налажена логистика по трассе М-4 и региональным дорогам. Стоимость доставки рассчитывается индивидуально, но благодаря собственному автопарку она остается минимальной для заказчика."
   },
   {
-    question: "Можно ли заказать ворота по индивидуальному размеру?",
-    answer: "Да, хотя у нас есть складская программа стандартных размеров, мы изготавливаем воротные группы и калитки под конкретный проем, заложенный в проекте вашего забора. Это гарантирует отсутствие щелей и идеальную работу автоматики."
+    question: "Можно ли заказать только материалы без монтажа?",
+    answer: "Да, как завод-изготовитель, мы отгружаем комплекты для самостоятельной сборки со склада в Воронеже. Вы получаете все необходимые комплектующие, схемы сборки и заводскую гарантию на металл и окраску."
   }
 ];
 
@@ -27,44 +28,64 @@ const FAQ: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="py-20 bg-gray-50">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-black text-metal-900 uppercase tracking-tight">
-            Ответы на <span className="text-gold-600">Важные</span> Вопросы
+    <section id="faq" className="py-32 bg-brand-black relative">
+      <div className="max-w-4xl mx-auto px-6">
+        <div className="text-center mb-20">
+          <span className="text-brand-gold font-black uppercase tracking-[0.6em] text-[10px] mb-4 block">База знаний</span>
+          <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter leading-none">
+            ОТВЕТЫ <span className="text-gold">ИНЖЕНЕРА</span>
           </h2>
-          <div className="h-1.5 w-20 bg-gold-500 mx-auto mt-4 rounded-full"></div>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-6">
           {faqs.map((faq, index) => (
-            <div key={index} className="border border-gray-200 rounded-2xl bg-white overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+            <div 
+              key={index} 
+              className={`border rounded-[2rem] transition-all duration-500 overflow-hidden ${
+                openIndex === index 
+                ? 'bg-brand-grey border-brand-gold/50 shadow-2xl' 
+                : 'bg-white/5 border-white/10 hover:border-white/20'
+              }`}
+            >
               <button
-                className="w-full flex justify-between items-center p-6 text-left font-bold text-metal-900 hover:bg-gray-50 transition-colors"
+                className="w-full flex justify-between items-center p-8 text-left group"
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
               >
-                <span className="pr-8">{faq.question}</span>
-                <svg 
-                  className={`w-6 h-6 text-gold-600 flex-shrink-0 transform transition-transform duration-300 ${openIndex === index ? 'rotate-180' : ''}`} 
-                  fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
+                <span className={`text-lg md:text-xl font-black uppercase tracking-tight transition-colors ${openIndex === index ? 'text-brand-gold' : 'text-white'}`}>
+                  {faq.question}
+                </span>
+                <div className={`w-10 h-10 rounded-full border flex items-center justify-center transition-all ${
+                  openIndex === index ? 'bg-brand-gold border-brand-gold text-black rotate-180' : 'border-white/20 text-white group-hover:border-brand-gold'
+                }`}>
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
               </button>
-              {openIndex === index && (
-                <div className="px-6 pb-6 text-gray-600 leading-relaxed border-t border-gray-50 pt-4 animate-fade-in">
+              
+              <div 
+                className={`transition-all duration-500 ease-in-out ${
+                  openIndex === index ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0 pointer-events-none'
+                }`}
+              >
+                <div className="px-8 pb-8 text-gray-400 leading-relaxed font-light text-base md:text-lg border-t border-white/5 pt-6">
                   {faq.answer}
                 </div>
-              )}
+              </div>
             </div>
           ))}
         </div>
 
-        <div className="mt-12 p-8 bg-gold-600/5 border border-gold-500/20 rounded-3xl text-center">
-           <p className="text-sm text-gray-500 mb-4">Не нашли ответ на свой вопрос?</p>
-           <a href="#contact" className="text-gold-600 font-black uppercase tracking-widest text-xs border-b-2 border-gold-600 pb-1 hover:text-gold-500 hover:border-gold-500 transition-all">
-             Спросить инженера в чате
-           </a>
+        <div className="mt-20 p-12 glass-card rounded-[3rem] text-center border-dashed border-2 border-brand-gold/20">
+           <p className="text-gray-400 mb-6 uppercase tracking-widest text-[10px] font-black">Остались специфические вопросы?</p>
+           <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <a href="#contact" className="btn-gold px-10 py-5 rounded-2xl text-[10px]">
+                Получить консультацию
+              </a>
+              <a href="https://t.me/8201704520" target="_blank" className="px-10 py-5 bg-white/5 hover:bg-white/10 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all">
+                Написать в Telegram
+              </a>
+           </div>
         </div>
       </div>
     </section>
