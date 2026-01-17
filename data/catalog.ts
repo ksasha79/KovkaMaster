@@ -107,6 +107,7 @@ export const catalogData: CatalogItem[] = [
 */
  
 
+
 export interface GalleryImage {
   url: string;
   label: string;
@@ -124,6 +125,12 @@ export interface CatalogItem {
   gallery: GalleryImage[];
 }
 
+/**
+ * ИНСТРУКЦИЯ:
+ * 1. Загрузите фото в /public/images/
+ * 2. Добавьте или измените блок ниже.
+ * 3. url должен быть в формате "/images/название_файла.jpg"
+ */
 export const catalogData: CatalogItem[] = [
   {
     id: 1,
@@ -170,6 +177,5 @@ export const catalogData: CatalogItem[] = [
     ]
   }
 ];
-
  
 
