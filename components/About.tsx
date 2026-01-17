@@ -9,10 +9,15 @@ const About: React.FC = () => {
           
           <div className="relative">
             <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl aspect-[4/5]">
+              {/* ИНСТРУКЦИЯ: Загрузите фото в public/images/ под названием factory-main.jpg */}
               <img 
-                src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80&w=1000&auto=format&fit=crop" 
+                src="/images/factory-main.jpg" 
                 alt="Производство ООО Евро-Заборы" 
                 className="w-full h-full object-cover"
+                onError={(e) => {
+                  // Резервный вариант, если фото еще не загружено
+                  (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80&w=1000&auto=format&fit=crop";
+                }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-metal-900/80 to-transparent"></div>
             </div>
