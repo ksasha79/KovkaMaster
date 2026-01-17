@@ -10,44 +10,40 @@
  *    установив в неё этот новый ID.
  * 4. Все заявки начнут приходить на новый аккаунт.
  */
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Метод не разрешен' });
   }
 
-  const { name, phone, length, message } = req.body;
-
-  if (!name || !phone) {
-    return res.status(400).json({ error: 'Имя и телефон обязательны' });
-  }
-
-  const token = process.env.TELEGRAM_BOT_TOKEN;
-  const chatId = process.env.TELEGRAM_CHAT_ID;
-
-  if (!token || !chatId) {
-    console.error("❌ Критическая ошибка: Переменные окружения Telegram не настроены.");
-    return res.status(500).json({ 
-      error: 'Ошибка конфигурации сервера. Уведомления не настроены.' 
-    });
-  }
-
-  const safeName = name.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-  const safeMessage = (message || 'Без комментария').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-
-  const htmlText = `
-<b>❄️ НОВЫЙ ЗАКАЗ</b>
-──────────────────
-<b>👤 Клиент:</b> ${safeName}
-<b>📞 Тел:</b> <code>${phone}</code>
-<b>📏 Длина:</b> ${length ? length + ' м.п.' : 'не указана'}
-<b>💬 Коммент:</b> ${safeMessage}
-──────────────────
-🏭 <i>Система уведомлений евро-заборы.рф</i>
-  `.trim();
-
   try {
-    const url = `https://api.telegram.org/bot${token}/sendMessage`;
-    const response = await fetch(url, {
+    const { name, phone, length, message } = req.body;
+
+    if (!name || !phone) {
+      return res.status(400).json({ error: 'Имя и телефон обязательны' });
+    }
+
+    const token = process.env.TELEGRAM_BOT_TOKEN;
+    const chatId = process.env.TELEGRAM_CHAT_ID;
+
+    if (!token || !chatId) {
+      return res.status(500).json({ error: 'Уведомления не настроены' });
+    }
+
+    const clean = (str) => (str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+    const htmlText = `
+<b>🏗 НОВАЯ ЗАЯВКА: ЕВРО-ЗАБОРЫ</b>
+──────────────────
+<b>👤 Клиент:</b> ${clean(name)}
+<b>📞 Тел:</b> <code>${clean(phone)}</code>
+<b>📏 Длина:</b> ${length ? length + ' м.п.' : 'не указана'}
+<b>💬 Коммент:</b> ${clean(message || 'Без комментария')}
+──────────────────
+🏭 <i>Система уведомлений завода евро-заборы.рф (Регион: Воронеж/М-4)</i>
+    `.trim();
+
+    const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -58,15 +54,8 @@ export default async function handler(req, res) {
     });
 
     const result = await response.json();
-
-    if (response.ok && result.ok) {
-      return res.status(200).json({ success: true });
-    } else {
-      console.error("❌ Telegram API Error:", result);
-      return res.status(502).json({ error: 'Ошибка Telegram API' });
-    }
+    return res.status(200).json({ success: true });
   } catch (error) {
-    console.error("❌ Server Error:", error);
-    return res.status(500).json({ error: 'Внутренняя ошибка сервера' });
+    return res.status(500).json({ error: 'Ошибка сервера' });
   }
 }
