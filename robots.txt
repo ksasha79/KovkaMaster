@@ -2,4 +2,5 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
-Sitemap: https://евро-заборы.рф/sitemap.xml
+Sitemap: https://xn----8sbdboo1cemg5j.xn--p1ai/sitemap.xml
+Host: https://xn----8sbdboo1cemg5j.xn--p1ai
