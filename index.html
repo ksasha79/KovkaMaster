@@ -3,6 +3,7 @@
   <head>
     <!-- Yandex.Metrika counter (Script part) -->
     <script type="text/javascript">
+        window.dataLayer = window.dataLayer || [];
         (function(m,e,t,r,i,k,a){
             m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
             m[i].l=1*new Date();
@@ -10,7 +11,14 @@
             k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
         })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=106420084', 'ym');
 
-        ym(106420084, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+        ym(106420084, 'init', {
+            ssr:true, 
+            webvisor:true, 
+            clickmap:true, 
+            ecommerce:"dataLayer", 
+            accurateTrackBounce:true, 
+            trackLinks:true
+        });
     </script>
     <!-- /Yandex.Metrika counter -->
 
@@ -92,7 +100,7 @@
 </script>
   </head>
   <body>
-    <!-- Yandex.Metrika counter (Noscript part) - Moved here to fix build error -->
+    <!-- Yandex.Metrika counter (Noscript part) -->
     <noscript><div><img src="https://mc.yandex.ru/watch/106420084" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     
     <div id="root"></div>
