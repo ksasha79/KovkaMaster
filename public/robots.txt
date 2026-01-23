@@ -2,5 +2,9 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
+User-agent: Yandex
+Allow: /
+Crawl-delay: 2
+
 Sitemap: https://xn----8sbdboo1cemg5j.xn--p1ai/sitemap.xml
 Host: xn----8sbdboo1cemg5j.xn--p1ai
