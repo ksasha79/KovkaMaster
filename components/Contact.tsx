@@ -5,6 +5,12 @@ interface ContactProps {
   prefillMessage?: string;
 }
 
+declare global {
+  interface Window {
+    ym: (id: number, action: string, target: string, params?: any) => void;
+  }
+}
+
 const Contact: React.FC<ContactProps> = ({ prefillMessage }) => {
   const [formData, setFormData] = useState({ 
     name: '', 
@@ -39,6 +45,12 @@ const Contact: React.FC<ContactProps> = ({ prefillMessage }) => {
 
       if (response.ok) {
         setStatus('success');
+        
+        // Отправка цели в Яндекс.Метрику
+        if (typeof window.ym === 'function') {
+          window.ym(106420084, 'reachGoal', 'lead_success');
+        }
+
         setFormData({ name: '', phone: '', message: '', length: '' });
       } else {
         throw new Error(result.error || 'Ошибка при отправке');
