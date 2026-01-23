@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { CONTACTS } from '../config';
 
 interface Review {
   id: number;
@@ -90,9 +91,9 @@ const Reviews: React.FC = () => {
       });
 
       if (response.ok) {
-        // Отправка цели в Яндекс.Метрику
+        // Отправка цели в Яндекс.Метрику с использованием ID из конфига
         if (typeof (window as any).ym === 'function') {
-          (window as any).ym(106420084, 'reachGoal', 'review_success');
+          (window as any).ym(CONTACTS.METRIKA_ID, 'reachGoal', 'review_success');
         }
       }
 
