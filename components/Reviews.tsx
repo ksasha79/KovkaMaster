@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 
 interface Review {
@@ -80,7 +79,7 @@ const Reviews: React.FC = () => {
     const message = `НОВЫЙ ОТЗЫВ (Рейтинг: ${rating}★)\nГород: ${formData.location}\nТекст: ${formData.text}`;
     
     try {
-      await fetch('/api/contact', {
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -89,12 +88,20 @@ const Reviews: React.FC = () => {
           message: message
         }),
       });
+
+      if (response.ok) {
+        // Отправка цели в Яндекс.Метрику
+        if (typeof (window as any).ym === 'function') {
+          (window as any).ym(106420084, 'reachGoal', 'review_success');
+        }
+      }
+
       setTimeout(() => {
         setStep(4);
         setIsTyping(false);
       }, 1500);
     } catch (e) {
-      setStep(4); // Even if fail, we show success to user but log error
+      setStep(4); 
       setIsTyping(false);
     }
   };
@@ -340,4 +347,3 @@ const Reviews: React.FC = () => {
 };
 
 export default Reviews;
-
