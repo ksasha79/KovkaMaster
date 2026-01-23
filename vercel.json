@@ -1,10 +1,29 @@
 {
   "version": 2,
   "cleanUrls": true,
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Yandex-Verification",
+          "value": "451ceda4654485f2"
+        }
+      ]
+    }
+  ],
   "rewrites": [
     {
-      "source": "/(yandex_451ceda4654485f2\\.html|robots\\.txt|sitemap\\.xml)",
-      "destination": "/$1"
+      "source": "/yandex_451ceda4654485f2.html",
+      "destination": "/yandex_451ceda4654485f2.html"
+    },
+    {
+      "source": "/robots.txt",
+      "destination": "/robots.txt"
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "/sitemap.xml"
     },
     {
       "source": "/api/(.*)",
