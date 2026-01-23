@@ -46,9 +46,9 @@ const Contact: React.FC<ContactProps> = ({ prefillMessage }) => {
       if (response.ok) {
         setStatus('success');
         
-        // Отправка цели в Яндекс.Метрику
+        // Отправка цели в Яндекс.Метрику с использованием ID из конфига
         if (typeof window.ym === 'function') {
-          window.ym(106420084, 'reachGoal', 'lead_success');
+          window.ym(CONTACTS.METRIKA_ID, 'reachGoal', 'lead_success');
         }
 
         setFormData({ name: '', phone: '', message: '', length: '' });
