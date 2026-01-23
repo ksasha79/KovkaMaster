@@ -12,6 +12,7 @@ export const CONTACTS = {
   TELEGRAM_USER: "8201704520",
   WHATSAPP_LINK: "79591878949",
   DOMAIN: "евро-заборы.рф",
+  METRIKA_ID: 106420084,
   FACTORY_ADDRESS: "Склад и офис: г. Воронеж / Производство: г. Аксай (быстрая доставка по М-4)"
 };
 
