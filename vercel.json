@@ -1,37 +1,28 @@
 {
   "version": 2,
-  "cleanUrls": true,
+  "cleanUrls": false,
   "headers": [
+    {
+      "source": "/yandex_451ceda4654485f2.html",
+      "headers": [
+        { "key": "Content-Type", "value": "text/html; charset=UTF-8" },
+        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" },
+        { "key": "Pragma", "value": "no-cache" },
+        { "key": "Expires", "value": "0" }
+      ]
+    },
     {
       "source": "/(.*)",
       "headers": [
-        {
-          "key": "X-Yandex-Verification",
-          "value": "451ceda4654485f2"
-        }
+        { "key": "X-Yandex-Verification", "value": "451ceda4654485f2" }
       ]
     }
   ],
   "rewrites": [
-    {
-      "source": "/yandex_451ceda4654485f2.html",
-      "destination": "/yandex_451ceda4654485f2.html"
-    },
-    {
-      "source": "/robots.txt",
-      "destination": "/robots.txt"
-    },
-    {
-      "source": "/sitemap.xml",
-      "destination": "/sitemap.xml"
-    },
-    {
-      "source": "/api/(.*)",
-      "destination": "/api/$1"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
+    { "source": "/yandex_451ceda4654485f2.html", "destination": "/yandex_451ceda4654485f2.html" },
+    { "source": "/robots.txt", "destination": "/robots.txt" },
+    { "source": "/sitemap.xml", "destination": "/sitemap.xml" },
+    { "source": "/api/(.*)", "destination": "/api/$1" },
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
