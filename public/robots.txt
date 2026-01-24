@@ -4,7 +4,6 @@ Disallow: /api/
 
 User-agent: Yandex
 Allow: /
-Crawl-delay: 2
-
-Sitemap: https://xn----8sbdboo1cemg5j.xn--p1ai/sitemap.xml
+Clean-param: utm_source&utm_medium&utm_campaign
 Host: xn----8sbdboo1cemg5j.xn--p1ai
+Sitemap: https://xn----8sbdboo1cemg5j.xn--p1ai/sitemap.xml
