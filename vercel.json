@@ -7,7 +7,7 @@
       "source": "/yandex_451ceda4654485f2.html",
       "headers": [
         { "key": "Content-Type", "value": "text/html; charset=UTF-8" },
-        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
       ]
     },
     {
@@ -22,6 +22,6 @@
     { "source": "/robots.txt", "destination": "/robots.txt" },
     { "source": "/sitemap.xml", "destination": "/sitemap.xml" },
     { "source": "/api/(.*)", "destination": "/api/$1" },
-    { "source": "/((?!yandex_451ceda4654485f2|robots\\.txt|sitemap\\.xml|api/).*)", "destination": "/index.html" }
+    { "source": "/((?!api/|yandex_451ceda4654485f2\\.html|robots\\.txt|sitemap\\.xml).*)", "destination": "/index.html" }
   ]
 }
