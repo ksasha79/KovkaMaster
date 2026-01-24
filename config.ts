@@ -8,12 +8,12 @@ export const CONTACTS = {
   MANAGER_PHONE: "79912644770",
   MANAGER_PHONE_DISPLAY: "+7 (991) 264-47-70",
   EMAIL: "evrozabory6@gmail.com",
-  LOCATION: "Воронеж, Липецк, Белгород, Ростов-на-Дону, ДНР, ЛНР",
+  LOCATION: "Воронеж, Липецк, Белгород, Курск",
   TELEGRAM_USER: "8201704520",
   WHATSAPP_LINK: "79591878949",
   DOMAIN: "евро-заборы.рф",
   METRIKA_ID: 106420084,
-  FACTORY_ADDRESS: "Склад и офис: г. Воронеж / Производство: г. Аксай (быстрая доставка по М-4)"
+  FACTORY_ADDRESS: "Воронеж, офис и склад (доставка по области 24/7). Производство: трасса М-4."
 };
 
 export const COLORS = {
