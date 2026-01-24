@@ -3,4 +3,4 @@ Allow: /
 Disallow: /api/
 
 Sitemap: https://xn----8sbdboo1cemg5j.xn--p1ai/sitemap.xml
-Host: xn----8sbdboo1cemg5j.xn--p1ai
+Host: https://xn----8sbdboo1cemg5j.xn--p1ai
