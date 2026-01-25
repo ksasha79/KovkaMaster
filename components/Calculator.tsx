@@ -10,14 +10,15 @@ type FenceType = {
 };
 
 const FENCE_TYPES: FenceType[] = [
-  { id: 'mesh', name: '3D Сетка Gitter', price: 1200, icon: '🌐', desc: 'Прозрачность и прочность' },
-  { id: 'jalousie', name: 'Забор Жалюзи', price: 3800, icon: '📊', desc: 'Приватность и стиль' },
-  { id: 'brick', name: 'Кирпич + Лента', price: 12000, icon: '🧱', desc: 'Капитальное решение' },
-  { id: 'rabica', name: 'Сетка Рабица', price: 850, icon: '⛓️', desc: 'Эконом вариант' },
+  { id: 'prof-sheet', name: 'Забор из профлиста', price: 2200, icon: '📄', desc: 'Сплошное ограждение' },
+  { id: 'picket-3d', name: 'Забор из 3Д штакета', price: 2600, icon: '📏', desc: 'Металлический штакетник' },
+  { id: 'mesh-3d', name: 'Забор из 3Д сетки', price: 1200, icon: '🌐', desc: 'Сетка Gitter' },
+  { id: 'chain-link', name: 'Забор из сетки рабицы', price: 850, icon: '⛓️', desc: 'Эконом решение' },
+  { id: 'jalousie', name: 'Забор из жалюзи', price: 3800, icon: '📊', desc: 'Премиум приватность' },
 ];
 
 const Calculator: React.FC = () => {
-  const [selectedType, setSelectedType] = useState<string>('jalousie');
+  const [selectedType, setSelectedType] = useState<string>('prof-sheet');
   const [length, setLength] = useState<number>(50);
   const [includeGates, setIncludeGates] = useState<boolean>(false);
   const [includeAutomation, setIncludeAutomation] = useState<boolean>(false);
@@ -26,13 +27,13 @@ const Calculator: React.FC = () => {
   const [formData, setFormData] = useState({ name: '', phone: '' });
 
   const currentType = useMemo(() => 
-    FENCE_TYPES.find(t => t.id === selectedType) || FENCE_TYPES[1]
+    FENCE_TYPES.find(t => t.id === selectedType) || FENCE_TYPES[0]
   , [selectedType]);
 
   const totalPrice = useMemo(() => {
     let total = currentType.price * length;
-    if (includeGates) total += 25000;
-    if (includeAutomation) total += 35000;
+    if (includeGates) total += 35000; // Средняя цена ворот с установкой
+    if (includeAutomation) total += 45000; // Комплект автоматики с монтажом
     return total;
   }, [currentType, length, includeGates, includeAutomation]);
 
@@ -51,7 +52,8 @@ const Calculator: React.FC = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          ...formData,
+          name: formData.name,
+          phone: formData.phone,
           length: length.toString(),
           message: message
         }),
@@ -74,27 +76,24 @@ const Calculator: React.FC = () => {
         </div>
 
         <div className="grid lg:grid-cols-12 gap-12 items-start">
-          {/* Левая часть: Выбор параметров */}
           <div className="lg:col-span-8 space-y-12">
-            
-            {/* Тип забора */}
             <div>
-              <h3 className="text-xs font-black uppercase tracking-widest text-gray-500 mb-8">1. Выберите тип ограждения</h3>
-              <div className="grid sm:grid-cols-2 gap-4">
+              <h3 className="text-xs font-black uppercase tracking-widest text-gray-500 mb-8">1. Выберите материал</h3>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {FENCE_TYPES.map((type) => (
                   <button
                     key={type.id}
                     onClick={() => setSelectedType(type.id)}
-                    className={`flex items-center gap-6 p-6 rounded-3xl border transition-all text-left ${
+                    className={`flex items-center gap-4 p-5 rounded-3xl border transition-all text-left ${
                       selectedType === type.id 
                       ? 'bg-brand-gold border-brand-gold text-black shadow-xl shadow-brand-gold/20' 
                       : 'bg-brand-grey/50 border-white/5 text-white hover:border-white/20'
                     }`}
                   >
-                    <span className="text-4xl">{type.icon}</span>
+                    <span className="text-3xl">{type.icon}</span>
                     <div>
-                      <div className="font-black uppercase text-sm">{type.name}</div>
-                      <div className={`text-[10px] font-bold ${selectedType === type.id ? 'text-black/60' : 'text-gray-500'}`}>
+                      <div className="font-black uppercase text-[11px] leading-tight">{type.name}</div>
+                      <div className={`text-[9px] font-bold ${selectedType === type.id ? 'text-black/60' : 'text-gray-500'}`}>
                         {type.desc}
                       </div>
                     </div>
@@ -103,74 +102,70 @@ const Calculator: React.FC = () => {
               </div>
             </div>
 
-            {/* Длина с ползунком */}
             <div>
               <div className="flex justify-between items-end mb-8">
-                <h3 className="text-xs font-black uppercase tracking-widest text-gray-500">2. Длина участка</h3>
+                <h3 className="text-xs font-black uppercase tracking-widest text-gray-500">2. Длина ограждения</h3>
                 <div className="text-4xl font-black text-brand-gold">
-                  {length} <span className="text-sm font-bold text-gray-600 uppercase">метров</span>
+                  {length} <span className="text-sm font-bold text-gray-600 uppercase">м.п.</span>
                 </div>
               </div>
               <div className="relative pt-6">
                 <input 
                   type="range" 
                   min="1" 
-                  max="200" 
+                  max="300" 
                   value={length}
                   onChange={(e) => setLength(parseInt(e.target.value))}
-                  className="w-full h-3 bg-brand-grey rounded-full appearance-none cursor-pointer accent-brand-gold"
+                  className="w-full h-2 bg-brand-grey rounded-full appearance-none cursor-pointer accent-brand-gold"
                 />
-                <div className="flex justify-between mt-4 text-[10px] font-black text-gray-700 uppercase tracking-widest">
+                <div className="flex justify-between mt-4 text-[9px] font-black text-gray-700 uppercase tracking-widest">
                   <span>1 м</span>
-                  <span>100 м</span>
-                  <span>200 м</span>
+                  <span>150 м</span>
+                  <span>300 м</span>
                 </div>
               </div>
             </div>
 
-            {/* Дополнительно */}
             <div>
-              <h3 className="text-xs font-black uppercase tracking-widest text-gray-500 mb-8">3. Дополнительные опции</h3>
+              <h3 className="text-xs font-black uppercase tracking-widest text-gray-500 mb-8">3. Дополнительно</h3>
               <div className="flex flex-wrap gap-4">
                 <button 
                   onClick={() => setIncludeGates(!includeGates)}
-                  className={`px-8 py-4 rounded-2xl border text-[10px] font-black uppercase tracking-widest transition-all ${
+                  className={`px-6 py-4 rounded-2xl border text-[10px] font-black uppercase tracking-widest transition-all ${
                     includeGates ? 'bg-white text-black border-white' : 'bg-transparent border-white/10 text-white/40'
                   }`}
                 >
-                  {includeGates ? '✓ Ворота и калитка' : '+ Добавить ворота'}
+                  {includeGates ? '✓ Ворота добавлены' : '+ Распашные ворота'}
                 </button>
                 <button 
                   onClick={() => setIncludeAutomation(!includeAutomation)}
-                  className={`px-8 py-4 rounded-2xl border text-[10px] font-black uppercase tracking-widest transition-all ${
+                  className={`px-6 py-4 rounded-2xl border text-[10px] font-black uppercase tracking-widest transition-all ${
                     includeAutomation ? 'bg-white text-black border-white' : 'bg-transparent border-white/10 text-white/40'
                   }`}
                 >
-                  {includeAutomation ? '✓ Автоматика' : '+ Добавить автоматику'}
+                  {includeAutomation ? '✓ Автоматика Nice' : '+ Автоматика'}
                 </button>
               </div>
             </div>
-
           </div>
 
-          {/* Правая часть: Итого и форма */}
           <div className="lg:col-span-4 sticky top-32">
             <div className="bg-brand-grey/80 backdrop-blur-xl border border-white/10 p-10 rounded-[3rem] shadow-2xl">
               <div className="mb-10 pb-10 border-b border-white/5">
-                <span className="text-[10px] font-black uppercase tracking-widest text-gray-500 mb-4 block">Предварительный итог:</span>
+                <span className="text-[10px] font-black uppercase tracking-widest text-gray-500 mb-4 block">Ориентировочно:</span>
                 <div className="text-5xl font-black text-white tracking-tighter mb-2">
                   {totalPrice.toLocaleString()} <span className="text-xl text-brand-gold">₽</span>
                 </div>
                 <p className="text-[9px] text-gray-600 font-black uppercase leading-relaxed">
-                  *Включает заводскую цену забора и стандартный монтаж в Воронеже.
+                  *Включает материал и стандартный монтаж. Точная смета после замера.
                 </p>
               </div>
 
               {status === 'success' ? (
                 <div className="text-center py-6 animate-fade-in">
-                  <div className="text-4xl mb-4">✨</div>
-                  <div className="text-sm font-black uppercase text-brand-gold">Заявка в очереди!</div>
-                  <p className="text-[10px] text-gray-500 mt-2">Инженер перезвонит вам с точными цифрами.</p>
+                  <div className="text-4xl mb-4">✅</div>
+                  <div className="text-sm font-black uppercase text-brand-gold">Заявка отправлена!</div>
+                  <p className="text-[10px] text-gray-500 mt-2">Менеджер свяжется с вами для записи на замер.</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -193,13 +188,12 @@ const Calculator: React.FC = () => {
                     disabled={status === 'sending'}
                     className="w-full btn-gold py-5 rounded-2xl text-[10px] shadow-2xl shadow-brand-gold/20"
                   >
-                    {status === 'sending' ? 'Загрузка...' : 'Закрепить скидку завода'}
+                    {status === 'sending' ? 'Отправка...' : 'Получить точный расчет'}
                   </button>
                 </form>
               )}
             </div>
           </div>
-
         </div>
       </div>
     </section>
