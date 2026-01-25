@@ -88,13 +88,15 @@ const Portfolio: React.FC<PortfolioProps> = ({ onOrderClick }) => {
               onClick={() => openModal(item)}
               className="group bg-brand-grey/30 rounded-[2rem] overflow-hidden border border-white/5 hover:border-brand-gold/30 transition-all cursor-pointer flex flex-col h-full"
             >
-              <div className="relative h-72 overflow-hidden">
+              <div className="relative h-72 overflow-hidden bg-brand-grey">
                 <img 
                   src={item.gallery[0].url} 
                   alt={item.title} 
                   className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-1000"
                   loading="lazy"
-                  onError={(e) => { (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1510511459019-5dee997d7db4?auto=format&fit=crop&q=80&w=1000"; }}
+                  onError={(e) => { 
+                    (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1510511459019-5dee997d7db4?q=80&w=1000&auto=format&fit=crop"; 
+                  }}
                 />
                 <div className="absolute top-6 left-6 bg-brand-gold text-black text-[9px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest">
                   {item.location}
@@ -125,7 +127,9 @@ const Portfolio: React.FC<PortfolioProps> = ({ onOrderClick }) => {
                  src={generatedImg || selectedItem.gallery[currentImageIndex].url} 
                  alt={selectedItem.title}
                  className="w-full h-full object-contain"
-                 onError={(e) => { (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1510511459019-5dee997d7db4?auto=format&fit=crop&q=80&w=1000"; }}
+                 onError={(e) => { 
+                   (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1510511459019-5dee997d7db4?q=80&w=1000&auto=format&fit=crop"; 
+                 }}
                />
                
                <div className="absolute inset-0 flex items-center justify-between px-6 opacity-0 group-hover/modal:opacity-100 transition-opacity">
