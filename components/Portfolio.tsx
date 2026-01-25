@@ -50,11 +50,11 @@ const Portfolio: React.FC<PortfolioProps> = ({ onOrderClick }) => {
 
   const categoryLabels: Record<CategoryType | 'all', string> = {
     all: 'Все работы',
-    'prof-sheet': 'Профлист',
-    'picket-3d': 'Штакетник 3Д',
-    'mesh-3d': 'Сетка 3Д',
-    'chain-link': 'Рабица',
-    'jalousie': 'Жалюзи'
+    'prof-sheet': 'Забор из проф листа',
+    'picket-3d': 'Забор из 3Д штакета',
+    'mesh-3d': 'Забор из 3Д сетки',
+    'chain-link': 'Забор из сетки рабицы',
+    'jalousie': 'Забор из жалюзи'
   };
 
   return (
