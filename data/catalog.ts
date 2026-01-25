@@ -3,7 +3,7 @@ export interface GalleryImage {
   label: string;
 }
 
-export type CategoryType = 'prof-sheet' | 'picket-3d' | 'mesh-3d' | 'chain-link' | 'jalousie';
+export type CategoryType = 'prof-sheet' | 'picket-3d' | 'mesh-3d' | 'chain-link' | 'jalousie' | 'canopies-terraces';
 
 export interface CatalogItem {
   id: number;
@@ -69,6 +69,17 @@ export const catalogData: CatalogItem[] = [
     description: "Шаблон описания: Современный забор-жалюзи. Укажите тип ламелей, глубину секции и цвет по каталогу RAL.",
     gallery: [
       { label: "Главное фото", url: "/images/jalousie-1.jpg" }
+    ]
+  },
+  {
+    id: 6,
+    title: "Навесы и террасы",
+    category: 'canopies-terraces',
+    location: "Воронеж",
+    priceStart: "от 8 000 ₽/м²",
+    description: "Шаблон описания: Проектирование и изготовление навесов для авто, террас и беседок на металлокаркасе.",
+    gallery: [
+      { label: "Главное фото", url: "/images/canopy-1.jpg" }
     ]
   }
 ];
