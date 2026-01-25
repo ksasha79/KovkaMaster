@@ -18,61 +18,57 @@ export interface CatalogItem {
 export const catalogData: CatalogItem[] = [
   {
     id: 1,
-    title: "Забор из жалюзи 'Lux'",
-    category: 'jalousie',
-    location: "Воронеж, СНТ Отдых",
-    priceStart: "от 3 800 ₽/п.м.",
-    description: "Современное решение из оцинкованной стали с полимерным покрытием. Обеспечивает проветриваемость участка при полной приватности. Толщина металла 0.5 мм.",
+    title: "Забор из проф листа",
+    category: 'prof-sheet',
+    location: "Воронеж",
+    priceStart: "от 2 200 ₽/п.м.",
+    description: "Шаблон описания: Сплошной забор из профнастила. Укажите толщину листа, марку стали и тип покрытия.",
     gallery: [
-      { label: "Фасадный вид", url: "/images/4-Zaluzi/3.png" },
-      { label: "Вид изнутри", url: "/images/4-Zaluzi/1.jpeg" }, 
-      { label: "Узел крепления", url: "/images/4-Zaluzi/2.png" }
+      { label: "Главное фото", url: "/images/prof-sheet-1.jpg" }
     ]
   },
   {
     id: 2,
-    title: "Ограждение из 3D сетки Gitter",
-    category: 'mesh-3d',
-    location: "Воронеж, Промзона",
-    priceStart: "от 1 200 ₽/п.м.",
-    description: "Секционное ограждение из оцинкованной проволоки 4мм с V-образными ребрами жесткости. Идеально для больших территорий и складских комплексов.",
+    title: "Забор из 3Д штакета",
+    category: 'picket-3d',
+    location: "Воронеж",
+    priceStart: "от 2 600 ₽/п.м.",
+    description: "Шаблон описания: Металлический штакетник с 3D резом. Укажите способ заполнения (односторонний/шахматка).",
     gallery: [
-      { label: "Общий вид", url: "/images/2-3D Gitter/1.jpeg" },
-      { label: "Установка столбов", url: "/images/2-3D Gitter/0.png" }   
+      { label: "Главное фото", url: "/images/picket-3d-1.jpg" }
     ]
   },
   {
     id: 3,
-    title: "Забор из сетки рабицы",
-    category: 'chain-link',
-    location: "Семилуки, Воронежская обл.",
-    priceStart: "от 850 ₽/п.м.",
-    description: "Бюджетный и долговечный вариант. Сетка оцинкованная, не ржавеет. Установка внатяжку или в секциях из уголка. Монтаж за 1 день.",
+    title: "Забор из 3Д сетки",
+    category: 'mesh-3d',
+    location: "Воронеж",
+    priceStart: "от 1 200 ₽/п.м.",
+    description: "Шаблон описания: Секционный забор из 3D сетки Gitter. Укажите толщину прутка и высоту секции.",
     gallery: [
-      { label: "Натяжной вариант", url: "/images/1-Rabica/0.png" },
-      { label: "Готовый объект", url: "/images/1-Rabica/1.jpeg" }
+      { label: "Главное фото", url: "/images/mesh-3d-1.jpg" }
     ]
   },
   {
     id: 4,
-    title: "Забор из профлиста С8",
-    category: 'prof-sheet',
-    location: "Новая Усмань",
-    priceStart: "от 2 200 ₽/п.м.",
-    description: "Классический сплошной забор. Используем качественный лист НЛМК. Каркас из профильной трубы 60х40, покраска в цвет листа.",
+    title: "Забор из сетки рабицы",
+    category: 'chain-link',
+    location: "Воронеж",
+    priceStart: "от 850 ₽/п.м.",
+    description: "Шаблон описания: Бюджетное ограждение из оцинкованной сетки рабицы. Укажите высоту и способ монтажа.",
     gallery: [
-      { label: "Забор из профнастила", url: "/images/3-Lenta/1.png" }
+      { label: "Главное фото", url: "/images/chain-link-1.jpg" }
     ]
   },
   {
     id: 5,
-    title: "Забор из 3Д металлоштакетника",
-    category: 'picket-3d',
-    location: "Рамонь",
-    priceStart: "от 2 600 ₽/п.м.",
-    description: "Металлическая имитация классического деревянного забора. 3D-рез верхнего края придает эстетичный вид. Долговечно и красиво.",
+    title: "Забор из жалюзи",
+    category: 'jalousie',
+    location: "Воронеж",
+    priceStart: "от 3 800 ₽/п.м.",
+    description: "Шаблон описания: Современный забор-жалюзи. Укажите тип ламелей, глубину секции и цвет по каталогу RAL.",
     gallery: [
-      { label: "Штакетник шахматка", url: "/images/3-Lenta/2.jpeg" }
+      { label: "Главное фото", url: "/images/jalousie-1.jpg" }
     ]
   }
 ];
