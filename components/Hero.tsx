@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { CONTACTS } from '../config.ts';
 
@@ -30,7 +29,7 @@ const Hero: React.FC = () => {
         </p>
         
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-          <a href="#calc" className="btn-gold px-12 py-6 text-xs rounded-2xl w-full sm:w-auto">
+          <a href="#calculator" className="btn-gold px-12 py-6 text-xs rounded-2xl w-full sm:w-auto">
              Бесплатный расчет 📐
           </a>
           <a href="#portfolio" className="px-12 py-6 border border-white/10 rounded-2xl font-black uppercase tracking-[0.2em] hover:bg-white/5 transition-all text-[10px] w-full sm:w-auto">
