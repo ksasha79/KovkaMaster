@@ -1,0 +1,22 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="32" height="32" rx="7" fill="#009245"/>
+  <!-- Центральный столб -->
+  <rect x="14.5" y="8" width="3" height="16" fill="white"/>
+  <rect x="13" y="8" width="6" height="2" rx="1" fill="white"/>
+  
+  <!-- Секции забора слева -->
+  <rect x="8" y="11" width="2" height="10" rx="0.5" fill="white"/>
+  <rect x="11" y="11" width="2" height="10" rx="0.5" fill="white"/>
+  <rect x="7.5" y="13" width="7.5" height="1.5" fill="white"/>
+  <rect x="7.5" y="18" width="7.5" height="1.5" fill="white"/>
+  
+  <!-- Секции забора справа -->
+  <rect x="19" y="11" width="2" height="10" rx="0.5" fill="white"/>
+  <rect x="22" y="11" width="2" height="10" rx="0.5" fill="white"/>
+  <rect x="17" y="13" width="7.5" height="1.5" fill="white"/>
+  <rect x="17" y="18" width="7.5" height="1.5" fill="white"/>
+  
+  <!-- Замочная скважина -->
+  <circle cx="16" cy="16.5" r="1.2" fill="#009245"/>
+  <path d="M16 17L15 19.5H17L16 17Z" fill="#009245"/>
+</svg>
