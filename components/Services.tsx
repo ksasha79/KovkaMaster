@@ -35,6 +35,13 @@ const services = [
     id: "05",
     tag: "ПРЕМИУМ",
     icon: "📊"
+  },
+  {
+    title: "Навесы и террасы",
+    desc: "Изготовление навесов для авто и зон отдыха. Надежные металлоконструкции с поликарбонатом или мягкой кровлей.",
+    id: "06",
+    tag: "НОВИНКА",
+    icon: "🏘️"
   }
 ];
 
@@ -71,7 +78,6 @@ const Services: React.FC = () => {
         </div>
       </div>
 
-      {/* Декоративный элемент фона */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none opacity-5">
         <div className="w-full h-full bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:40px_40px]"></div>
       </div>
