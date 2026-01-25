@@ -16,10 +16,10 @@ const plans = [
     popular: true
   },
   {
-    name: 'Премиум',
-    price: 'от 8 500 ₽',
-    desc: 'Забор из жалюзи',
-    features: ['Ламели премиум-класса', 'Скрытый крепеж', 'Покрытие Soft-touch', 'Усиленный каркас', 'VIP-монтаж'],
+    name: 'Спецпроекты',
+    price: 'от 8 000 ₽',
+    desc: 'Навесы, террасы и жалюзи',
+    features: ['Навесы для авто', 'Террасы на металлокаркасе', 'Заборы жалюзи', 'Скрытый крепеж', 'Полимерная покраска'],
     popular: false
   }
 ];
@@ -31,7 +31,7 @@ const Pricing: React.FC = () => {
         <div className="text-center mb-24">
           <h2 className="text-[10px] font-black text-gold-600 uppercase tracking-[0.6em] mb-4">Прайс-лист 2025</h2>
           <h3 className="text-5xl md:text-7xl font-black text-metal-900 uppercase tracking-tighter leading-none">
-            ЗАВОДСКИЕ ЦЕНЫ <br/> <span className="text-gold-500">ЗА МЕТР ПОГОННЫЙ</span>
+            ЗАВОДСКИЕ ЦЕНЫ <br/> <span className="text-gold-500">ЗА ЕДИНИЦУ ИЗМЕРЕНИЯ</span>
           </h3>
           <div className="h-1.5 w-32 bg-gold-500 mx-auto mt-8 rounded-full"></div>
         </div>
@@ -60,7 +60,7 @@ const Pricing: React.FC = () => {
                 
                 <div className="flex items-baseline mb-10 border-b border-current/10 pb-8">
                   <span className="text-5xl font-black tracking-tighter">{plan.price}</span>
-                  <span className="text-[10px] font-black ml-2 uppercase opacity-40">/ м.п.</span>
+                  <span className="text-[10px] font-black ml-2 uppercase opacity-40">/ ед.</span>
                 </div>
 
                 <ul className="space-y-5 mb-12">
