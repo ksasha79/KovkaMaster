@@ -54,7 +54,8 @@ const Portfolio: React.FC<PortfolioProps> = ({ onOrderClick }) => {
     'picket-3d': 'Забор из 3Д штакета',
     'mesh-3d': 'Забор из 3Д сетки',
     'chain-link': 'Забор из сетки рабицы',
-    'jalousie': 'Забор из жалюзи'
+    'jalousie': 'Забор из жалюзи',
+    'canopies-terraces': 'Навесы и террасы'
   };
 
   return (
@@ -68,7 +69,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ onOrderClick }) => {
         </div>
 
         <div className="flex flex-wrap justify-center gap-3 mb-20">
-          {(['all', 'prof-sheet', 'picket-3d', 'mesh-3d', 'chain-link', 'jalousie'] as const).map((cat) => (
+          {(['all', 'prof-sheet', 'picket-3d', 'mesh-3d', 'chain-link', 'jalousie', 'canopies-terraces'] as const).map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
