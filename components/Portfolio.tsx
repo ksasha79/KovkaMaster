@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { generateGateConcept } from '../services/geminiService.ts';
 import { catalogData, CatalogItem, CategoryType } from '../data/catalog.ts';
@@ -51,10 +50,11 @@ const Portfolio: React.FC<PortfolioProps> = ({ onOrderClick }) => {
 
   const categoryLabels: Record<CategoryType | 'all', string> = {
     all: 'Все работы',
-    metal: 'Металл',
-    'mesh-3d': 'Сетка 3D',
+    'prof-sheet': 'Профлист',
+    'picket-3d': 'Штакетник 3Д',
+    'mesh-3d': 'Сетка 3Д',
     'chain-link': 'Рабица',
-    'brick-foundation': 'Кирпич + Лента'
+    'jalousie': 'Жалюзи'
   };
 
   return (
@@ -67,13 +67,12 @@ const Portfolio: React.FC<PortfolioProps> = ({ onOrderClick }) => {
           </h3>
         </div>
 
-        {/* Filter */}
-        <div className="flex flex-wrap justify-center gap-4 mb-20">
-          {(['all', 'metal', 'mesh-3d', 'chain-link', 'brick-foundation'] as const).map((cat) => (
+        <div className="flex flex-wrap justify-center gap-3 mb-20">
+          {(['all', 'prof-sheet', 'picket-3d', 'mesh-3d', 'chain-link', 'jalousie'] as const).map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all border ${
+              className={`px-5 py-3 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all border ${
                 activeCategory === cat ? 'bg-brand-gold border-brand-gold text-black shadow-xl' : 'border-white/10 text-gray-400 hover:border-white/30'
               }`}
             >
@@ -92,9 +91,10 @@ const Portfolio: React.FC<PortfolioProps> = ({ onOrderClick }) => {
               <div className="relative h-72 overflow-hidden">
                 <img 
                   src={item.gallery[0].url} 
-                  alt={`${item.title} — ${categoryLabels[item.category]} от завода Евро-Заборы, ${item.location}`} 
+                  alt={item.title} 
                   className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-1000"
                   loading="lazy"
+                  onError={(e) => { (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1510511459019-5dee997d7db4?auto=format&fit=crop&q=80&w=1000"; }}
                 />
                 <div className="absolute top-6 left-6 bg-brand-gold text-black text-[9px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest">
                   {item.location}
@@ -117,69 +117,59 @@ const Portfolio: React.FC<PortfolioProps> = ({ onOrderClick }) => {
         </div>
       </div>
 
-      {/* Modal */}
       {selectedItem && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-2xl p-6" onClick={closeModal} role="dialog" aria-modal="true">
-          <div className="relative max-w-6xl w-full flex flex-col md:flex-row bg-brand-dark rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl" onClick={e => e.stopPropagation()}>
-            {/* Gallery Side */}
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-2xl p-6" onClick={closeModal}>
+          <div className="relative max-w-6xl w-full flex flex-col md:flex-row bg-brand-black rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl" onClick={e => e.stopPropagation()}>
             <div className="md:w-3/5 relative min-h-[400px] bg-black group/modal">
                <img 
                  src={generatedImg || selectedItem.gallery[currentImageIndex].url} 
-                 alt={`${selectedItem.title} - фото выполненного проекта`}
+                 alt={selectedItem.title}
                  className="w-full h-full object-contain"
+                 onError={(e) => { (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1510511459019-5dee997d7db4?auto=format&fit=crop&q=80&w=1000"; }}
                />
                
                <div className="absolute inset-0 flex items-center justify-between px-6 opacity-0 group-hover/modal:opacity-100 transition-opacity">
-                  <button onClick={prevImage} className="w-14 h-14 bg-black/50 hover:bg-brand-gold hover:text-black rounded-full flex items-center justify-center transition-all text-xl" aria-label="Предыдущее фото">←</button>
-                  <button onClick={nextImage} className="w-14 h-14 bg-black/50 hover:bg-brand-gold hover:text-black rounded-full flex items-center justify-center transition-all text-xl" aria-label="Следующее фото">→</button>
+                  <button onClick={prevImage} className="w-12 h-12 bg-black/50 hover:bg-brand-gold hover:text-black rounded-full flex items-center justify-center transition-all">←</button>
+                  <button onClick={nextImage} className="w-12 h-12 bg-black/50 hover:bg-brand-gold hover:text-black rounded-full flex items-center justify-center transition-all">→</button>
                </div>
 
-               <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-full px-12 flex flex-col items-center gap-4">
+               <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
                   <button 
                     onClick={handleAiGenerate}
                     disabled={isGenerating}
-                    className="bg-brand-gold text-black px-8 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:scale-105 transition-all flex items-center gap-3 shadow-2xl"
+                    className="bg-brand-gold text-black px-6 py-3 rounded-xl text-[9px] font-black uppercase tracking-widest flex items-center gap-2"
                   >
-                    {isGenerating ? (
-                      <>
-                        <span className="w-4 h-4 border-2 border-black/20 border-t-black rounded-full animate-spin"></span>
-                        Нейросеть генерирует...
-                      </>
-                    ) : (
-                      <>✨ Создать альтернативу ИИ</>
-                    )}
+                    {isGenerating ? 'Генерация...' : '✨ Визуализировать ИИ'}
                   </button>
                </div>
             </div>
             
-            {/* Content Side */}
             <div className="md:w-2/5 p-12 flex flex-col justify-center">
                <div className="mb-8">
                   <span className="text-brand-gold text-[10px] font-black uppercase tracking-[0.4em] block mb-4">{categoryLabels[selectedItem.category]}</span>
-                  <h3 className="text-4xl font-black text-white uppercase mb-6 leading-tight">{selectedItem.title}</h3>
-                  <p className="text-gray-400 text-base leading-relaxed font-light">{selectedItem.description}</p>
+                  <h3 className="text-3xl font-black text-white uppercase mb-6">{selectedItem.title}</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed font-light">{selectedItem.description}</p>
                </div>
                
-               <div className="space-y-6 mb-10">
-                  <div className="flex justify-between py-4 border-b border-white/5">
-                    <span className="text-gray-500 uppercase text-xs font-bold tracking-widest">Цена проекта</span>
-                    <span className="text-brand-gold font-black text-xl">{selectedItem.priceStart}</span>
+               <div className="space-y-4 mb-10">
+                  <div className="flex justify-between py-3 border-b border-white/5">
+                    <span className="text-gray-500 uppercase text-[10px] font-bold">Цена</span>
+                    <span className="text-brand-gold font-black">{selectedItem.priceStart}</span>
                   </div>
-                  <div className="flex justify-between py-4 border-b border-white/5">
-                    <span className="text-gray-500 uppercase text-xs font-bold tracking-widest">Локация</span>
-                    <span className="text-white font-bold">{selectedItem.location}</span>
+                  <div className="flex justify-between py-3 border-b border-white/5">
+                    <span className="text-gray-500 uppercase text-[10px] font-bold">Город</span>
+                    <span className="text-white font-bold text-xs">{selectedItem.location}</span>
                   </div>
                </div>
 
                <button 
                  onClick={() => { onOrderClick(selectedItem.title); closeModal(); }}
-                 className="w-full btn-gold py-5 rounded-2xl font-black text-[10px] tracking-widest"
+                 className="w-full btn-gold py-5 rounded-xl font-black text-[10px] tracking-widest"
                >
-                 Заказать такой же расчет
+                 Заказать расчет
                </button>
-               
-               <button onClick={closeModal} className="w-full mt-6 text-gray-500 hover:text-white uppercase text-[10px] font-black tracking-widest transition-colors">
-                 Закрыть просмотр
+               <button onClick={closeModal} className="w-full mt-4 text-gray-500 hover:text-white uppercase text-[9px] font-black tracking-widest transition-colors">
+                 Закрыть
                </button>
             </div>
           </div>
