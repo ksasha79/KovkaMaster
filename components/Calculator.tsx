@@ -15,6 +15,7 @@ const FENCE_TYPES: FenceType[] = [
   { id: 'mesh-3d', name: 'Забор из 3Д сетки', price: 3000, icon: '🌐', desc: 'Сетка Gitter' },
   { id: 'chain-link', name: 'Забор из сетки рабицы', price: 2000, icon: '⛓️', desc: 'Эконом решение' },
   { id: 'jalousie', name: 'Забор из жалюзи', price: 8500, icon: '📊', desc: 'Премиум приватность' },
+  { id: 'canopies-terraces', name: 'Навесы и террасы', price: 8000, icon: '🏘️', desc: 'Металлоконструкции' },
 ];
 
 const Calculator: React.FC = () => {
@@ -43,7 +44,7 @@ const Calculator: React.FC = () => {
 
     const message = `КАЛЬКУЛЯТОР:
 Тип: ${currentType.name}
-Длина: ${length} м.п.
+Длина/Площадь: ${length} ед.
 Допы: ${includeGates ? 'Ворота (+)' : ''} ${includeAutomation ? 'Автоматика (+)' : ''}
 Предварительная цена: ${totalPrice.toLocaleString()} руб.`;
 
@@ -104,9 +105,9 @@ const Calculator: React.FC = () => {
 
             <div>
               <div className="flex justify-between items-end mb-8">
-                <h3 className="text-xs font-black uppercase tracking-widest text-gray-500">2. Длина ограждения</h3>
+                <h3 className="text-xs font-black uppercase tracking-widest text-gray-500">2. Длина / Площадь</h3>
                 <div className="text-4xl font-black text-brand-gold">
-                  {length} <span className="text-sm font-bold text-gray-600 uppercase">м.п.</span>
+                  {length} <span className="text-sm font-bold text-gray-600 uppercase">{selectedType === 'canopies-terraces' ? 'м²' : 'м.п.'}</span>
                 </div>
               </div>
               <div className="relative pt-6">
@@ -119,9 +120,9 @@ const Calculator: React.FC = () => {
                   className="w-full h-2 bg-brand-grey rounded-full appearance-none cursor-pointer accent-brand-gold"
                 />
                 <div className="flex justify-between mt-4 text-[9px] font-black text-gray-700 uppercase tracking-widest">
-                  <span>1 м</span>
-                  <span>150 м</span>
-                  <span>300 м</span>
+                  <span>1 ед.</span>
+                  <span>150 ед.</span>
+                  <span>300 ед.</span>
                 </div>
               </div>
             </div>
