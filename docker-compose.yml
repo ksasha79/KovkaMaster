@@ -1,0 +1,14 @@
+
+version: '3.8'
+
+services:
+  euro-zabory-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: euro_zabory_container
+    ports:
+      - "8080:3000"
+    env_file:
+      - .env
+    restart: always
